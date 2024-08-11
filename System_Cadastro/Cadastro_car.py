@@ -26,14 +26,14 @@ class Carro:
         Ano_Veiculo = int(input("Informe o Ano: "))
         Quantidade_veiculo = int(input("Informe quantidade adicionadas: "))
         
-        New_Row = {
-            'Codigo':Codigo_Veiculo,
-            'Marca': Marca_Veiculo,
-            'Modelo': Modelo_Veiculo,
-            'Preco': Preco_Veiculo,
-            'Ano': Ano_Veiculo,
-            'Quantidade': Quantidade_veiculo
-        }
+        # New_Row = {
+        #     'Codigo':Codigo_Veiculo,
+        #     'Marca': Marca_Veiculo,
+        #     'Modelo': Modelo_Veiculo,
+        #     'Preco': Preco_Veiculo,
+        #     'Ano': Ano_Veiculo,
+        #     'Quantidade': Quantidade_veiculo
+        # }
         self._DataCadastro.loc[self._DataCadastro.shape[0]] = [
             Codigo_Veiculo,
             Marca_Veiculo,
