@@ -9,14 +9,15 @@ class Carro:
         
         
         self._DataCadastro = pd.DataFrame(columns=['Codigo', 'Marca', 'Modelo', 'Preco', 'Ano', 'Quantidade'])
-        # self._DataCadastro = pd.DataFrame({
-        #     'Codigo': pd.Series(dtype=str),
-        #     'Marca': pd.Series(dtype=str),
-        #     'Modelo': pd.Series(dtype=str),
-        #     'Preco': pd.Series(dtype=float),
-        #     'Ano': pd.Series(dtype=int),
-        #     'Quantidade': pd.Series(dtype=int)
-        #     })
+        
+        self._DataCadastro = self._DataCadastro.astype({
+            'Codigo': 'string',
+            'Marca': 'string',
+            'Modelo': 'string',
+            'Preco': 'float64',
+            'Ano': 'int32',
+            'Quantidade': 'int32'
+        })
 
     def Cadastrar_veiculo(self):
         Codigo_Veiculo = f'CRR{self._DataCadastro.shape[0 ] + 1:05d}'
@@ -26,14 +27,6 @@ class Carro:
         Ano_Veiculo = int(input("Informe o Ano: "))
         Quantidade_veiculo = int(input("Informe quantidade adicionadas: "))
         
-        # New_Row = {
-        #     'Codigo':Codigo_Veiculo,
-        #     'Marca': Marca_Veiculo,
-        #     'Modelo': Modelo_Veiculo,
-        #     'Preco': Preco_Veiculo,
-        #     'Ano': Ano_Veiculo,
-        #     'Quantidade': Quantidade_veiculo
-        # }
         self._DataCadastro.loc[self._DataCadastro.shape[0]] = [
             Codigo_Veiculo,
             Marca_Veiculo,
@@ -43,9 +36,18 @@ class Carro:
             Quantidade_veiculo
         ]
         
-        # self._DataCadastro = pd.concat([self._DataCadastro, New_Row], ignore_index=True)
+    def Atualizar_preco_veiculo(self):
+        Codigo_search = input('Imforme o código: ')
         
-        
+        if Codigo_search in self._DataCadastro['Codigo'].values:
+            
+            index = self._DataCadastro[self._DataCadastro['Codigo'] == Codigo_search ].index[0]
+            
+            self._DataCadastro.at[index,'Preco'] = float(input('Informe o novo preço:'))
+            
+            print('Valor atualizado')
+        else:
+            print('Não encontrado')
         
     def listar(self):
         print(self._DataCadastro)
@@ -53,4 +55,7 @@ class Carro:
 if __name__ == '__main__':
     user = Carro()
     user.Cadastrar_veiculo()
+    user.Cadastrar_veiculo()
+    user.listar()
+    user.Atualizar_preco_veiculo()
     user.listar()
