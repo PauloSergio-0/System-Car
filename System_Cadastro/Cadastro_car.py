@@ -34,14 +34,23 @@ class Carro:
             'Ano': Ano_Veiculo,
             'Quantidade': Quantidade_veiculo
         }
+        self._DataCadastro.loc[self._DataCadastro.shape[0]] = [
+            Codigo_Veiculo,
+            Marca_Veiculo,
+            Modelo_Veiculo,
+            Preco_Veiculo,
+            Ano_Veiculo,
+            Quantidade_veiculo
+        ]
         
-        self._DataCadastro = pd.concat([self._Cadastrar_veiculo, New_Row], ignore_index=True)
+        # self._DataCadastro = pd.concat([self._DataCadastro, New_Row], ignore_index=True)
         
         
         
     def listar(self):
-        print(self._pas)
+        print(self._DataCadastro)
         
 if __name__ == '__main__':
-    porst = Carro()
-    porst.listar()
+    user = Carro()
+    user.Cadastrar_veiculo()
+    user.listar()
