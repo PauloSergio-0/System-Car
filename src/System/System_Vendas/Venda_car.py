@@ -1,7 +1,7 @@
-from System.System_Cadastro.Cadastro_car import Carro
+import System_Cadastro.Cadastro_car as Cadastro_car
 import pandas as pd
 
-class Venda(Carro):
+class Venda(Cadastro_car.Carro):
     def __init__(self):
         super().__init__()
         self._DataVenda = pd.DataFrame(columns=['Nr_Fatura', 'Valor_transacao', 'Modelo', 'Marca', 'data_transancao', 'Metodo Pagamento']) # add --> 'Comprador', 'Vendedor'
@@ -15,7 +15,7 @@ class Venda(Carro):
         })
 
     def Realizar_Venda(self):
-        print(self._DataCadastro)
+        print('self.DataCadastro')
 
 if __name__ == '__main__':
     sell = Venda()
