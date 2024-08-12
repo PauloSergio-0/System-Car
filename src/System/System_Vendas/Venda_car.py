@@ -4,7 +4,7 @@ import pandas as pd
 class Venda(Cadastro_car.Carro):
     def __init__(self):
         super().__init__()
-        self._DataVenda = pd.DataFrame(columns=['Nr_Fatura', 'Valor_transacao', 'Modelo', 'Marca', 'data_transancao', 'Metodo Pagamento']) # add --> 'Comprador', 'Vendedor'
+        self._DataVenda = pd.DataFrame(columns=['Nr_Fatura', 'Valor_transacao', 'Modelo', 'Marca', 'data_transancao', 'Metodo Pagamento']) # add --> 'Comprador', 'Vendedor' ,'loja'
         self._DataVenda= pd.astype({
             'Nr_Fatura': 'string',
             'Valor_transacao': 'float64',
