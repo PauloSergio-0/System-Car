@@ -25,6 +25,7 @@ class Carro:
         Preco_Veiculo = float(input('Informe o preço: '))
         Ano_Veiculo = int(input("Informe o Ano: "))
         Quantidade_veiculo = int(input("Informe quantidade adicionadas: "))
+        
         data_de_cadastro = date.today().strftime('%d/%m/%Y')
         data_de_modificacao = None
         
@@ -47,11 +48,28 @@ class Carro:
             index = self._DataCadastro[self._DataCadastro['Codigo'] == Codigo_search ].index[0]
             
             self._DataCadastro.at[index,'Preco'] = float(input('Informe o novo preço:'))
-            self._DataCadastro.at[index,'Data Modificacao'] = datetime.today().strftime('%d/%m/%Y, %H:%M:%S')
+            self._DataCadastro.at[index,'Data Modificacao'] = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
             print('Valor atualizado')
         else:
             print('Não encontrado')
         
+    def Atualizar_qtd_veiculo(self):
+        Codigo_search = input('Iforme o código: ')
+        
+        if Codigo_search in self._DataCadastro['Codigo'].values:
+            index = self._DataCadastro[self._DataCadastro['Codigo'] == Codigo_search].index[0]
+            self._DataCadastro.at[index, 'Quantidade'] = int(input('Informe quantidade: '))
+            self._DataCadastro.at[index,'Data Modificacao'] = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
+            print("Quantidade atualizada: ")
+        else:
+            print('Não encontrado')
+
+    def Atualizar_nome_Veiculo(self):
+        codigo = input('Qual: ')
+        print('kjbdfk')
+        print('ldkfsdkf')
+
+
     def listar(self):
         print(self._DataCadastro)
 
@@ -59,6 +77,7 @@ class Carro:
         print(self._DataCadastro.info())
         
 if __name__ == '__main__':
+
     user = Carro()
     user.Cadastrar_veiculo()
     user.Cadastrar_veiculo()
