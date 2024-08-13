@@ -49,7 +49,7 @@ class Venda(Cadastro_car.Carro):
                 return 'PAYPAL'
 
             elif opcao == 5:
-                return 
+                return 'CHEQUE'
 
             else:
                 print("Opção invalida!")
@@ -59,7 +59,7 @@ class Venda(Cadastro_car.Carro):
         codigo_search = input('Informe o código:')
         if codigo_search in self._DataCadastro['Codigo'].values:
 
-            index = self._DataCadastro[self._DataCadastro['Codifo'] == codigo_search].index[0]
+            index = self._DataCadastro[self._DataCadastro['Codigo'] == codigo_search].index[0]
             qtd_vendida =int(input('Informe quantidade vendida: '))
 
             if qtd_vendida == 0:
@@ -71,7 +71,7 @@ class Venda(Cadastro_car.Carro):
                 self._DataCadastro.at[index, 'Data Modificacao'] = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
                 print('venda realizada com sucesso!')
 
-                Codigo_fat = f'FTR{self._DataCadastro.at[index, 'Codigo']}-{self._DataCadastro.shape[0] +1:03d}'
+                Codigo_fat = f'FTR{self._DataCadastro.at[index, "Codigo"]}-{self._DataCadastro.shape[0] +1:03d}'
                 Marca_Veiculo = self._DataCadastro.at[index, 'Marca']
                 Modelo_Veiculo = self._DataCadastro.at[index, 'Modelo']
                 Venda_qtd  = qtd_vendida
@@ -81,7 +81,7 @@ class Venda(Cadastro_car.Carro):
                 data_de_venda = date.today().strftime('%d/%m/%Y')
                 metodo_pg_venda = self.Metodo_pagamento()
 
-                self._DataVenda.loc[self._DataVenda.shape[0]]={
+                self._DataVenda.loc[self._DataVenda.shape[0]]=[
                     Codigo_fat ,
                     Marca_Veiculo ,
                     Modelo_Veiculo ,
@@ -89,8 +89,9 @@ class Venda(Cadastro_car.Carro):
                     Preco_Veiculo ,
                     Ano_Veiculo ,
                     data_de_venda ,
-                    metodo_pg_venda 
-                }
+                    metodo_pg_venda
+
+                ]
 
             else:
                 print('A quantidade é maior que o estoque')

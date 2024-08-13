@@ -83,3 +83,7 @@ if __name__ == '__main__':
 
     user_test = Vendas_car.Venda(user)
     user_test.Realizar_Venda()
+
+    user.listar()
+
+    print(user_test.listar_vendas())
