@@ -98,8 +98,3 @@ class Venda(Cadastro_car.Carro):
 
     def listar_vendas(self):
         print(self._DataVenda)
-
-
-
-if __name__ == '__main__':
-    print('teste')
