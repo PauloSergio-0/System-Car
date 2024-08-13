@@ -86,4 +86,4 @@ if __name__ == '__main__':
 
     user.listar()
 
-    print(user_test.listar_vendas())
+    user_test.listar_vendas()
