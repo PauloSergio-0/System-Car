@@ -1,5 +1,4 @@
 from setuptools import setup, find_packages
-
 # cd /caminho para setup.py
 # exec terminal: "python setup.py develop"
 
