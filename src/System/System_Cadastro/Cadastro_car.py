@@ -20,7 +20,7 @@ class Carro:
         })
 
     def Cadastrar_veiculo(self):
-        Codigo_Veiculo = f'CRR{self._DataCadastro.shape[0 ] + 1:05d}'
+        Codigo_Veiculo = f'CRR{self._DataCadastro.shape[0] + 1:05d}'
         Marca_Veiculo = input('Informe a Marca: ')
         Modelo_Veiculo = input("Informe o modelo: ")
         Preco_Veiculo = float(input('Informe o preço: '))
@@ -81,5 +81,5 @@ if __name__ == '__main__':
     # user.listar()
     # user.listar_info()
 
-    user_test = Vendas_car.Venda()
+    user_test = Vendas_car.Venda(user)
     user_test.Realizar_Venda()
