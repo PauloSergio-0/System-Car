@@ -7,7 +7,8 @@ class Venda(Cadastro_car.Carro):
         self._DataCadastro = Carro_estancia._DataCadastro
 
         self._DataVenda = pd.DataFrame(columns=['Nr_Fatura','Marca', 'Modelo', 'Quantidade_Vendida', 'Valor_transacao', 'Ano', 'data_transancao', 'Metodo Pagamento']) # add --> 'Comprador', 'Vendedor' , 'loja'
-        self._DataVenda= self._DataVenda.astype({
+
+        self._DataVenda = self._DataVenda.astype({
             'Nr_Fatura': 'string',
             'Valor_transacao': 'float64',
             'Modelo': 'string',
