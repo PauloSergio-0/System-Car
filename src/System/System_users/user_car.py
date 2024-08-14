@@ -5,11 +5,12 @@ import re
 
 class Users():
     def __init__(self):
-        self._DataUsers = pd.DataFrame(columns=['Codigo','Nome', 'idade', 'Sexo', 'Senha']) # add ==> loja
+        self._DataUsers = pd.DataFrame(columns=['Codigo','Nome', 'Data Nascimento', 'idade', 'Sexo', 'Senha']) # add ==> loja
         
         self._DataUsers = self._DataUsers.astype({
             'Codigo': 'string',
             'Nome': 'string',
+            'Data Nascimento': 'string',
             'idade': 'int64',
             'Sexo': 'string',
             'Senha': 'string'
@@ -65,6 +66,23 @@ class Users():
 
 
     def Cadastro_User(self):
+
+        def data_idade():
+            def data_nascimento(): #=> verificador de inputs (dt_nasc ==> dia, mes,ano)
+                print('Informe data de nascimento: ')
+                dia = input('Dia: ')
+                mes = input('Mes: ')
+                ano = input('Ano: ')
+                try:
+                    dt_nasc =  datetime.strptime(f"{dia}/{mes}/{ano}", "%d/%m/%Y")
+                    return dt_nasc
+                except ValueError:
+                        print('Erro no valor inserido?')
+                        return data_nascimento()
+
+
+            
+
         codigo_user = f'USR{self._DataUsers.shape[0]+1:05d}'
         name = input('Informe nome do usuário: ')
         idade = int(input("Informe a idade: "))
