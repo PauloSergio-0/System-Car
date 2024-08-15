@@ -68,58 +68,43 @@ class Users():
 
     def Cadastro_User(self):
         
-
         def data_idade():
             data_atual = date.today()
             def data_nascimento(): #=> verificador de inputs (dt_nasc ==> dia, mes,ano)
                 
                 print('Informe data de nascimento: ')
                 
-                    
-                def Dia_vf():
+
+                def Verificar_datas(Tipo_date, verificacao):
                     try:
-                        dia = int(input('Dia: '))
+                        valor = int(input(f'{Tipo_date}: '))
+                        if verificacao(valor):
+                            return valor
+                        else:
+                            print('Valor Invalido!')
+                            return Verificar_datas(Tipo_date = Tipo_date, verificacao = verificacao)
                     except ValueError:
                         print("Error: o valor deve ser numero inteiro")
-                        return Dia_vf()
-                    if not (len(str(dia)) > 2 and len(str(dia)) < 1) and not(dia < 1):
-                        return dia
-                    else:
-                        return Dia_vf()
-
-                def Mes_vf():
-                    try:
-                        mes = int(input('Mes: '))
-                    except ValueError:
-                        print("Error: o valor deve ser numero inteiro")
-                        return Mes_vf()
-                    if not (len(str(mes)) > 2 and len(str(mes)) < 1) and (mes >= 1 and mes <= 12):
-                        return mes
-                    else:
-                        return Mes_vf()
-
-                def Ano_vf():
-                    try:
-                        ano = int(input('Ano: '))
-
-                    except ValueError:
-                        print("Error: o valor deve ser numero inteiro")
-                        return Ano_vf()
-                    
-                    if not (len(str(ano)) < 4 and len(str(ano)) > 4) and not (ano > data_atual.year) and (ano > 1800):
-                        return ano
-                    else:
-                        return Ano_vf()
+                        return Verificar_datas()
+            
+                def Dia_vf(Dia):
+                    return not (len(str(Dia)) > 2 and len(str(Dia)) < 1) and not(Dia < 1)
+                
+                def Mes_vf(Mes):
+                    return not (len(str(Mes)) > 2 and len(str(Mes)) < 1) and (Mes >= 1 and Mes <= 12)
+                
+                def Ano_vf(Ano):
+                    return not (len(str(Ano)) < 4 and len(str(Ano)) > 4) and not (Ano > data_atual.year) and (Ano > 1800)
 
                 try:
-                    dia = Dia_vf() 
-                    mes = Mes_vf()
-                    ano = Ano_vf()
+                    dia = Verificar_datas(Tipo_date='Dia', verificacao=Dia_vf) 
+                    mes = Verificar_datas('Mes',Mes_vf)
+                    ano = Verificar_datas('Ano', Ano_vf)
 
                     dt_nasc =  date(day = dia, month = mes, year = ano)
                     return dt_nasc
                 except ValueError:
-                        print('Erro no valor inserido?')
+                        print('Erro no valor inserido:')
                         return data_nascimento()
                 
 
