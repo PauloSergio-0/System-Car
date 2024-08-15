@@ -4,10 +4,6 @@ src/System/SistemaVendaCarros.egg-info/PKG-INFO
 src/System/SistemaVendaCarros.egg-info/SOURCES.txt
 src/System/SistemaVendaCarros.egg-info/dependency_links.txt
 src/System/SistemaVendaCarros.egg-info/top_level.txt
-src/System/SistemaVendaCarros.egg-info/PKG-INFO
-src/System/SistemaVendaCarros.egg-info/SOURCES.txt
-src/System/SistemaVendaCarros.egg-info/dependency_links.txt
-src/System/SistemaVendaCarros.egg-info/top_level.txt
 src/System/System_Cadastro/Cadastro_car.py
 src/System/System_Cadastro/__init__.py
 src/System/System_Vendas/Venda_car.py
