@@ -106,12 +106,9 @@ class Users():
                 except ValueError:
                         print('Erro no valor inserido:')
                         return data_nascimento()
-                
-
 
             def Idade_calc(data_nascimento):
-                
-                
+            
                 idade =  data_atual.year - data_nasc.year
 
                 if (data_atual.day , data_atual.month) < (data_nasc.day, data_nasc.month):
@@ -121,7 +118,7 @@ class Users():
             
             data_nasc = data_nascimento()
             if data_nasc > data_atual:
-                print('Sua data de Nascimento é invalida pois é maior que a o ano atual.')
+                print('Não é possivel nascer no futuro!!!!.')
                 data_nasc = data_nascimento()
 
             
@@ -129,12 +126,33 @@ class Users():
             data_nasc = data_nasc.strftime('%d/%m/%Y')
 
             return data_nasc, idade
+        
+        def Escolha_Sexo():
+            print('--Escolha o sexo--')
+            print("1. Masculino")
+            print("2. Feminino")
+            try:
+                
+                opcao = int(input('Escolha uma opcao: '))
+                if opcao == 1:
+                    return 'Masculino'
+                
+                elif opcao == 2:
+                    return 'Feminino'
+            
+            except ValueError:
+                print('Não é um número das opções')
+                return Escolha_Sexo()
+            else:
+                print('Item Invalido')
+                return Escolha_Sexo()
+
 
 
         codigo_user = f'USR{self._DataUsers.shape[0]+1:05d}'
         name = input('Informe nome do usuário: ')
         Data_de_nascimento,idade = data_idade()
-        sexo = input('Informe Sexo: ')
+        sexo = Escolha_Sexo()
         senha = self.verificar_senha() 
         self._DataUsers.loc[self._DataUsers.shape[0]] =[
             codigo_user,

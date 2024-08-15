@@ -1,4 +1,5 @@
 import System_Cadastro.Cadastro_car as Cadastro_car
+import System_users.user_car as user_car
 import pandas as pd
 from datetime import date,datetime
 
@@ -91,7 +92,6 @@ class Venda(Cadastro_car.Carro):
                     Ano_Veiculo ,
                     data_de_venda ,
                     metodo_pg_venda
-
                 ]
 
             else:
