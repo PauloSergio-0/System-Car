@@ -3,7 +3,7 @@ import System_users.user_car as user_car
 import pandas as pd
 from datetime import date,datetime
 
-class Venda(Cadastro_car.Carro):
+class Venda(Cadastro_car.Carro()):
     def __init__(self, Carro_estancia):
         self._DataCadastro = Carro_estancia._DataCadastro
 
