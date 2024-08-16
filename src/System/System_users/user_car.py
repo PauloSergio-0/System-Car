@@ -166,10 +166,3 @@ class Users():
 
     def listar(self):
         print(self._DataUsers)
-
-if __name__ == '__main__':
-    test = Users()
-    test.Cadastro_User()
-    test.listar()
-    test.Editar_nome()
-    test.listar()

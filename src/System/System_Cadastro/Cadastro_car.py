@@ -1,6 +1,6 @@
 import pandas as pd
 from datetime import date, datetime
-import System_Vendas.Venda_car as Vendas_car
+# import System_Vendas.Venda_car as Vendas_car
 
 
 class Carro:
@@ -70,20 +70,3 @@ class Carro:
 
     def listar_info(self):
         print(self._DataCadastro.info())
-        
-if __name__ == '__main__':
-
-    user = Carro()
-    user.Cadastrar_veiculo()
-    user.Cadastrar_veiculo()
-    user.listar()
-    # user.Atualizar_preco_veiculo()
-    # user.listar()
-    # user.listar_info()
-
-    user_test = Vendas_car.Venda(user)
-    user_test.Realizar_Venda()
-
-    user.listar()
-
-    user_test.listar_vendas()
