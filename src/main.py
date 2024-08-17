@@ -1,6 +1,3 @@
-# import System_Cadastro.Cadastro_car as Cadastro_car
-# import System_Vendas.Venda_car as Venda_car
-# import System_users.user_car as user_car
 from System_users.user_car import Users
 from System_Vendas.Venda_car import Venda
 from System_Cadastro.Cadastro_car import Carro
