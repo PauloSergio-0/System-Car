@@ -150,7 +150,7 @@ class Users():
 
 
         codigo_user = f'USR{self._DataUsers.shape[0]+1:05d}'
-        name = input('Informe nome do usuário: ')
+        name = input('Informe nome do usuário: ') # add verificador de nome
         Data_de_nascimento,idade = data_idade()
         sexo = Escolha_Sexo()
         senha = self.verificar_senha() 

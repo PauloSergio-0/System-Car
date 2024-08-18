@@ -1,20 +1,20 @@
-from System_Cadastro.Cadastro_car import Carro
 import pandas as pd
 from datetime import date,datetime
 
-class Venda(Carro):
-    def __init__(self, Carro_estancia):
+class Venda():
+    def __init__(self, Carro_estancia, User_login_estancia):
         self._DataCadastro = Carro_estancia._DataCadastro
+        self.user_login = User_login_estancia.user_login
+        self._DataVenda = pd.DataFrame(columns=['Nr_Fatura','Marca', 'Modelo', 'Quantidade_Vendida', 'Valor_transacao', 'Ano', 'data_transancao', 'Metodo Pagamento', 'Vendedor']) # add --> 'Comprador', 'Vendedor' , 'loja'
 
-        self._DataVenda = pd.DataFrame(columns=['Nr_Fatura','Marca', 'Modelo', 'Quantidade_Vendida', 'Valor_transacao', 'Ano', 'data_transancao', 'Metodo Pagamento']) # add --> 'Comprador', 'Vendedor' , 'loja'
-
-        self._DataVenda = self._DataVenda.astype({
+        self._DataVenda = self._DataVenda.astype({ 
             'Nr_Fatura': 'string',
             'Valor_transacao': 'float64',
             'Modelo': 'string',
             'Marca': 'string',
             'data_transancao': 'string',
-            'Metodo Pagamento': 'string'
+            'Metodo Pagamento': 'string',
+            'Vendedor': 'string'
         })
 
 
@@ -66,7 +66,7 @@ class Venda(Carro):
             if qtd_vendida == 0:
                 print('A quantidade deve ser maior que 0.')
 
-            elif qtd_vendida <= self._DataCadastro.at[index, 'Quantidade']:
+            elif qtd_vendida <= self._DataCadastro.at[index, 'Quantidade']: # ao realizar a venda reduz a quantidade de de items 
 
                 self._DataCadastro.at[index, 'Quantidade'] -= qtd_vendida
                 self._DataCadastro.at[index, 'Data Modificacao'] = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
@@ -81,6 +81,7 @@ class Venda(Carro):
                 
                 data_de_venda = date.today().strftime('%d/%m/%Y')
                 metodo_pg_venda = self.Metodo_pagamento()
+                
 
                 self._DataVenda.loc[self._DataVenda.shape[0]]=[
                     Codigo_fat ,
@@ -90,7 +91,8 @@ class Venda(Carro):
                     Preco_Veiculo ,
                     Ano_Veiculo ,
                     data_de_venda ,
-                    metodo_pg_venda
+                    metodo_pg_venda,
+                    self.user_login
                 ]
 
             else:

@@ -1,14 +1,14 @@
 import pandas as pd
 from datetime import date, datetime
-# import System_Vendas.Venda_car as Vendas_car
+
 
 
 class Carro:
-    def __init__(self):
+    def __init__(self): # inicia um dataframe com as colunas vazias
 
-        self._DataCadastro = pd.DataFrame(columns=['Codigo', 'Marca', 'Modelo', 'Preco', 'Ano', 'Quantidade', 'Data Cadastro', 'Data Modificacao'])
+        self._DataCadastro = pd.DataFrame(columns=['Codigo', 'Marca', 'Modelo', 'Preco', 'Ano', 'Quantidade', 'Data Cadastro', 'Data Modificacao'])# ==> loja
         
-        self._DataCadastro = self._DataCadastro.astype({
+        self._DataCadastro = self._DataCadastro.astype({# pré define o tipo das colunas
             'Codigo': 'string',
             'Marca': 'string',
             'Modelo': 'string',
@@ -19,7 +19,7 @@ class Carro:
             'Data Modificacao': 'string'
         })
 
-    def Cadastrar_veiculo(self):
+    def Cadastrar_veiculo(self):# no cadastro de veiculo será gerado um codifo de acordo com o tamanho do df(linhas)
         Codigo_Veiculo = f'CRR{self._DataCadastro.shape[0] + 1:05d}'
         Marca_Veiculo = input('Informe a Marca: ')
         Modelo_Veiculo = input("Informe o modelo: ")
@@ -28,9 +28,10 @@ class Carro:
         Quantidade_veiculo = int(input("Informe quantidade adicionadas: "))
         
         data_de_cadastro = date.today().strftime('%d/%m/%Y')
-        data_de_modificacao = None
+        data_de_modificacao = None # data de modificação só irá iniciado por None pois só pode ser modificados após ser cadastrado
         
-        self._DataCadastro.loc[self._DataCadastro.shape[0]] = [
+        # adcionado ao dataframe
+        self._DataCadastro.loc[self._DataCadastro.shape[0]] = [ 
             Codigo_Veiculo,
             Marca_Veiculo,
             Modelo_Veiculo,
@@ -42,11 +43,11 @@ class Carro:
         ]
         
     def Atualizar_preco_veiculo(self):
-        Codigo_search = input('Iforme o código: ')
+        Codigo_search = input('Informe o código: ')
         
-        if Codigo_search in self._DataCadastro['Codigo'].values:
+        if Codigo_search in self._DataCadastro['Codigo'].values: # se o codigo existir na coluna['Codigo'] irá gerar um True oq fará e poderar seguir para a alteração
             
-            index = self._DataCadastro[self._DataCadastro['Codigo'] == Codigo_search ].index[0]
+            index = self._DataCadastro[self._DataCadastro['Codigo'] == Codigo_search ].index[0]# pega o indice para modificar a na raiz do df
             
             self._DataCadastro.at[index,'Preco'] = float(input('Informe o novo preço:'))
             self._DataCadastro.at[index,'Data Modificacao'] = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
