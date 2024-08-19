@@ -92,7 +92,6 @@ class Users():
                 
                 print('Informe data de nascimento: ')
                 
-
                 def Verificar_datas(Tipo_date, verificacao):
                     try:
                         valor = int(input(f'{Tipo_date}: '))
