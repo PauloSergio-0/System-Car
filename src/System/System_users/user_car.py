@@ -5,19 +5,37 @@ import re
 
 
 class Users():
-    def __init__(self):
-        self._DataUsers = pd.DataFrame(columns=['Codigo','Nome', 'Data Nascimento', 'idade', 'Sexo', 'Senha']) # add ==> loja
-        
+    def __init__(self, loja_estacia):
+        self._DataUsers = pd.DataFrame(columns=['Codigo','Nome', 'Data Nascimento', 'idade', 'Sexo', 'Senha', 'Loja']) # add ==> loja
+        self._Loja_Df = loja_estacia._Loja_Df
         self._DataUsers = self._DataUsers.astype({
             'Codigo': 'string',
             'Nome': 'string',
             'Data Nascimento': 'string',
             'idade': 'int64',
             'Sexo': 'string',
-            'Senha': 'string'
+            'Senha': 'string',
+            'Loja': 'string'
         })
         
 
+    def Registrar_loja(self):
+        print('Informe a loja que será cadastrado:')
+        num =0
+        lista_loja= self._Loja_Df['Nome_loja'].unique().tolist()
+        for item in lista_loja:
+            print(f"{num}. {item}")
+            num +=1
+        try:
+            opcao = int(input('Escolha opção: '))
+            if opcao < len(lista_loja):
+                return lista_loja[opcao]
+            else:
+                return self.Registrar_loja()
+        except ValueError:
+            print('erro!!')
+            return
+        
     def verificar_senha(self): # ADD module uuid() hash
 
         """
@@ -154,13 +172,15 @@ class Users():
         Data_de_nascimento,idade = data_idade()
         sexo = Escolha_Sexo()
         senha = self.verificar_senha() 
+        loja = self.Registrar_loja()
         self._DataUsers.loc[self._DataUsers.shape[0]] =[
             codigo_user,
             name,
             Data_de_nascimento,
             idade,
             sexo,
-            senha
+            senha,
+            loja
         ]
 
 
