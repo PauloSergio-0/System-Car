@@ -2,9 +2,9 @@ import pandas as pd
 from datetime import date,datetime
 
 class Venda():
-    def __init__(self, Carro_estancia, User_login_estancia):
+    def __init__(self, Carro_estancia, user_name):
         self._DataCadastro = Carro_estancia._DataCadastro
-        self.user_login = User_login_estancia.user_login
+        self.user_login = user_name
         self._DataVenda = pd.DataFrame(columns=['Nr_Fatura','Marca', 'Modelo', 'Quantidade_Vendida', 'Valor_transacao', 'Ano', 'data_transancao', 'Metodo Pagamento', 'Vendedor']) # add --> 'Comprador', 'Vendedor' , 'loja'
 
         self._DataVenda = self._DataVenda.astype({ 
@@ -16,6 +16,8 @@ class Venda():
             'Metodo Pagamento': 'string',
             'Vendedor': 'string'
         })
+
+    
 
 
     def Metodo_pagamento(self):
@@ -59,6 +61,8 @@ class Venda():
     def Realizar_Venda(self):
         codigo_search = input('Informe o código:')
         if codigo_search in self._DataCadastro['Codigo'].values:
+            
+            
 
             index = self._DataCadastro[self._DataCadastro['Codigo'] == codigo_search].index[0]
             qtd_vendida =int(input('Informe quantidade vendida: '))
@@ -81,7 +85,7 @@ class Venda():
                 
                 data_de_venda = date.today().strftime('%d/%m/%Y')
                 metodo_pg_venda = self.Metodo_pagamento()
-                
+                usuario = self.user_login
 
                 self._DataVenda.loc[self._DataVenda.shape[0]]=[
                     Codigo_fat ,
@@ -92,7 +96,7 @@ class Venda():
                     Ano_Veiculo ,
                     data_de_venda ,
                     metodo_pg_venda,
-                    self.user_login
+                    usuario
                 ]
 
             else:

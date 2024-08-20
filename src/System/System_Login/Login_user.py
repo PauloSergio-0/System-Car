@@ -1,9 +1,13 @@
+from argon2 import PasswordHasher 
+
+
 class Login():
     def __init__(self, users_estacia):
         self.Login_successful = False
-        self.password = None
+        self.password_login = None
         self.user_login = None
         self._DataUsers  = users_estacia._DataUsers
+        self.ph = PasswordHasher()
         
     def logar(self):
         
@@ -26,19 +30,20 @@ class Login():
         
         def Verificar_senha(usuario_index, user):
             try:
-                self.password = input("Senha: ")
+                self.password_login = input("Senha: ")
                 
-                if self.password == '':
-                    return Verificar_senha()
+                if self.password_login == '':
+                    return Verificar_senha(usuario_index=usuario_index, user=user)
             except ValueError:
-                print("Valor incorreto!!")
-                return Verificar_senha()
+                print("Senha incorreta!!")
+                return Verificar_senha(usuario_index=usuario_index, user=user)
             
-            if self._DataUsers['Senha'][usuario_index] == self.password:
+            try:
+                self.ph.verify(self._DataUsers['Senha'][usuario_index], password=self.password_login)
                 print('Login feito!!')
                 self.Login_successful = True
-                return True
-            else:
+                return self.Login_successful
+            except:
                 print("Senha Invalida!!")
                 return Verificar_senha(usuario_index=usuario_index, user=user)
         
@@ -47,3 +52,10 @@ class Login():
             Verificar_senha(usuario_index, self.user_login)
             
         return Enter_accout()
+    
+
+    def logout(self):
+        self.Login_successful = False
+        self.password_login = None
+        self.user_login = None
+        print("Logout!!")

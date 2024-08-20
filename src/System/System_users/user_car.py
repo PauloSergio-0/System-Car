@@ -1,6 +1,7 @@
 import pandas as pd
 from datetime import datetime, date
-from uuid import uuid5
+from argon2 import PasswordHasher 
+
 import re
 
 
@@ -24,18 +25,21 @@ class Users():
         print('Informe a loja que será cadastrado:')
         num =0
         lista_loja= self._Loja_Df['Nome_loja'].unique().tolist()
+        
         for item in lista_loja:
-            print(f"{num}. {item}")
             num +=1
+            print(f"{num}. {item}")
+
         try:
             opcao = int(input('Escolha opção: '))
+            opcao -=1
             if opcao < len(lista_loja):
                 return lista_loja[opcao]
             else:
                 return self.Registrar_loja()
         except ValueError:
             print('erro!!')
-            return
+            return self.Registrar_loja()
         
     def verificar_senha(self): # ADD module uuid() hash
 
@@ -47,6 +51,11 @@ class Users():
         - Pelo menos um número
         - Pelo menos um caractere especial
         """
+        ph = PasswordHasher(
+            time_cost=2,
+            memory_cost=65536,
+            parallelism=2
+        )
         senha = input('Informe a senha: ')
 
         criterios = { # dicionário com os valores da verificação de criterios
@@ -63,7 +72,7 @@ class Users():
 
         if valido:
             print("Senha válida!")
-            return senha
+            return ph.hash(senha)
         else:
             print("Senha inválida. Critérios não atendidos:")
             for criterio, atendido in criterios.items():
@@ -165,7 +174,9 @@ class Users():
         name = input('Informe nome do usuário: ') # add verificador de nome
         Data_de_nascimento = self.data_nascimento()
         idade = self.Idade_calc(Data_de_nascimento)
-        Data_de_nascimento= Data_de_nascimento.strftime('%d/%m/%Y')
+
+        Data_de_nascimento = Data_de_nascimento.strftime('%d/%m/%Y')
+
         sexo = self.Escolha_Sexo()
         senha = self.verificar_senha() 
         loja = self.Registrar_loja()

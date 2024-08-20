@@ -17,14 +17,16 @@ if __name__ == '__main__':
 
     user.listar()
 
-    test = Carro()
-    test.Cadastrar_veiculo()
-    test.listar()
-
     log = Login(user)
     log.logar()
 
-    vendendo = Venda(test, log)
+    test = Carro(user_estacia=user, userLogin_estacia=log.user_login)
+    test.Cadastrar_veiculo()
+    test.listar()
+
+    
+
+    vendendo = Venda(test,user_name=log.user_login)
     vendendo.Realizar_Venda()
     vendendo.listar_vendas()
 

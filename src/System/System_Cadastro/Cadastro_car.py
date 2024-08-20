@@ -4,10 +4,11 @@ from datetime import date, datetime
 
 
 class Carro:
-    def __init__(self): # inicia um dataframe com as colunas vazias
-
-        self._DataCadastro = pd.DataFrame(columns=['Codigo', 'Marca', 'Modelo', 'Preco', 'Ano', 'Quantidade', 'Data Cadastro', 'Data Modificacao'])# ==> loja
-        
+    def __init__(self, user_estacia, userLogin_estacia): # inicia um dataframe com as colunas vazias
+        self._DataUsers = user_estacia._DataUsers
+        self.user_login = userLogin_estacia
+        self._DataCadastro = pd.DataFrame(columns=['Codigo', 'Marca', 'Modelo', 'Preco', 'Ano', 'Quantidade', 'Data Cadastro', 'Data Modificacao', 'loja', 'Adcionado Por', 'Modificado Por'])# ==> loja
+        self.info_user = self._DataUsers[self._DataUsers['Nome'] == self.user_login].iloc[0]
         self._DataCadastro = self._DataCadastro.astype({# pré define o tipo das colunas
             'Codigo': 'string',
             'Marca': 'string',
@@ -16,7 +17,10 @@ class Carro:
             'Ano': 'int32',
             'Quantidade': 'int32',
             'Data Cadastro': 'string',
-            'Data Modificacao': 'string'
+            'Data Modificacao': 'string',
+            'loja': 'string',
+            'Adcionado Por': 'string',
+            'Modificado Por': 'string'
         })
 
     def Cadastrar_veiculo(self):# no cadastro de veiculo será gerado um codifo de acordo com o tamanho do df(linhas)
@@ -26,10 +30,11 @@ class Carro:
         Preco_Veiculo = float(input('Informe o preço: '))
         Ano_Veiculo = int(input("Informe o Ano: "))
         Quantidade_veiculo = int(input("Informe quantidade adicionadas: "))
-        
         data_de_cadastro = date.today().strftime('%d/%m/%Y')
         data_de_modificacao = None # data de modificação só irá iniciado por None pois só pode ser modificados após ser cadastrado
-        
+        Loja =  self.info_user['Loja']
+        add_user = self.info_user['Nome']
+        mod_user = None
         # adcionado ao dataframe
         self._DataCadastro.loc[self._DataCadastro.shape[0]] = [ 
             Codigo_Veiculo,
@@ -39,7 +44,10 @@ class Carro:
             Ano_Veiculo,
             Quantidade_veiculo,
             data_de_cadastro,
-            data_de_modificacao
+            data_de_modificacao,
+            Loja,
+            add_user,
+            mod_user
         ]
         
     def Atualizar_preco_veiculo(self):
@@ -51,6 +59,8 @@ class Carro:
             
             self._DataCadastro.at[index,'Preco'] = float(input('Informe o novo preço:'))
             self._DataCadastro.at[index,'Data Modificacao'] = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
+            self._DataCadastro.at[index,'Modificado Por'] = self.info_user['Nome'].values
+            
             print('Valor atualizado')
         else:
             print('Não encontrado')
@@ -62,6 +72,7 @@ class Carro:
             index = self._DataCadastro[self._DataCadastro['Codigo'] == Codigo_search].index[0]
             self._DataCadastro.at[index, 'Quantidade'] = int(input('Informe quantidade: '))
             self._DataCadastro.at[index,'Data Modificacao'] = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
+            self._DataCadastro.at[index,'Modificado Por'] = self.info_user['Nome'].values
             print("Quantidade atualizada: ")
         else:
             print('Não encontrado')
