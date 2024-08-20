@@ -6,6 +6,7 @@ import re
 
 class Users():
     def __init__(self, loja_estacia):
+        self.data_atual = date.today()
         self._DataUsers = pd.DataFrame(columns=['Codigo','Nome', 'Data Nascimento', 'idade', 'Sexo', 'Senha', 'Loja']) # add ==> loja
         self._Loja_Df = loja_estacia._Loja_Df
         self._DataUsers = self._DataUsers.astype({
@@ -83,69 +84,61 @@ class Users():
             print('Código não encontrado')
             return self.Editar_nome()
 
-
-    def Cadastro_User(self):
         
-        def data_idade():
-            data_atual = date.today()
-            def data_nascimento(): #=> verificador de inputs (dt_nasc ==> dia, mes,ano)
-                
-                print('Informe data de nascimento: ')
-                
+    def data_nascimento(self): #=> verificador de inputs (dt_nasc ==> dia, mes,ano)
+        print('Informe data de nascimento: ')
 
-                def Verificar_datas(Tipo_date, verificacao):
-                    try:
-                        valor = int(input(f'{Tipo_date}: '))
-                        if verificacao(valor):
-                            return valor
-                        else:
-                            print('Valor Invalido!')
-                            return Verificar_datas(Tipo_date = Tipo_date, verificacao = verificacao)
-                    except ValueError:
-                        print("Error: o valor deve ser numero inteiro")
-                        return Verificar_datas()
+        def Verificar_datas(Tipo_date, verificacao):
+            try:
+                valor = int(input(f'{Tipo_date}: '))
+                if verificacao(valor):
+                    return valor
+                else:
+                    print('Valor Invalido!')
+                    return Verificar_datas(Tipo_date = Tipo_date, verificacao = verificacao)
+            except ValueError:
+                print("Error: o valor deve ser numero inteiro")
+                return Verificar_datas()
             
-                def Dia_vf(Dia):
-                    return not (len(str(Dia)) > 2 and len(str(Dia)) < 1) and not(Dia < 1)
-                
-                def Mes_vf(Mes):
-                    return not (len(str(Mes)) > 2 and len(str(Mes)) < 1) and (Mes >= 1 and Mes <= 12)
-                
-                def Ano_vf(Ano):
-                    return not (len(str(Ano)) < 4 and len(str(Ano)) > 4) and not (Ano > data_atual.year) and (Ano > 1800)
+        def Dia_vf(Dia):
+            return not (len(str(Dia)) > 2 and len(str(Dia)) < 1) and not(Dia < 1)
+        
+        def Mes_vf(Mes):
+            return not (len(str(Mes)) > 2 and len(str(Mes)) < 1) and (Mes >= 1 and Mes <= 12)
+        
+        def Ano_vf(Ano):
+            return not (len(str(Ano)) < 4 and len(str(Ano)) > 4) and not (Ano > self.data_atual.year) and (Ano > 1800)
 
-                try:
-                    dia = Verificar_datas(Tipo_date='Dia', verificacao=Dia_vf) 
-                    mes = Verificar_datas('Mes',Mes_vf)
-                    ano = Verificar_datas('Ano', Ano_vf)
+        try:
+            dia = Verificar_datas(Tipo_date='Dia', verificacao=Dia_vf) 
+            mes = Verificar_datas('Mes',Mes_vf)
+            ano = Verificar_datas('Ano', Ano_vf)
 
-                    dt_nasc =  date(day = dia, month = mes, year = ano)
-                    return dt_nasc
-                except ValueError:
-                        print('Erro no valor inserido:')
-                        return data_nascimento()
+            dt_nasc =  date(day = dia, month = mes, year = ano)
+            # data_nasc = self.data_nascimento()
 
-            def Idade_calc(data_nascimento):
-            
-                idade =  data_atual.year - data_nasc.year
-
-                if (data_atual.day , data_atual.month) < (data_nasc.day, data_nasc.month):
-                    idade -= 1
-                
-                return idade
-            
-            data_nasc = data_nascimento()
-            if data_nasc > data_atual:
+            if dt_nasc > self.data_atual:
                 print('Não é possivel nascer no futuro!!!!.')
-                data_nasc = data_nascimento()
+                dt_nasc = self.data_nascimento()
 
-            
-            idade = Idade_calc(data_nasc)
-            data_nasc = data_nasc.strftime('%d/%m/%Y')
+            return dt_nasc
+        except ValueError:
+                print('Erro no valor inserido:')
+                return self.data_nascimento()
 
-            return data_nasc, idade
+
+
+    def Idade_calc(self, data_nascimento):
+    
+        idade =  self.data_atual.year - data_nascimento.year
+
+        if (self.data_atual.day , self.data_atual.month) < (data_nascimento.day, data_nascimento.month):
+            idade -= 1
         
-        def Escolha_Sexo():
+        return idade
+    
+    
+    def Escolha_Sexo(self):
             print('--Escolha o sexo--')
             print("1. Masculino")
             print("2. Feminino")
@@ -160,17 +153,20 @@ class Users():
             
             except ValueError:
                 print('Não é um número das opções')
-                return Escolha_Sexo()
+                return self.Escolha_Sexo()
             else:
                 print('Item Invalido')
-                return Escolha_Sexo()
-
-
+                return self.Escolha_Sexo()
+            
+        
+    def Cadastro_User(self):
 
         codigo_user = f'USR{self._DataUsers.shape[0]+1:05d}'
         name = input('Informe nome do usuário: ') # add verificador de nome
-        Data_de_nascimento,idade = data_idade()
-        sexo = Escolha_Sexo()
+        Data_de_nascimento = self.data_nascimento()
+        idade = self.Idade_calc(Data_de_nascimento)
+        Data_de_nascimento= Data_de_nascimento.strftime('%d/%m/%Y')
+        sexo = self.Escolha_Sexo()
         senha = self.verificar_senha() 
         loja = self.Registrar_loja()
         self._DataUsers.loc[self._DataUsers.shape[0]] =[

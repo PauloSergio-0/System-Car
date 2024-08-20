@@ -17,19 +17,19 @@ if __name__ == '__main__':
 
     user.listar()
 
-#     test = Carro()
-#     test.Cadastrar_veiculo()
-#     test.listar()
+    test = Carro()
+    test.Cadastrar_veiculo()
+    test.listar()
 
-#     log = Login(user)
-#     log.logar()
+    log = Login(user)
+    log.logar()
 
-#     vendendo = Venda(test, user)
-#     vendendo.Realizar_Venda()
-#     vendendo.listar_vendas()
+    vendendo = Venda(test, log)
+    vendendo.Realizar_Venda()
+    vendendo.listar_vendas()
 
 
-#     print(log.Login_successful)
-#     print(log.user_login)
+    print(log.Login_successful)
+    print(log.user_login)
 
-# print('Fim do projeto!!')
+    print('Fim do projeto!!')

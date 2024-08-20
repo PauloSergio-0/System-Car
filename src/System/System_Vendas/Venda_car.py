@@ -63,7 +63,7 @@ class Venda():
             index = self._DataCadastro[self._DataCadastro['Codigo'] == codigo_search].index[0]
             qtd_vendida =int(input('Informe quantidade vendida: '))
 
-            if qtd_vendida == 0:
+            if qtd_vendida <= 0 :
                 print('A quantidade deve ser maior que 0.')
 
             elif qtd_vendida <= self._DataCadastro.at[index, 'Quantidade']: # ao realizar a venda reduz a quantidade de de items 
@@ -97,6 +97,10 @@ class Venda():
 
             else:
                 print('A quantidade é maior que o estoque')
+                return self.Realizar_Venda()
+        else:
+            print("Veiculo não encontrado!!")
+            return self.Realizar_Venda()
 
     def listar_vendas(self):
         print(self._DataVenda)
