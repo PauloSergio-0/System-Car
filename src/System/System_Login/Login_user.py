@@ -47,4 +47,3 @@ class Login():
             Verificar_senha(usuario_index, self.user_login)
             
         return Enter_accout()
-            
