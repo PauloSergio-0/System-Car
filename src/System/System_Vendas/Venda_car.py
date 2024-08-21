@@ -44,6 +44,7 @@ class Venda():
                         return 'CARTOA - DEBITO'
                     else:
                         print('Opção invalida')
+                        return self.Metodo_pagamento()
 
             elif opcao == 3:
                 return 'EM DINHEIRO'
@@ -74,7 +75,7 @@ class Venda():
 
                 self._DataCadastro.at[index, 'Quantidade'] -= qtd_vendida
                 self._DataCadastro.at[index, 'Data Modificacao'] = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
-                print('venda realizada com sucesso!')
+                
 
                 Codigo_fat = f'FTR{self._DataCadastro.at[index, "Codigo"]}-{self._DataCadastro.shape[0] +1:03d}'
                 Marca_Veiculo = self._DataCadastro.at[index, 'Marca']
@@ -98,7 +99,8 @@ class Venda():
                     metodo_pg_venda,
                     usuario
                 ]
-
+                
+                print('venda realizada com sucesso!')
             else:
                 print('A quantidade é maior que o estoque')
                 return self.Realizar_Venda()
