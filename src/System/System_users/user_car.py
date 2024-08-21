@@ -1,5 +1,5 @@
 import pandas as pd
-from datetime import datetime, date
+from datetime import date
 from argon2 import PasswordHasher 
 
 import re
@@ -8,16 +8,16 @@ import re
 class Users():
     def __init__(self, loja_estacia):
         self.data_atual = date.today()
-        self._DataUsers = pd.DataFrame(columns=['Codigo','Nome', 'Data Nascimento', 'idade', 'Sexo', 'Senha', 'Loja']) # add ==> loja
+        self._DataUsers = pd.DataFrame(columns=['Codigo', 'Loja','Nome', 'Data Nascimento', 'idade', 'Sexo', 'Senha']) # add ==> loja
         self._Loja_Df = loja_estacia._Loja_Df
         self._DataUsers = self._DataUsers.astype({
             'Codigo': 'string',
+            'Loja': 'string',
             'Nome': 'string',
             'Data Nascimento': 'string',
             'idade': 'int64',
             'Sexo': 'string',
-            'Senha': 'string',
-            'Loja': 'string'
+            'Senha': 'string'
         })
         
 
@@ -41,7 +41,7 @@ class Users():
             print('erro!!')
             return self.Registrar_loja()
         
-    def verificar_senha(self): # ADD module uuid() hash
+    def verificar_senha(self): # ADD hash
 
         """
         Verifica a qualidade da senha com base em vários critérios:
@@ -50,6 +50,7 @@ class Users():
         - Pelo menos uma letra minúscula
         - Pelo menos um número
         - Pelo menos um caractere especial
+        - Não deve conter espaços
         """
         ph = PasswordHasher(
             time_cost=2,
@@ -57,14 +58,15 @@ class Users():
             parallelism=2
         )
         senha = input('Informe a senha: ')
+        
+
 
         criterios = { # dicionário com os valores da verificação de criterios
             "comprimento_minimo": len(senha) >= 8,
             "letra_maiuscula": re.search(r'[A-Z]', senha) is not None,
             "letra_minuscula": re.search(r'[a-z]', senha) is not None,
-            "numero": re.search(r'\d', senha) is not None,
+            "Contem_numeros": re.search(r'\d', senha) is not None,
             "caractere_especial": re.search(r'[^a-zA-Z0-9]', senha) is not None,
-            "Tem_espaços": re.search(r'\s', senha) is None
         }
         todos_criterios_satisfeitos = all(criterios.values()) # capta os booleanos gerados
 
@@ -79,7 +81,55 @@ class Users():
                 if not atendido:
                     print(f"- {criterio.replace('_', ' ').capitalize()}")
                     return self.verificar_senha()
+                
+    def verificar_Nome(self): # ADD hash
 
+        """
+        Verifica a qualidade da senha com base em vários critérios:
+        - Pelo número
+        - Pelo menos um caractere especial
+        - Não deve conter
+        """
+        def confirmacao_senha(nome):
+            print(f'\n{nome}\n')
+            print('Esse é o Seu nome?')
+
+            print('0. Não')
+            print('1. Sim')
+            opcao = int(input('Informe a opção: '))
+            if opcao == 1:
+                print('Nome confirmado!')
+            elif opcao == 0:
+                print('Nome incorreto')
+                return self.verificar_Nome()
+        try:
+            name = input('Informe nome do usuário: ')
+            
+        except ValueError:
+            print('Não é um nome')
+            return self.verificar_Nome()
+
+        criterios = { # dicionário com os valores da verificação de criterios
+            "letra_maiuscula": re.search(r'[A-Z]', name) is not None,
+            "letra_minuscula": re.search(r'[a-z]', name) is not None,
+            "numero": re.search(r'\d', name) is None,
+            "caractere_especial": re.search(r'[^a-zA-Z0-9\sáéíóúÁÉÍÓÚâêîôûÂÊÎÔÛãõÃÕçÇ]', name) is None,
+            # "Tem_espaços": re.search(r'\s', name) is not None
+        }
+        todos_criterios_satisfeitos = all(criterios.values()) # capta os booleanos gerados
+
+        criterios, valido = criterios, todos_criterios_satisfeitos
+        
+        if valido:
+            confirmacao_senha(name)
+            print("nome valido!")
+            return name
+        else:
+            print("nome invalido. Critérios não atendidos:")
+            for criterio, atendido in criterios.items():
+                if not atendido:
+                    print(f"- {criterio.replace('_', ' ').capitalize()}")
+                    return self.verificar_Nome()
 
     def Editar_nome(self):
         Codigo_seach = input('Informe o codigo: ')
@@ -171,7 +221,7 @@ class Users():
     def Cadastro_User(self):
 
         codigo_user = f'USR{self._DataUsers.shape[0]+1:05d}'
-        name = input('Informe nome do usuário: ') # add verificador de nome
+        name = self.verificar_Nome() # add verificador de nome
         Data_de_nascimento = self.data_nascimento()
         idade = self.Idade_calc(Data_de_nascimento)
 
@@ -182,12 +232,12 @@ class Users():
         loja = self.Registrar_loja()
         self._DataUsers.loc[self._DataUsers.shape[0]] =[
             codigo_user,
+            loja,
             name,
             Data_de_nascimento,
             idade,
             sexo,
-            senha,
-            loja
+            senha
         ]
 
 

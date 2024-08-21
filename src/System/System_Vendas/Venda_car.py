@@ -2,8 +2,9 @@ import pandas as pd
 from datetime import date,datetime
 
 class Venda():
-    def __init__(self, Carro_estancia, user_name):
+    def __init__(self, Carro_estancia, user_name, user_cad_Dat):
         self._DataCadastro = Carro_estancia._DataCadastro
+        self._DataUsers = user_cad_Dat._DataUsers[self._DataUsers['Nome'] == user_name].iloc[0]
         self.user_login = user_name
         self._DataVenda = pd.DataFrame(columns=['Nr_Fatura','Marca', 'Modelo', 'Quantidade_Vendida', 'Valor_transacao', 'Ano', 'data_transancao', 'Metodo Pagamento', 'Vendedor']) # add --> 'Comprador', 'Vendedor' , 'loja'
 

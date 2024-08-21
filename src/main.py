@@ -1,5 +1,3 @@
-import pandas as pd
-
 from System_users.user_car import Users
 from System_Vendas.Venda_car import Venda
 from System_Cadastro.Cadastro_car import Carro
@@ -7,12 +5,12 @@ from System_Login.Login_user import Login
 from System_Loja.Cad_loja import loja
 
 
-
 def main():
     lojas = loja()
     usuario = Users(loja_estacia=lojas)
     Login_usuario = Login(usuario)
     
+    # usuario.verificar_Nome()
     while True:
         print(('-'*5) + 'ESTOQUE GLOBAL' + ('-'*5))
         print('1. Cadastar loja')
@@ -85,32 +83,4 @@ def main_log(Login_usuario, carro_sistema, carro_vendas):
 
 
 if __name__ == '__main__':
-    
     main()
-    # lojas = loja()
-    # lojas.Cadastrar_Loja()
-
-
-
-    # usuario.Cadastro_User()
-
-
-    # usuario.listar()
-
-
-    # Login_usuario.logar()
-
-
-    # carro_sistema.Cadastrar_veiculo()
-    # carro_sistema.listar()
-
-    
-
-    # carro_vendas.Realizar_Venda()
-    # carro_vendas.listar_vendas()
-
-
-    # print(Login_usuario.Login_successful)
-    # print(Login_usuario.user_login)
-
-    # print('Fim do projeto!!')
