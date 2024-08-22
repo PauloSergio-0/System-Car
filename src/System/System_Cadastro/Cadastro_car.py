@@ -1,27 +1,33 @@
 import pandas as pd
 from datetime import date, datetime
-
+import os
 
 
 class Carro:
     def __init__(self, user_estacia, userLogin_estacia): # inicia um dataframe com as colunas vazias
         self._DataUsers = user_estacia._DataUsers
         self.user_login = userLogin_estacia
-        self._DataCadastro = pd.DataFrame(columns=['Codigo', 'Marca', 'Modelo', 'Preco', 'Ano', 'Quantidade', 'Data Cadastro', 'Data Modificacao', 'loja', 'Adcionado Por', 'Modificado Por'])# ==> loja
         self.info_user = self._DataUsers[self._DataUsers['Nome'] == self.user_login].iloc[0]
-        self._DataCadastro = self._DataCadastro.astype({# pré define o tipo das colunas
-            'Codigo': 'string',
-            'Marca': 'string',
-            'Modelo': 'string',
-            'Preco': 'float64',
-            'Ano': 'int32',
-            'Quantidade': 'int32',
-            'Data Cadastro': 'string',
-            'Data Modificacao': 'string',
-            'loja': 'string',
-            'Adcionado Por': 'string',
-            'Modificado Por': 'string'
-        })
+        
+        if os.path.exists("./src/Datasets/Carro_data/Car_system.csv"):
+            self._DataCadastro = pd.read_csv("./src/Datasets/Carro_data/Car_system.csv", sep = ";",encoding="UTF-8")
+
+        else:
+            self._DataCadastro = pd.DataFrame(columns=['Codigo', 'Marca', 'Modelo', 'Preco', 'Ano', 'Quantidade', 'Data Cadastro', 'Data Modificacao', 'loja', 'Adcionado Por', 'Modificado Por'])# ==> loja
+            self._DataCadastro = self._DataCadastro.astype({# pré define o tipo das colunas
+                'Codigo': 'string',
+                'Marca': 'string',
+                'Modelo': 'string',
+                'Preco': 'float64',
+                'Ano': 'int32',
+                'Quantidade': 'int32',
+                'Data Cadastro': 'string',
+                'Data Modificacao': 'string',
+                'loja': 'string',
+                'Adcionado Por': 'string',
+                'Modificado Por': 'string'
+            })
+
 
     def Cadastrar_veiculo(self):# no cadastro de veiculo será gerado um codifo de acordo com o tamanho do df(linhas)
         Codigo_Veiculo = f'CRR{self._DataCadastro.shape[0] + 1:05d}'
@@ -49,6 +55,9 @@ class Carro:
             add_user,
             mod_user
         ]
+
+        self._DataCadastro.to_csv("./src/Datasets/Carro_data/Car_system.csv", sep = ";",encoding="UTF-8",index=False)
+
         
     def Atualizar_preco_veiculo(self):
         Codigo_search = input('Informe o código: ')

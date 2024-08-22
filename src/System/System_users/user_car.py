@@ -1,24 +1,30 @@
 import pandas as pd
 from datetime import date
 from argon2 import PasswordHasher 
-
+import os 
 import re
 
 
 class Users():
     def __init__(self, loja_estacia):
         self.data_atual = date.today()
-        self._DataUsers = pd.DataFrame(columns=['Codigo', 'Loja','Nome', 'Data Nascimento', 'idade', 'Sexo', 'Senha']) # add ==> type user
         self._Loja_Df = loja_estacia._Loja_Df
-        self._DataUsers = self._DataUsers.astype({
-            'Codigo': 'string',
-            'Loja': 'string',
-            'Nome': 'string',
-            'Data Nascimento': 'string',
-            'idade': 'int64',
-            'Sexo': 'string',
-            'Senha': 'string'
-        })
+
+        if os.path.exists("./src/Datasets/Usuario_data/Usuario_system.csv"):
+            self._DataUsers = pd.read_csv("./src/Datasets/Usuario_data/Usuario_system.csv", sep = ";",encoding="UTF-8")
+        else:
+            self._DataUsers = pd.DataFrame(columns=['Codigo', 'Loja','Nome', 'Data Nascimento', 'idade', 'Sexo', 'Senha','Type'])
+            self._DataUsers = self._DataUsers.astype({
+                'Codigo': 'string',
+                'Loja': 'string',
+                'Nome': 'string',
+                'Data Nascimento': 'string',
+                'idade': 'int64',
+                'Sexo': 'string',
+                'Senha': 'string',
+                'Type': 'string'
+
+            })
         
 
     def Registrar_loja(self):
@@ -98,7 +104,7 @@ class Users():
         - Pelo menos um caractere especial
         - Não deve conter
         """
-        def confirmacao_senha(nome):
+        def confirmacao_nome(nome):
             print(f'\n{nome}\n')
             print('Esse é o Seu nome?')
 
@@ -129,7 +135,7 @@ class Users():
         criterios, valido = criterios, todos_criterios_satisfeitos
         
         if valido:
-            confirmacao_senha(name)
+            confirmacao_nome(name)
             print("nome valido!")
             return name
         else:
@@ -238,6 +244,7 @@ class Users():
         sexo = self.Escolha_Sexo()
         senha = self.verificar_senha() 
         loja = self.Registrar_loja()
+        Tipo = 'Default'
         self._DataUsers.loc[self._DataUsers.shape[0]] =[
             codigo_user,
             loja,
@@ -245,9 +252,10 @@ class Users():
             Data_de_nascimento,
             idade,
             sexo,
-            senha
+            senha,
+            Tipo
         ]
-
+        self._DataUsers.to_csv("./src/Datasets/Usuario_data/Usuario_system.csv", sep = ";",encoding="UTF-8",index=False)
 
     def listar(self):
         print(self._DataUsers)

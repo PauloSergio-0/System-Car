@@ -1,24 +1,27 @@
 import pandas as pd
 from datetime import date,datetime
+import os
 
 class Venda():
-    def __init__(self, Carro_estancia, user_name, user_cad_Dat):
+    def __init__(self, Carro_estancia, user_name):#, user_cad_Dat
         self._DataCadastro = Carro_estancia._DataCadastro
-        self._DataUsers = user_cad_Dat._DataUsers[self._DataUsers['Nome'] == user_name].iloc[0]
+        #self._DataUsers = user_cad_Dat._DataUsers[self._DataUsers['Nome'] == user_name].iloc[0]
         self.user_login = user_name
-        self._DataVenda = pd.DataFrame(columns=['Nr_Fatura','Marca', 'Modelo', 'Quantidade_Vendida', 'Valor_transacao', 'Ano', 'data_transancao', 'Metodo Pagamento', 'Vendedor']) # add --> 'Comprador', 'Vendedor' , 'loja'
 
-        self._DataVenda = self._DataVenda.astype({ 
-            'Nr_Fatura': 'string',
-            'Valor_transacao': 'float64',
-            'Modelo': 'string',
-            'Marca': 'string',
-            'data_transancao': 'string',
-            'Metodo Pagamento': 'string',
-            'Vendedor': 'string'
-        })
+        if os.path.exists('./src/Datasets/Venda_data/Vendas_carros.csv'):
+            self._DataVenda= pd.read_csv('./src/Datasets/Venda_data/Vendas_carros.csv', sep=';', encoding='UTF-8')
+        else:
+            self._DataVenda = pd.DataFrame(columns=['Nr_Fatura','Marca', 'Modelo', 'Quantidade_Vendida', 'Valor_transacao', 'Ano', 'data_transancao', 'Metodo Pagamento', 'Vendedor']) # add --> 'Comprador', 'Vendedor' , 'loja'
 
-    
+            self._DataVenda = self._DataVenda.astype({ 
+                'Nr_Fatura': 'string',
+                'Valor_transacao': 'float64',
+                'Modelo': 'string',
+                'Marca': 'string',
+                'data_transancao': 'string',
+                'Metodo Pagamento': 'string',
+                'Vendedor': 'string'
+            })
 
 
     def Metodo_pagamento(self):
@@ -42,7 +45,7 @@ class Venda():
                         return 'CARTAO - CREDITO'
                         
                     elif ct_opcao == 2:
-                        return 'CARTOA - DEBITO'
+                        return 'CARTAO - DEBITO'
                     else:
                         print('Opção invalida')
                         return self.Metodo_pagamento()
@@ -78,14 +81,14 @@ class Venda():
                 self._DataCadastro.at[index, 'Data Modificacao'] = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
                 
 
-                Codigo_fat = f'FTR{self._DataCadastro.at[index, "Codigo"]}-{self._DataCadastro.shape[0] +1:03d}'
+                Codigo_fat = f'FTR{self._DataCadastro.at[index, "Codigo"]}-{self._DataVenda.shape[0] + 1:03d}'
                 Marca_Veiculo = self._DataCadastro.at[index, 'Marca']
                 Modelo_Veiculo = self._DataCadastro.at[index, 'Modelo']
                 Venda_qtd  = qtd_vendida
                 Preco_Veiculo = qtd_vendida * self._DataCadastro.at[index, 'Preco']
                 Ano_Veiculo = self._DataCadastro.at[index, 'Ano']
                 
-                data_de_venda = date.today().strftime('%d/%m/%Y')
+                data_de_venda = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
                 metodo_pg_venda = self.Metodo_pagamento()
                 usuario = self.user_login
 
@@ -100,6 +103,8 @@ class Venda():
                     metodo_pg_venda,
                     usuario
                 ]
+
+                self._DataVenda.to_csv("./src/Datasets/Venda_data/Vendas_carros.csv", sep = ";",encoding="UTF-8",index=False)
                 
                 print('venda realizada com sucesso!')
             else:

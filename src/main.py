@@ -8,7 +8,7 @@ from System_Loja.Cad_loja import loja
 def main():
     lojas = loja()
     usuario = Users(loja_estacia=lojas)
-    Login_usuario = Login(usuario)
+    Login_usuario = Login(usuario, lojas)
     while True:
         print(('-'*5) + 'ESTOQUE GLOBAL' + ('-'*5))
         print('1. Cadastar loja')
