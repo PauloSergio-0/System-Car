@@ -9,8 +9,6 @@ def main():
     lojas = loja()
     usuario = Users(loja_estacia=lojas)
     Login_usuario = Login(usuario)
-    
-    # usuario.verificar_Nome()
     while True:
         print(('-'*5) + 'ESTOQUE GLOBAL' + ('-'*5))
         print('1. Cadastar loja')

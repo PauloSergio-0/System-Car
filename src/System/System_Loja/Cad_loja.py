@@ -2,7 +2,7 @@ import pandas as pd
 
 class loja:
     def __init__(self):
-        self._Loja_Df = pd.DataFrame(columns=['Nome_loja', 'Pais', 'Estado', 'Cidade']) # Moeda ??
+        self._Loja_Df = pd.DataFrame(columns=['Nome_loja', 'Pais', 'Estado', 'Cidade']) # Moeda ??  add ==> type user
         
         self._Loja_Df = self._Loja_Df.astype({
             'Nome_loja': 'string',

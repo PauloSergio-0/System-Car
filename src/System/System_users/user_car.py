@@ -8,7 +8,7 @@ import re
 class Users():
     def __init__(self, loja_estacia):
         self.data_atual = date.today()
-        self._DataUsers = pd.DataFrame(columns=['Codigo', 'Loja','Nome', 'Data Nascimento', 'idade', 'Sexo', 'Senha']) # add ==> loja
+        self._DataUsers = pd.DataFrame(columns=['Codigo', 'Loja','Nome', 'Data Nascimento', 'idade', 'Sexo', 'Senha']) # add ==> type user
         self._Loja_Df = loja_estacia._Loja_Df
         self._DataUsers = self._DataUsers.astype({
             'Codigo': 'string',
@@ -59,7 +59,14 @@ class Users():
         )
         senha = input('Informe a senha: ')
         
-
+        def Confirmar_senha(senha_vf):
+            re_senha = input('Digite a senha novamente:')
+            if senha == re_senha:
+                print('senha cadastrada')
+            else:
+                print('Senhas diferentes')
+                return Confirmar_senha(senha_vf=senha_vf)
+            
 
         criterios = { # dicionário com os valores da verificação de criterios
             "comprimento_minimo": len(senha) >= 8,
@@ -73,6 +80,7 @@ class Users():
         criterios, valido = criterios, todos_criterios_satisfeitos
 
         if valido:
+            Confirmar_senha(senha)
             print("Senha válida!")
             return ph.hash(senha)
         else:
