@@ -38,7 +38,7 @@ def main():
                 print('Não existem lojas cadastradas!')
             else:
                 Login_usuario.logar()
-                carro_sistema = Carro(user_estacia=usuario, userLogin_estacia=Login_usuario.user_login)
+                carro_sistema = Carro(user_estacia=usuario, Loja_estacia=lojas,userLogin_estacia=Login_usuario)
                 carro_vendas = Venda(carro_sistema,user_name=Login_usuario.user_login)
                 main_log( Login_usuario,carro_sistema,carro_vendas)
         elif opcao == 4:
@@ -69,7 +69,7 @@ def main_log(Login_usuario, carro_sistema, carro_vendas):
                 
         elif opcao == 2:
             if carro_sistema._DataCadastro.empty:
-                print('Não existem usuario cadastrados!')
+                print('Não existem Carro cadastrados!')
             else:
                 carro_vendas.Realizar_Venda()
         elif opcao == 3:

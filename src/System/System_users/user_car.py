@@ -13,7 +13,7 @@ class Users():
         if os.path.exists("./src/Datasets/Usuario_data/Usuario_system.csv"):
             self._DataUsers = pd.read_csv("./src/Datasets/Usuario_data/Usuario_system.csv", sep = ";",encoding="UTF-8")
         else:
-            self._DataUsers = pd.DataFrame(columns=['Codigo', 'Loja','Nome', 'Data Nascimento', 'idade', 'Sexo', 'Senha','Type'])
+            self._DataUsers = pd.DataFrame(columns=['Codigo', 'Loja', 'Nome', 'Data Nascimento', 'idade', 'Sexo', 'Senha','Type'])
             self._DataUsers = self._DataUsers.astype({
                 'Codigo': 'string',
                 'Loja': 'string',

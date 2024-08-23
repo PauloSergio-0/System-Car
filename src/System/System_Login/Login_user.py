@@ -6,6 +6,7 @@ class Login():
         self.Login_successful = False
         self.password_login = None
         self.user_login = None
+        self.user_Type = None
         self._DataUsers  = users_estacia._DataUsers
         self._Loja_Df = loja_estacia._Loja_Df
         self.ph = PasswordHasher()
@@ -19,8 +20,10 @@ class Login():
         try:
             opcao=int(input('Informe a escolha: '))
             if opcao == 1:
+                self.user_Type = opcao
                 return opcao
             elif opcao == 2:
+                self.user_Type = opcao
                 return opcao
             else:
                 print('opção invalida')

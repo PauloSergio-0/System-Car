@@ -1,2 +1,3 @@
 Nome_loja;Pais;Estado;Cidade;Senha;Type
 Porshe;asd;das;dsa;$argon2id$v=19$m=65536,t=2,p=2$aHqt90O2LTPthdXYmMkVqQ$zqBwNSJldhNunTo9J1chvOtNoxutP0cI0ZWZB3nq38M;Admin
+Ferrari;italia;mon;naco;$argon2id$v=19$m=65536,t=2,p=2$ZEqlYP2V9StFuX6SXTd/Jw$T/bo9DqRXAvH+3H2pq9MhNnbjyR0lFrowLUutZH09Qw;Admin

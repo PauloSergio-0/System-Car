@@ -4,11 +4,17 @@ import os
 
 
 class Carro:
-    def __init__(self, user_estacia, userLogin_estacia): # inicia um dataframe com as colunas vazias
+    def __init__(self, user_estacia, Loja_estacia, userLogin_estacia): # inicia um dataframe com as colunas vazias
         self._DataUsers = user_estacia._DataUsers
-        self.user_login = userLogin_estacia
-        self.info_user = self._DataUsers[self._DataUsers['Nome'] == self.user_login].iloc[0]
-        
+        self._Loja_Df = Loja_estacia._Loja_Df
+        self.user_login = userLogin_estacia.user_login
+        self.user_type = userLogin_estacia.user_Type
+        self.Verificar_fonte()
+        self.Tipo_usuario()
+
+
+
+    def Verificar_fonte(self):
         if os.path.exists("./src/Datasets/Carro_data/Car_system.csv"):
             self._DataCadastro = pd.read_csv("./src/Datasets/Carro_data/Car_system.csv", sep = ";",encoding="UTF-8")
 
@@ -28,6 +34,16 @@ class Carro:
                 'Modificado Por': 'string'
             })
 
+    def Tipo_usuario(self):
+
+        if self.user_type == 1:
+            self.info_user = self._Loja_Df[self._Loja_Df['Nome_loja'] == self.user_login].iloc[0]
+            return self.info_user['Nome_loja'], self.info_user['Type']
+        
+        elif self.user_type == 2:
+            self.info_user = self._DataUsers[self._DataUsers['Nome'] == self.user_login].iloc[0]
+            return self.info_user['Nome_loja'], self.info_user['Nome']
+
 
     def Cadastrar_veiculo(self):# no cadastro de veiculo será gerado um codifo de acordo com o tamanho do df(linhas)
         Codigo_Veiculo = f'CRR{self._DataCadastro.shape[0] + 1:05d}'
@@ -38,8 +54,15 @@ class Carro:
         Quantidade_veiculo = int(input("Informe quantidade adicionadas: "))
         data_de_cadastro = date.today().strftime('%d/%m/%Y')
         data_de_modificacao = None # data de modificação só irá iniciado por None pois só pode ser modificados após ser cadastrado
-        Loja =  self.info_user['Loja']
-        add_user = self.info_user['Nome']
+
+        if self.user_type == 1:            
+            Loja =  self.info_user['Nome_loja']
+            add_user = self.info_user['Type']
+
+        elif self.user_type == 2:
+            Loja =  self.info_user['Loja']
+            add_user = self.info_user['Nome']
+
         mod_user = None
         # adcionado ao dataframe
         self._DataCadastro.loc[self._DataCadastro.shape[0]] = [ 
@@ -68,7 +91,12 @@ class Carro:
             
             self._DataCadastro.at[index,'Preco'] = float(input('Informe o novo preço:'))
             self._DataCadastro.at[index,'Data Modificacao'] = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
-            self._DataCadastro.at[index,'Modificado Por'] = self.info_user['Nome'].values
+
+            if self.user_type == 1:
+                self._DataCadastro.at[index,'Modificado Por'] = self.info_user['Nome_loja'].values
+            elif self.user_types == 2:
+                self._DataCadastro.at[index,'Modificado Por'] = self.info_user['Nome'].values
+
             
             print('Valor atualizado')
         else:
@@ -81,7 +109,12 @@ class Carro:
             index = self._DataCadastro[self._DataCadastro['Codigo'] == Codigo_search].index[0]
             self._DataCadastro.at[index, 'Quantidade'] = int(input('Informe quantidade: '))
             self._DataCadastro.at[index,'Data Modificacao'] = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
-            self._DataCadastro.at[index,'Modificado Por'] = self.info_user['Nome'].values
+
+            if self.user_type == 1:
+                self._DataCadastro.at[index,'Modificado Por'] = self.info_user['Nome_loja'].values
+            elif self.user_types == 2:
+                self._DataCadastro.at[index,'Modificado Por'] = self.info_user['Nome'].values
+
             print("Quantidade atualizada: ")
         else:
             print('Não encontrado')
