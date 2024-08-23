@@ -1,7 +1,7 @@
 import pandas as pd
 from datetime import date
-from argon2 import PasswordHasher 
-import os 
+from argon2 import PasswordHasher
+import os
 import re
 
 
@@ -12,8 +12,10 @@ class Users():
 
         if os.path.exists("./src/Datasets/Usuario_data/Usuario_system.csv"):
             self._DataUsers = pd.read_csv("./src/Datasets/Usuario_data/Usuario_system.csv", sep = ";",encoding="UTF-8")
+
         else:
             self._DataUsers = pd.DataFrame(columns=['Codigo', 'Loja', 'Nome', 'Data Nascimento', 'idade', 'Sexo', 'Senha','Type'])
+
             self._DataUsers = self._DataUsers.astype({
                 'Codigo': 'string',
                 'Loja': 'string',
@@ -23,9 +25,9 @@ class Users():
                 'Sexo': 'string',
                 'Senha': 'string',
                 'Type': 'string'
-
             })
         
+
 
     def Registrar_loja(self):
         print('Informe a loja que será cadastrado:')
@@ -158,7 +160,7 @@ class Users():
             return self.Editar_nome()
 
         
-    def data_nascimento(self): #=> verificador de inputs (dt_nasc ==> dia, mes,ano)
+    def data_nascimento(self): 
         print('Informe data de nascimento: ')
 
         def Verificar_datas(Tipo_date, verificacao):
