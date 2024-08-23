@@ -98,4 +98,6 @@ class Login():
         self.Login_successful = False
         self.password_login = None
         self.user_login = None
+        self.user_Type = None
+
         print("Logout!!")
