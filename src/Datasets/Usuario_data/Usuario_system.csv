@@ -1,0 +1,2 @@
+Codigo;Loja;Nome;Data Nascimento;idade;Sexo;Senha;Type
+USR00001;Porshe;Paulo;01/02/2000;24;Masculino;$argon2id$v=19$m=65536,t=2,p=2$PJNOyfbjgkyJ/u2lfycT1w$G8kPOrffrVAs9txCEVEYct/JGbUUJ61JfPxCnFgLrKc;Default
