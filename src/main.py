@@ -20,9 +20,7 @@ def main():
         except ValueError:
             print('Valor Incorreto!!')
             return main()
-        # TODO: retirar funcionalidade tratamento de valor
-        # except KeyboardInterrupt:
-        #     return main()
+
         if opcao == 1:
             lojas.Cadastrar_Loja()
         elif opcao == 2:
@@ -31,28 +29,30 @@ def main():
             else:
                 usuario.Cadastro_User()
         elif opcao == 3:
-            if usuario._DataUsers.empty:
-                print('Não existem usuario cadastrados!')
+            if usuario._DataUsers.empty and lojas._Loja_Df.empty:
+                print('Não existem usuarios cadastrados!')
                 
-            elif lojas._Loja_Df.empty:
-                print('Não existem lojas cadastradas!')
             else:
                 Login_usuario.logar()
                 carro_sistema = Carro(user_estacia=usuario, Loja_estacia=lojas,userLogin_estacia=Login_usuario)
                 carro_vendas = Venda(carro_sistema,user_name=Login_usuario.user_login)
-                main_log( Login_usuario,carro_sistema,carro_vendas)
+                main_log( Login_usuario, carro_sistema, carro_vendas, lojas, usuario)
         elif opcao == 4:
             break
         else:
             print('Opção invalida!!')
 
-def main_log(Login_usuario, carro_sistema, carro_vendas):
+
+
+def main_log(Login_usuario, carro_sistema, carro_vendas, loja_estacia, user_estacia):
+    
+    
     print(f'Bem-vindo(a) {Login_usuario.user_login}')
 
     while True:
 
         print(('-'*5) + 'ESTOQUE GLOBAL' + ('-'*5))
-        print('1. Cadastar Carro')
+        print('1. Cadastrar Carro')
         print('2. Vender Carro')
         print('3. Sair')
 
@@ -60,12 +60,15 @@ def main_log(Login_usuario, carro_sistema, carro_vendas):
             opcao = int(input('Informe a opcao: '))
         except ValueError:
             print('Valor Incorreto!!')
-            return main_log()
-        # TODO: retirar funcionalidade tratamento de valor
-        # except KeyboardInterrupt:
-        #     return main()
+            return main_log(Login_usuario = Login_usuario, carro_sistema = carro_sistema, carro_vendas = carro_vendas)
+
         if opcao == 1:
+            
+            if Login_usuario.user_Type == 1:
                 carro_sistema.Cadastrar_veiculo()
+            elif Login_usuario.user_Type == 2:
+                print('Usuários Defaults não podem registrar veiculos')
+                return main_log(Login_usuario = Login_usuario, carro_sistema = carro_sistema, carro_vendas = carro_vendas)
                 
         elif opcao == 2:
             if carro_sistema._DataCadastro.empty:

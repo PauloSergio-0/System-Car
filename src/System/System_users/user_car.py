@@ -14,6 +14,8 @@ class Users():
             self._DataUsers = pd.read_csv("./src/Datasets/Usuario_data/Usuario_system.csv", sep = ";",encoding="UTF-8")
 
         else:
+            os.makedirs("./src/Datasets/Usuario_data", exist_ok=True)
+
             self._DataUsers = pd.DataFrame(columns=['Codigo', 'Loja', 'Nome', 'Data Nascimento', 'idade', 'Sexo', 'Senha','Type'])
 
             self._DataUsers = self._DataUsers.astype({

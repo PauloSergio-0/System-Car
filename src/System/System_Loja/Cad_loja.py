@@ -10,6 +10,8 @@ class loja:
             self._Loja_Df = pd.read_csv("./src/Datasets/Loja_data/Loja_system.csv", sep=";", encoding="UTF-8")
 
         else:
+            os.makedirs("./src/Datasets/Loja_data", exist_ok=True)
+
             self._Loja_Df = pd.DataFrame(columns=['Nome_loja', 'Pais', 'Estado', 'Cidade','Senha','Type']) # Moeda ??  add ==> type user
             
             self._Loja_Df = self._Loja_Df.astype({
@@ -72,7 +74,7 @@ class loja:
                 
     def Cadastrar_Loja(self):
         Nm_loja = input('Informe o Nome da Loja: ')
-        Pais = input('Informe o país: ')
+        Pais = 'Brasil'
         estado = input('Informe o estado: ')
         cidade = input('Informe a cidade: ')
         senha = self.verificar_senha()

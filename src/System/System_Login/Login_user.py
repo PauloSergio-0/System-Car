@@ -50,7 +50,7 @@ class Login():
                     index = self._Loja_Df[self._Loja_Df['Nome_loja'] == self.user_login].index[0]
                     return index, self.user_login, tipo_login
                 else:
-                    print("erro")
+                    print(f"Usuario Admin não encontrado!!")
                     return Verificar_usuario()
                 
             if tipo_login == 2:
@@ -58,7 +58,7 @@ class Login():
                     index =self._DataUsers[self._DataUsers['Nome'] == self.user_login].index[0]
                     return index , self.user_login, tipo_login
                 else:
-                    print("erro")
+                    print("Usuario Default não encontrado!!")
                     return Verificar_usuario()
                     
         
@@ -75,7 +75,7 @@ class Login():
             try:
                 if type_user == 1:
                     self.ph.verify(self._Loja_Df['Senha'][usuario_index], password=self.password_login)
-                    print('Login FEito')
+                    print('Login Feito')
                     self.Login_successful = True
                     return self.Login_successful
                 elif type_user == 2:

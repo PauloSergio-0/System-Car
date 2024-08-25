@@ -10,7 +10,6 @@ src/System/SistemaVendaCarros.egg-info/SOURCES.txt
 src/System/SistemaVendaCarros.egg-info/dependency_links.txt
 src/System/SistemaVendaCarros.egg-info/top_level.txt
 src/System/System_Cadastro/Cadastro_car.py
-src/System/System_Cadastro/__init__.py
 src/System/System_Login/Login_user.py
 src/System/System_Login/__init__.py
 src/System/System_Loja/Cad_loja.py
