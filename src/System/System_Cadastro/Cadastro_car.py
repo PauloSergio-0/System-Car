@@ -32,10 +32,10 @@ class Carro:
                 'Ano': 'int32',
                 'Quantidade': 'int32',
                 'Data Cadastro': 'string',
-                'Data Modificacao': 'float64',
+                'Data Modificacao': pd.StringDtype(),# BUG: bug pandas: is string
                 'loja': 'string',
                 'Adcionado Por': 'string',
-                'Modificado Por': 'string'
+                'Modificado Por': pd.StringDtype()# BUG: bug pandas: is string
             })
 
     def Tipo_usuario(self):
@@ -219,6 +219,34 @@ class Carro:
             print("Quantidade atualizada: ")
         else:
             print('Não encontrado')
+            
+    def Atualizar_dados_veiculo(self, Type_mod, type_var):
+        Codigo_search = self.Codigo_Carro()
+        try:
+            if Codigo_search in self._DataCadastro['Codigo'].values:
+                index = self._DataCadastro[self._DataCadastro['Codigo'] == Codigo_search].index[0]
+                if type_var == 1:
+                    self._DataCadastro.at[index, Type_mod] = input(f'Informe a {Type_mod}: ')
+                elif type_var ==2:
+                    self._DataCadastro.at[index, Type_mod] = int(input(f'Informe a {Type_mod}: '))
+                elif type_var ==3:
+                    self._DataCadastro.at[index, Type_mod] = float(input(f'Informe a {Type_mod}: '))
+
+                self._DataCadastro.at[index,'Data Modificacao'] = datetime.now()
+
+                if self.user_type == 1:
+                    self._DataCadastro.at[index,'Modificado Por'] = self.user_login
+                elif self.user_types == 2:
+                    self._DataCadastro.at[index,'Modificado Por'] = self.user_login
+                print(f"{Type_mod} atualizada")
+            else:
+                print('Não encontrado')
+                return self.Atualizar_qtd_veiculo(Type_mod= Type_mod , type_var= type_var)
+
+        except ValueError:
+            print('Erro no valor')
+            return self.Atualizar_qtd_veiculo(Type_mod= Type_mod, type_var= type_var)
+            
 
     def listar(self):
         print(self._DataCadastro)

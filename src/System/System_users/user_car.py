@@ -148,7 +148,9 @@ class Users():
                 if not atendido:
                     print(f"- {criterio.replace('_', ' ').capitalize()}")
                     return self.verificar_Nome()
-
+                
+                
+        
     def Editar_nome(self):
         Codigo_seach = input('Informe o codigo: ')
         if Codigo_seach in self._DataUsers['Codigo'].values:
