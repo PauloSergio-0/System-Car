@@ -45,36 +45,84 @@ def main():
 
 
 def main_log(Login_usuario, carro_sistema, carro_vendas, loja_estacia, user_estacia):
-    
-    
+
+    def Carro_config():
+        while True:
+            print('-'*5+'Veiculos'+'-'*5)
+            print('1. Cadastrar veiculo')
+            print('2. Vender veiculo')
+            print('3. Editar Nome veiculo')
+            print('4. Editar Quantidade')
+            print('5. Sair')
+            
+            try:
+                opcao = int(input('Informe a opcao: '))
+            except ValueError:
+                print('Valor Incorreto!!')
+                return main_log
+                
+            if opcao == 1 :   
+                if Login_usuario.user_Type == 1:
+                    carro_sistema.Cadastrar_veiculo()
+                elif Login_usuario.user_Type == 2:
+                    print('Usuários Defaults não podem registrar veiculos')
+                    return Carro_config()
+            elif opcao == 2:
+                if carro_sistema._DataCadastro.empty:
+                    print('Não existem Carro cadastrados!')
+                else:
+                    carro_vendas.Realizar_Venda()
+            elif opcao == 3:
+                if carro_sistema._DataCadastro.empty:
+                    print('Não existem Carro cadastrados!')
+                else:
+                    carro_sistema.Atualizar_dados_veiculo('Marca')
+                    carro_sistema.Atualizar_dados_veiculo('Modelo')
+            elif opcao == 4:
+                if carro_sistema._DataCadastro.empty:
+                    print('Não existem Carro cadastrados!')
+                else:
+                    carro_sistema.Atualizar_dados_veiculo('Quantidade')
+            elif opcao == 5:
+                print("Saindo")
+                return main_log(Login_usuario = Login_usuario, carro_sistema = carro_sistema, carro_vendas = carro_vendas, loja_estacia=loja_estacia, user_estacia=user_estacia)
+            else:
+                print('Opcao invalida')
+                return Carro_config()
+            
+    def User_config():
+        while True:
+            print('-'*5+'Veiculos'+'-'*5)
+            print('1. Cadastrar veiculo')
+            print('2. Vender veiculo')
+            print('3. Editar Nome user')
+            print('4. Editar Quantidade')
+            print('5. Sair')
+            
+            try:
+                opcao = int(input('Informe a opcao: '))
+            except ValueError:
+                print('Valor Incorreto!!')
+                return main_log
+            
     print(f'Bem-vindo(a) {Login_usuario.user_login}')
 
     while True:
 
         print(('-'*5) + 'ESTOQUE GLOBAL' + ('-'*5))
-        print('1. Cadastrar Carro')
-        print('2. Vender Carro')
+        print('1. Veiculos')
+        print('2. Usuários')
         print('3. Sair')
-
+        
         try:
             opcao = int(input('Informe a opcao: '))
         except ValueError:
             print('Valor Incorreto!!')
-            return main_log(Login_usuario = Login_usuario, carro_sistema = carro_sistema, carro_vendas = carro_vendas)
-
+            return main_log(Login_usuario = Login_usuario, carro_sistema = carro_sistema, carro_vendas = carro_vendas, loja_estacia=loja_estacia, user_estacia=user_estacia)
+        
         if opcao == 1:
-            
-            if Login_usuario.user_Type == 1:
-                carro_sistema.Cadastrar_veiculo()
-            elif Login_usuario.user_Type == 2:
-                print('Usuários Defaults não podem registrar veiculos')
-                return main_log(Login_usuario = Login_usuario, carro_sistema = carro_sistema, carro_vendas = carro_vendas)
-                
-        elif opcao == 2:
-            if carro_sistema._DataCadastro.empty:
-                print('Não existem Carro cadastrados!')
-            else:
-                carro_vendas.Realizar_Venda()
+            Carro_config()
+
         elif opcao == 3:
             Login_usuario.logout()
             print('Saindo......')

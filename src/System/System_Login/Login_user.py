@@ -7,6 +7,7 @@ class Login():
         self.password_login = None
         self.user_login = None
         self.user_Type = None
+        self.id_user = None
         self._DataUsers  = users_estacia._DataUsers
         self._Loja_Df = loja_estacia._Loja_Df
         self.ph = PasswordHasher()
