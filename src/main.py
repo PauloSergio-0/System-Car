@@ -99,17 +99,80 @@ def main_log(Login_usuario, carro_sistema, carro_vendas, loja_estacia, user_esta
     def User_config():
         while True:
             print('-'*5+'Veiculos'+'-'*5)
-            print('1. Cadastrar veiculo')
-            print('2. Vender veiculo')
-            print('3. Editar Nome user')
-            print('4. Editar Quantidade')
+            print('1. Alterar nome')
+            print('2. Alterar senha')
+            print('3. Alterar Data de nascimento')
+            print('4. Alterar sexo')
             print('5. Sair')
             
             try:
                 opcao = int(input('Informe a opcao: '))
             except ValueError:
                 print('Valor Incorreto!!')
-                return main_log
+                return User_config()
+            
+
+            if opcao == 1:
+                
+                user_estacia.Alterar(Login_usuario.user_login, 'Nome')
+
+            elif opcao == 2:
+                user_estacia.Alterar_user(Login_usuario.user_login, 'Senha')
+
+            elif opcao == 3:
+                user_estacia.Alterar_user(Login_usuario.user_login, 'Data Nascimento')
+
+            elif opcao == 4:
+                user_estacia.Alterar_user(Login_usuario.user_login, 'Sexo')
+
+            elif opcao == 5:
+                print('Saindo...')
+                return main_log(Login_usuario = Login_usuario, carro_sistema = carro_sistema, carro_vendas = carro_vendas, loja_estacia=loja_estacia, user_estacia=user_estacia)
+            else:
+                print('Opção incorreta.')
+                return User_config()
+            
+    def Loja_config():
+        while True:
+            print('-'*5+'Veiculos'+'-'*5)
+            print('1. Alterar nome')
+            print('2. Alterar senha')
+            print('3. Alterar pais')
+            print('4. Alterar estado')
+            print('5. Cidade')
+            print('5. Sair')
+            
+            try:
+                opcao = int(input('Informe a opcao: '))
+            except ValueError:
+                print('Valor Incorreto!!')
+                return Loja_config()
+            
+
+            if opcao == 1:
+                
+                loja_estacia.Alterar_user_admin(Login_usuario.user_login, 'Nome_loja')
+
+            elif opcao == 2:
+                loja_estacia.Alterar_user_admin(Login_usuario.user_login, 'Senha')
+
+            elif opcao == 3:
+                loja_estacia.Alterar_user_admin(Login_usuario.user_login, 'Pais')
+
+            elif opcao == 4:
+                loja_estacia.Alterar_user_admin(Login_usuario.user_login, 'Estado')
+                
+            elif opcao == 5:
+                loja_estacia.Alterar_user_admin(Login_usuario.user_login, 'Cidade')
+
+            elif opcao == 6:
+                print('Saindo...')
+                return main_log(Login_usuario = Login_usuario, carro_sistema = carro_sistema, carro_vendas = carro_vendas, loja_estacia=loja_estacia, user_estacia=user_estacia)
+            else:
+                print('Opção incorreta.')
+                return Loja_config()
+
+
             
     print(f'Bem-vindo(a) {Login_usuario.user_login}')
 
@@ -128,6 +191,12 @@ def main_log(Login_usuario, carro_sistema, carro_vendas, loja_estacia, user_esta
         
         if opcao == 1:
             Carro_config()
+
+        elif opcao == 2:
+            if Login_usuario.user_Type == 1:
+                Loja_config()
+            elif Login_usuario.user_Type == 2:
+                User_config()
 
         elif opcao == 3:
             Login_usuario.logout()

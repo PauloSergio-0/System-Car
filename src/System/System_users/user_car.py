@@ -11,7 +11,23 @@ class Users():
         self._Loja_Df = loja_estacia._Loja_Df
 
         if os.path.exists("./src/Datasets/Usuario_data/Usuario_system.csv"):
-            self._DataUsers = pd.read_csv("./src/Datasets/Usuario_data/Usuario_system.csv", sep = ";",encoding="UTF-8")
+            self._DataUsers = pd.read_csv(
+                "./src/Datasets/Usuario_data/Usuario_system.csv",
+                    sep=";",
+                    encoding="UTF-8",
+
+                    dtype={
+                        'Codigo': 'string',
+                        'Loja': 'string',
+                        'Nome': 'string',
+                        'Data Nascimento': 'string',
+                        'idade': 'int64',
+                        'Sexo': 'string',
+                        'Senha': 'string',
+                        'Type': 'string'
+                    }
+                    
+                )
 
         else:
             os.makedirs("./src/Datasets/Usuario_data", exist_ok=True)
@@ -29,7 +45,6 @@ class Users():
                 'Type': 'string'
             })
         
-
 
     def Registrar_loja(self):
         print('Informe a loja que será cadastrado:')
@@ -151,17 +166,36 @@ class Users():
                 
                 
         
-    def Editar_nome(self):
-        Codigo_seach = input('Informe o codigo: ')
-        if Codigo_seach in self._DataUsers['Codigo'].values:
-            index = self._DataUsers[self._DataUsers['Codigo'] == Codigo_seach].index[0]
-            new_name = input('Informe Novo nome:')
-            self._DataUsers.at[index,'Nome'] = new_name
+   
 
-            print('Nome Atualizado!!')
-        else:
-            print('Código não encontrado')
-            return self.Editar_nome()
+    def Editar_nome(self, User_login, type_alteracao):
+        index = self._DataUsers[self._DataUsers['Nome'] == User_login].index[0]
+        if type_alteracao == 'Nome':
+            self._DataUsers.at[index,type_alteracao] = self.verificar_Nome()
+
+        elif type_alteracao == 'Data Nascimento':
+            new_date=self.data_nascimento()
+            self._DataUsers.at[index,type_alteracao] = new_date
+            self._DataUsers.at[index,'idade']= self.Idade_calc(new_date)
+
+        elif type_alteracao == 'Sexo':
+            self._DataUsers.at[index,type_alteracao] = self.Escolha_Sexo()
+
+        elif type_alteracao == 'Loja':
+            self._DataUsers.at[index,type_alteracao] = self.Registrar_loja()
+
+        elif type_alteracao == 'Senha':
+            self._DataUsers.at[index,type_alteracao] = self.verificar_senha()
+
+        self._DataUsers.to_csv("./src/Datasets/Usuario_data/Usuario_system.csv", sep = ";", encoding="UTF-8", index=False)
+
+    # def Editar_nome(self, User_login):
+    #     print('Novo nome')
+    #     index = self._DataUsers[self._DataUsers['Nome'] == User_login ].index[0]
+    #     self._DataUsers.at[index,'Nome'] = self.verificar_Nome()
+
+    #     print('Nome Atualizado!!')
+
 
         
     def data_nascimento(self): 

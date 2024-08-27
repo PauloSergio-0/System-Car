@@ -7,7 +7,18 @@ class loja:
     def __init__(self):
 
         if os.path.exists("./src/Datasets/Loja_data/Loja_system.csv"):
-            self._Loja_Df = pd.read_csv("./src/Datasets/Loja_data/Loja_system.csv", sep=";", encoding="UTF-8")
+            self._Loja_Df = pd.read_csv(
+                "./src/Datasets/Loja_data/Loja_system.csv",
+                sep=";",
+                encoding="UTF-8",
+                dtype={
+                'Nome_loja': 'string',
+                'Pais': 'string',
+                'Estado': 'string',
+                'Cidade': 'string',
+                'Senha': 'string',
+                'Type': 'string'
+            })
 
         else:
             os.makedirs("./src/Datasets/Loja_data", exist_ok=True)
@@ -71,7 +82,18 @@ class loja:
                 if not atendido:
                     print(f"- {criterio.replace('_', ' ').capitalize()}")
                     return self.verificar_senha()
-                
+
+    def Alterar_user_admin(self, User_login, type_alteracao):
+        index = self._Loja_Df[self._Loja_Df['Nome_loja'] == User_login ].index[0]
+        if type_alteracao == 'Senha':
+            self._Loja_Df.at[index,type_alteracao] = self.verificar_senha()
+        else:
+            self._Loja_Df.at[index,type_alteracao] = input(f'Informe {type_alteracao} da loja: ')
+
+        print(f'{type_alteracao} Alterado(a)')
+
+        self._Loja_Df.to_csv("./src/Datasets/Loja_data/Loja_system.csv", sep = ";",encoding="UTF-8",index=False)
+
     def Cadastrar_Loja(self):
         Nm_loja = input('Informe o Nome da Loja: ')
         Pais = 'Brasil'

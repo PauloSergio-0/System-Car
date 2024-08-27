@@ -10,7 +10,18 @@ class Venda():
         self.carro = Carro_estancia
 
         if os.path.exists('./src/Datasets/Venda_data/Vendas_carros.csv'):
-            self._DataVenda= pd.read_csv('./src/Datasets/Venda_data/Vendas_carros.csv', sep=';', encoding='UTF-8')
+            self._DataVenda= pd.read_csv('./src/Datasets/Venda_data/Vendas_carros.csv', 
+                sep=';', 
+                encoding='UTF-8',
+                dtype={ 
+                'Nr_Fatura': 'string',
+                'Valor_transacao': 'float64',
+                'Marca': 'string',
+                'Modelo': 'string',
+                'data_transancao': 'string',
+                'Metodo Pagamento': 'string',
+                'Vendedor': 'string'
+            })
             
         else:
             os.makedirs("./src/Datasets/Venda_data", exist_ok=True)
@@ -22,7 +33,7 @@ class Venda():
                 'Valor_transacao': 'float64',
                 'Marca': 'string',
                 'Modelo': 'string',
-                'data_transancao': 'float64',
+                'data_transancao': 'string',
                 'Metodo Pagamento': 'string',
                 'Vendedor': 'string'
             })

@@ -17,7 +17,22 @@ class Carro:
 
     def Verificar_fonte(self):
         if os.path.exists("./src/Datasets/Carro_data/Car_system.csv"):
-            self._DataCadastro = pd.read_csv("./src/Datasets/Carro_data/Car_system.csv", sep = ";",encoding="UTF-8")
+            self._DataCadastro = pd.read_csv("./src/Datasets/Carro_data/Car_system.csv",
+                sep = ";",
+                encoding="UTF-8",
+                dtype={
+                'Codigo': 'string',
+                'Marca': 'string',
+                'Modelo': 'string',
+                'Preco': 'float64',
+                'Ano': 'int32',
+                'Quantidade': 'int32',
+                'Data Cadastro': 'string',
+                'Data Modificacao': 'string',# BUG: bug pandas: is string
+                'loja': 'string',
+                'Adcionado Por': 'string',
+                'Modificado Por': 'string'# BUG: bug pandas: is string
+            })
 
         else:
             os.makedirs("./src/Datasets/Carro_data", exist_ok=True)
@@ -32,10 +47,10 @@ class Carro:
                 'Ano': 'int32',
                 'Quantidade': 'int32',
                 'Data Cadastro': 'string',
-                'Data Modificacao': pd.StringDtype(),# BUG: bug pandas: is string
+                'Data Modificacao': 'string',# BUG: bug pandas: is string
                 'loja': 'string',
                 'Adcionado Por': 'string',
-                'Modificado Por': pd.StringDtype()# BUG: bug pandas: is string
+                'Modificado Por': 'string'# BUG: bug pandas: is string
             })
 
     def Tipo_usuario(self):
@@ -190,7 +205,7 @@ class Carro:
             index = self._DataCadastro[self._DataCadastro['Codigo'] == Codigo_search ].index[0]# pega o indice para modificar a na raiz do df
             
             self._DataCadastro.at[index,'Preco'] = float(input('Informe o novo preço:'))
-            self._DataCadastro.at[index,'Data Modificacao'] = datetime.now()
+            self._DataCadastro.at[index,'Data Modificacao'] = datetime.now().strftime("%d/%m/%Y, %H:%M:%S")
 
             if self.user_type == 1:
                 self._DataCadastro.at[index,'Modificado Por'] = self.info_user['Nome_loja'].values
@@ -209,7 +224,7 @@ class Carro:
         if Codigo_search in self._DataCadastro['Codigo'].values:
             index = self._DataCadastro[self._DataCadastro['Codigo'] == Codigo_search].index[0]
             self._DataCadastro.at[index, 'Quantidade'] = int(input('Informe quantidade: '))
-            self._DataCadastro.at[index,'Data Modificacao'] = datetime.now()
+            self._DataCadastro.at[index,'Data Modificacao'] = datetime.now().strftime("%d/%m/%Y, %H:%M:%S")
 
             if self.user_type == 1:
                 self._DataCadastro.at[index,'Modificado Por'] = self.info_user['Nome_loja'].values
@@ -232,13 +247,14 @@ class Carro:
                 elif type_var ==3:
                     self._DataCadastro.at[index, Type_mod] = float(input(f'Informe a {Type_mod}: '))
 
-                self._DataCadastro.at[index,'Data Modificacao'] = datetime.now()
+                self._DataCadastro.at[index,'Data Modificacao'] = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 
                 if self.user_type == 1:
                     self._DataCadastro.at[index,'Modificado Por'] = self.user_login
                 elif self.user_types == 2:
                     self._DataCadastro.at[index,'Modificado Por'] = self.user_login
                 print(f"{Type_mod} atualizada")
+                self._DataCadastro.to_csv("./src/Datasets/Carro_data/Car_system.csv", sep = ";",encoding="UTF-8",index=False)
             else:
                 print('Não encontrado')
                 return self.Atualizar_qtd_veiculo(Type_mod= Type_mod , type_var= type_var)

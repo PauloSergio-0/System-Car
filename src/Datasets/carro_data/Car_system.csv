@@ -1,7 +1,8 @@
 Codigo;Marca;Modelo;Preco;Ano;Quantidade;Data Cadastro;Data Modificacao;loja;Adcionado Por;Modificado Por
-CRR00001;Ferrar;sadas;12.0;1231;12;24/08/2024;;Imports;Admin;
-CRR00002;Lanbor;Urra;1212.0;1290;12;25/08/2024;;Imports;Admin;
-CRR00003;Lanbor;Veneno;121.0;1311;12;25/08/2024;;Imports;Admin;
+CRR00001;Ferrar;sadas;12.0;2024;12;24/08/2024;;Imports;Admin;
+CRR00002;Lanbor;Urra;1212.0;2024;12;25/08/2024;;Imports;Admin;
+CRR00003;Lanbor;Veneno;121.0;2024;12;25/08/2024;;Imports;Admin;
 CRR00004;Ferrar;Moisay;12.0;2024;12;25/08/2024;;Imports;Admin;
-CRR00005;Ferrar;iouyi;12312.0;1990;12;25/08/2024;;Imports;Admin;
+CRR00005;BMW;Corina;100098.99;1990;12;25/08/2024;27/08/2024 10:37:52;Imports;Admin;Imports
 CRR00006;Ferrar;LPO00;123412.0;2000;12;26/08/2024;;Imports;Admin;
+CRR00007;BMW;I3;1234.0;2012;100;27/08/2024;27/08/2024 10:37:07;Imports;Admin;Imports

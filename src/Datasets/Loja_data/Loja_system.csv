@@ -1,2 +1,3 @@
 Nome_loja;Pais;Estado;Cidade;Senha;Type
-Imports;S;s;s;$argon2id$v=19$m=65536,t=2,p=2$t7IuWVhPXlT4u/ULMAKeHQ$5GvyOEIV5N2v3CfaMGCTQrfRuDgSd7PU650fgl2HVYI;Admin
+Imports;S;s;São crstóvão;$argon2id$v=19$m=65536,t=2,p=2$t7IuWVhPXlT4u/ULMAKeHQ$5GvyOEIV5N2v3CfaMGCTQrfRuDgSd7PU650fgl2HVYI;Admin
+oprshe;Brasil;as;as;$argon2id$v=19$m=65536,t=2,p=2$bOkBoYQck+/13CAcS5o+JA$diFfOuSA2wI9AeRoYUDbSZpx+OCKn8qoU4gsl4ydbPA;Admin
