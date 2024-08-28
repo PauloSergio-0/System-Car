@@ -1,4 +1,0 @@
-System_Login
-System_Loja
-System_Vendas
-System_users

@@ -54,7 +54,9 @@ def main_log(Login_usuario, carro_sistema, carro_vendas, loja_estacia, user_esta
             print('3. Editar Nome veiculo')
             print('4. Editar Quantidade')
             print('5. Editar Preço')
-            print('6. Sair')
+            print('6. Listar Veiculos')
+            print('7. Listar Vendas')
+            print('8. Sair')
             
             try:
                 opcao = int(input('Informe a opcao: '))
@@ -90,6 +92,10 @@ def main_log(Login_usuario, carro_sistema, carro_vendas, loja_estacia, user_esta
                 else:
                     carro_sistema.Atualizar_dados_veiculo('Preco', 3)
             elif opcao == 6:
+                carro_sistema.listar_veiculos(Login_usuario.user_login)
+            elif opcao == 7:
+                carro_vendas.listar_vendas(Login_usuario.user_login)
+            elif opcao == 8:
                 print("Saindo")
                 return main_log(Login_usuario = Login_usuario, carro_sistema = carro_sistema, carro_vendas = carro_vendas, loja_estacia=loja_estacia, user_estacia=user_estacia)
             else:
@@ -114,7 +120,7 @@ def main_log(Login_usuario, carro_sistema, carro_vendas, loja_estacia, user_esta
 
             if opcao == 1:
                 
-                user_estacia.Alterar(Login_usuario.user_login, 'Nome')
+                user_estacia.Alterar_user(Login_usuario.user_login, 'Nome')
 
             elif opcao == 2:
                 user_estacia.Alterar_user(Login_usuario.user_login, 'Senha')

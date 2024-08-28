@@ -1,6 +1,4 @@
-Nr_Fatura;Marca;Modelo;Quantidade_Vendida;Valor_transacao;Ano;data_transancao;Metodo Pagamento;Vendedor
-FTRCRR00001-001;Ferrar;sadas;1;12.0;1231;24/08/2024 23:17:36;PIX;Imports
-FTRCRR00001-002;Ferrar;sadas;1;12.0;1231;25/08/2024 11:35:10;PIX;Imports
-FTRCRR00003-003;Lanbor;Veneno;11;1331.0;1311;25/08/2024 11:57:19;CARTAO - CREDITO;Imports
-FTRCRR00005-004;Ferrar;iouyi;11;135432.0;1990;25/08/2024 15:19:33;EM DINHEIRO;Imports
-FTRCRR00003-005;Lanbor;Veneno;1;121.0;1311;26/08/2024 16:02:01;CARTAO - DEBITO;Imports
+Nr_Fatura;Loja;Marca;Modelo;Quantidade_Vendida;Valor_transacao;Ano;data_transancao;Metodo Pagamento;Vendedor
+FTRCRR00001-001;Imports;Ferrari;Enzo;1;123312.0;1999;28/08/2024 14:27:24;EM DINHEIRO;Imports
+FTRCRR00001-002;Imports;Ferrari;Enzo;1;123312.0;1999;28/08/2024 14:40:11;CARTAO - CREDITO;Imports
+FTRCRR00001-003;Imports;Ferrari;Enzo;3;369936.0;1999;28/08/2024 14:41:54;PIX;Paulo0

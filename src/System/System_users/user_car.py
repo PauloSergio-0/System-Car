@@ -1,5 +1,5 @@
 import pandas as pd
-from datetime import date
+from datetime import date,datetime
 from argon2 import PasswordHasher
 import os
 import re
@@ -21,8 +21,9 @@ class Users():
                         'Loja': 'string',
                         'Nome': 'string',
                         'Data Nascimento': 'string',
-                        'idade': 'int64',
+                        'Idade': 'int64',
                         'Sexo': 'string',
+                        'Usuario': 'string',
                         'Senha': 'string',
                         'Type': 'string'
                     }
@@ -32,15 +33,16 @@ class Users():
         else:
             os.makedirs("./src/Datasets/Usuario_data", exist_ok=True)
 
-            self._DataUsers = pd.DataFrame(columns=['Codigo', 'Loja', 'Nome', 'Data Nascimento', 'idade', 'Sexo', 'Senha','Type'])
+            self._DataUsers = pd.DataFrame(columns=['Codigo', 'Loja', 'Nome', 'Data Nascimento', 'Idade', 'Sexo', 'Usuario', 'Senha','Type'])
 
             self._DataUsers = self._DataUsers.astype({
                 'Codigo': 'string',
                 'Loja': 'string',
                 'Nome': 'string',
                 'Data Nascimento': 'string',
-                'idade': 'int64',
+                'Idade': 'int64',
                 'Sexo': 'string',
+                'Usuario': 'string',
                 'Senha': 'string',
                 'Type': 'string'
             })
@@ -115,7 +117,44 @@ class Users():
                     print(f"- {criterio.replace('_', ' ').capitalize()}")
                     return self.verificar_senha()
                 
-    def verificar_Nome(self): # ADD hash
+    def verificar_usuario(self):
+
+        """
+        Verifica a qualidade da senha com base em vários critérios:
+        - Comprimento mínimo de 8 caracteres
+        - Pelo menos uma letra maiúscula
+        - Pelo menos uma letra minúscula
+        - Pelo menos um número
+        - Pelo menos um caractere especial
+        - Não deve conter espaços
+        """
+        
+        usuario = input('Informe a usuario: ')
+        
+        
+            
+
+        criterios = { # dicionário com os valores da verificação de criterios
+            "letra_maiuscula": re.search(r'[A-Z]', usuario) is not None,
+            "letra_minuscula": re.search(r'[a-z]', usuario) is not None,
+            "caractere_especial": re.search(r'[^a-zA-Z0-9]', usuario) is None,
+        }
+        todos_criterios_satisfeitos = all(criterios.values()) # capta os booleanos gerados
+
+        criterios, valido = criterios, todos_criterios_satisfeitos
+
+        if valido:
+            print("Senha válida!")
+            return usuario
+        else:
+            print("Senha inválida. Critérios não atendidos:")
+            for criterio, atendido in criterios.items():
+                if not atendido:
+                    print(f"- {criterio.replace('_', ' ').capitalize()}")
+                    return self.verificar_usuario()
+                
+    
+    def verificar_Nome(self):
 
         """
         Verifica a qualidade da senha com base em vários critérios:
@@ -155,8 +194,14 @@ class Users():
         
         if valido:
             confirmacao_nome(name)
-            print("nome valido!")
-            return name
+            
+            if not name in self._DataUsers['Nome'].values:
+                print("nome valido!")
+                return name
+            else:
+                print("Usuario já existe")
+                return self.verificar_Nome()
+
         else:
             print("nome invalido. Critérios não atendidos:")
             for criterio, atendido in criterios.items():
@@ -164,19 +209,20 @@ class Users():
                     print(f"- {criterio.replace('_', ' ').capitalize()}")
                     return self.verificar_Nome()
                 
-                
-        
-   
 
-    def Editar_nome(self, User_login, type_alteracao):
-        index = self._DataUsers[self._DataUsers['Nome'] == User_login].index[0]
+
+    def Alterar_user(self, User_login, type_alteracao):
+        index = self._DataUsers[self._DataUsers['Usuario'] == User_login].index[0]
         if type_alteracao == 'Nome':
             self._DataUsers.at[index,type_alteracao] = self.verificar_Nome()
 
         elif type_alteracao == 'Data Nascimento':
-            new_date=self.data_nascimento()
-            self._DataUsers.at[index,type_alteracao] = new_date
-            self._DataUsers.at[index,'idade']= self.Idade_calc(new_date)
+            Data_de_nascimento = self.data_nascimento()
+            idade = self.Idade_calc(Data_de_nascimento)
+            Data_de_nascimento = Data_de_nascimento.strftime('%d/%m/%Y')
+
+            self._DataUsers.at[index,type_alteracao] = Data_de_nascimento
+            self._DataUsers.at[index,'Idade']= idade
 
         elif type_alteracao == 'Sexo':
             self._DataUsers.at[index,type_alteracao] = self.Escolha_Sexo()
@@ -188,14 +234,6 @@ class Users():
             self._DataUsers.at[index,type_alteracao] = self.verificar_senha()
 
         self._DataUsers.to_csv("./src/Datasets/Usuario_data/Usuario_system.csv", sep = ";", encoding="UTF-8", index=False)
-
-    # def Editar_nome(self, User_login):
-    #     print('Novo nome')
-    #     index = self._DataUsers[self._DataUsers['Nome'] == User_login ].index[0]
-    #     self._DataUsers.at[index,'Nome'] = self.verificar_Nome()
-
-    #     print('Nome Atualizado!!')
-
 
         
     def data_nascimento(self): 
@@ -276,12 +314,14 @@ class Users():
 
         codigo_user = f'USR{self._DataUsers.shape[0]+1:05d}'
         name = self.verificar_Nome() # add verificador de nome
+
         Data_de_nascimento = self.data_nascimento()
         idade = self.Idade_calc(Data_de_nascimento)
 
         Data_de_nascimento = Data_de_nascimento.strftime('%d/%m/%Y')
 
         sexo = self.Escolha_Sexo()
+        usuario = self.verificar_usuario()
         senha = self.verificar_senha() 
         loja = self.Registrar_loja()
         Tipo = 'Default'
@@ -292,6 +332,7 @@ class Users():
             Data_de_nascimento,
             idade,
             sexo,
+            usuario,
             senha,
             Tipo
         ]

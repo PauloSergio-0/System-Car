@@ -55,8 +55,8 @@ class Login():
                     return Verificar_usuario()
                 
             if tipo_login == 2:
-                if self.user_login in self._DataUsers['Nome'].values:
-                    index =self._DataUsers[self._DataUsers['Nome'] == self.user_login].index[0]
+                if self.user_login in self._DataUsers['Usuario'].values:
+                    index =self._DataUsers[self._DataUsers['Usuario'] == self.user_login].index[0]
                     return index , self.user_login, tipo_login
                 else:
                     print("Usuario Default não encontrado!!")

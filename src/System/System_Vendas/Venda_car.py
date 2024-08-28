@@ -26,10 +26,11 @@ class Venda():
         else:
             os.makedirs("./src/Datasets/Venda_data", exist_ok=True)
 
-            self._DataVenda = pd.DataFrame(columns=['Nr_Fatura','Marca', 'Modelo', 'Quantidade_Vendida', 'Valor_transacao', 'Ano', 'data_transancao', 'Metodo Pagamento', 'Vendedor']) # add --> 'Comprador', 'Vendedor' , 'loja'
+            self._DataVenda = pd.DataFrame(columns=['Nr_Fatura','Loja','Marca', 'Modelo', 'Quantidade_Vendida', 'Valor_transacao', 'Ano', 'data_transancao', 'Metodo Pagamento', 'Vendedor']) # add --> 'Comprador', 'Vendedor' , 'loja'
 
             self._DataVenda = self._DataVenda.astype({ 
                 'Nr_Fatura': 'string',
+                'Loja': 'string',
                 'Valor_transacao': 'float64',
                 'Marca': 'string',
                 'Modelo': 'string',
@@ -38,62 +39,6 @@ class Venda():
                 'Vendedor': 'string'
             })
 
-    # def Marca_carro(self):
-    #     print('Informe a marca que será vendida:')
-    #     num = 0
-    #     lista_carro = self._DataCadastro['Marca'].unique().tolist()
-        
-    #     for item in lista_carro:
-    #         num += 1
-    #         print(f"{num}. {item}")
-
-    #     try:
-    #         opcao = int(input('Escolha opção: '))
-    #         opcao -= 1
-    #         if 0 <= opcao < len(lista_carro):
-    #             return lista_carro[opcao]
-    #         else:
-    #             return self.Registrar_loja()
-    #     except ValueError:
-    #         print('Erro! Por favor, insira um número válido.')
-    #         return self.Registrar_loja()
-            
-    # def Modelo_carro(self, Marca_escolha):
-    #     lista_modelo = self._DataCadastro[self._DataCadastro['Marca'] == Marca_escolha]
-    #     modelos_unicos = lista_modelo['Modelo'].unique().tolist()
-        
-    #     for num, modelo in enumerate(modelos_unicos, start=1):
-    #         print(f"{num}. {modelo}")
-        
-    #     try:
-    #         opcao = int(input('Escolha opção: '))
-    #         opcao -= 1
-    #         if 0 <= opcao < len(modelos_unicos):
-    #             return modelos_unicos[opcao]
-    #         else:
-    #             print("Opção inválida. Por favor, escolha novamente.")
-    #             return self.Modelo_carro(Marca_escolha=Marca_escolha)
-    #     except ValueError:
-    #         print('Erro! Por favor, insira um número válido.')
-    #         return self.Modelo_carro(Marca_escolha=Marca_escolha)
-        
-    # def Codigo_Carro(self):
-    #     marca = self.Marca_carro()
-    #     modelo = self.Modelo_carro(marca)
-        
-    #     carro_search = self._DataCadastro[
-    #         (self._DataCadastro['Marca'] == marca) & 
-    #         (self._DataCadastro['Modelo'] == modelo)
-    #     ].reset_index(drop=True)
-        
-    #     if not carro_search.empty:
-    #         codigo_carro = carro_search.iloc[0]['Codigo']
-    #         return codigo_carro
-    #     else:
-    #         print(f'Veículo com marca: {marca} e modelo: {modelo} não encontrado.')
-    #         return self.Codigo_Carro() 
-
-        
     
     def Metodo_pagamento(self):
         print('1. PIX')
@@ -155,13 +100,12 @@ class Venda():
             elif qtd_vendida <= self._DataCadastro.at[index, 'Quantidade']: # ao realizar a venda reduz a quantidade de de items 
 
                 self._DataCadastro.at[index, 'Quantidade'] -= qtd_vendida
-                
-                self._DataCadastro.at[index, 'Data Modificacao'] =  pd.to_datetime(datetime.now().replace(microsecond=0), format='%Y-%m-%d %H:%M:%S')
 
-                # self._DataCadastro.at[index, 'Data Modificacao'] = datetime.now().strftime('%d/%m/%Y %H:%M:%S') 
+                self._DataCadastro.at[index, 'Data Modificacao'] = datetime.now().strftime('%d/%m/%Y %H:%M:%S') 
                 
 
                 Codigo_fat = f'FTR{self._DataCadastro.at[index, "Codigo"]}-{self._DataVenda.shape[0] + 1:03d}'
+                loja = self._DataCadastro.at[index, 'Loja']
                 Marca_Veiculo = self._DataCadastro.at[index, 'Marca']
                 Modelo_Veiculo = self._DataCadastro.at[index, 'Modelo']
                 Venda_qtd  = qtd_vendida
@@ -174,6 +118,7 @@ class Venda():
 
                 self._DataVenda.loc[self._DataVenda.shape[0]]=[
                     Codigo_fat ,
+                    loja ,
                     Marca_Veiculo ,
                     Modelo_Veiculo ,
                     Venda_qtd  ,
@@ -184,7 +129,7 @@ class Venda():
                     usuario
                 ]
 
-                self._DataVenda.to_csv("./src/Datasets/Venda_data/Vendas_carros.csv", sep = ";",encoding="UTF-8",index=False)
+                self._DataVenda.to_csv("./src/Datasets/Venda_data/Vendas_carros.csv", sep = ";", encoding="UTF-8", index=False)
                 
                 print('venda realizada com sucesso!')
             else:
@@ -194,5 +139,8 @@ class Venda():
             print("Veiculo não encontrado!!")
             return self.Realizar_Venda()
 
-    def listar_vendas(self):
-        print(self._DataVenda)
+    def listar_vendas(self, user_login):
+
+        venda_filter = self._DataVenda[self._DataVenda['Vendedor'] == user_login]
+
+        print(venda_filter)

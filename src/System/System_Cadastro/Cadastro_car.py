@@ -29,7 +29,7 @@ class Carro:
                 'Quantidade': 'int32',
                 'Data Cadastro': 'string',
                 'Data Modificacao': 'string',# BUG: bug pandas: is string
-                'loja': 'string',
+                'Loja': 'string',
                 'Adcionado Por': 'string',
                 'Modificado Por': 'string'# BUG: bug pandas: is string
             })
@@ -37,7 +37,7 @@ class Carro:
         else:
             os.makedirs("./src/Datasets/Carro_data", exist_ok=True)
 
-            self._DataCadastro = pd.DataFrame(columns=['Codigo', 'Marca', 'Modelo', 'Preco', 'Ano', 'Quantidade', 'Data Cadastro', 'Data Modificacao', 'loja', 'Adcionado Por', 'Modificado Por'])# ==> loja
+            self._DataCadastro = pd.DataFrame(columns=['Codigo', 'Marca', 'Modelo', 'Preco', 'Ano', 'Quantidade', 'Data Cadastro', 'Data Modificacao', 'Loja', 'Adcionado Por', 'Modificado Por'])# ==> Loja
             
             self._DataCadastro = self._DataCadastro.astype({# pré define o tipo das colunas
                 'Codigo': 'string',
@@ -48,7 +48,7 @@ class Carro:
                 'Quantidade': 'int32',
                 'Data Cadastro': 'string',
                 'Data Modificacao': 'string',# BUG: bug pandas: is string
-                'loja': 'string',
+                'Loja': 'string',
                 'Adcionado Por': 'string',
                 'Modificado Por': 'string'# BUG: bug pandas: is string
             })
@@ -60,8 +60,8 @@ class Carro:
             return self.info_user['Nome_loja'], self.info_user['Type']
         
         elif self.user_type == 2:
-            self.info_user = self._DataUsers[self._DataUsers['Nome'] == self.user_login].iloc[0]
-            return self.info_user['Loja'], self.info_user['Nome']
+            self.info_user = self._DataUsers[self._DataUsers['Usuario'] == self.user_login].iloc[0]
+            return self.info_user['Loja'], self.info_user['Usuario']
         
     def verificar_ano(self):
         try:
@@ -115,7 +115,7 @@ class Carro:
         mod_user = None
 
         def Verificacao_test():
-            lista_modelo = self._DataCadastro[(self._DataCadastro['Marca'] == Marca_Veiculo) & (self._DataCadastro['Modelo'] == Modelo_Veiculo) & self._DataCadastro['loja'] == Loja].reset_index(drop=True)
+            lista_modelo = self._DataCadastro[(self._DataCadastro['Marca'] == Marca_Veiculo) & (self._DataCadastro['Modelo'] == Modelo_Veiculo) & self._DataCadastro['Loja'] == Loja].reset_index(drop=True)
             if Ano_Veiculo in lista_modelo['Ano'].values:
                 return False
             else:
@@ -264,8 +264,9 @@ class Carro:
             return self.Atualizar_qtd_veiculo(Type_mod= Type_mod, type_var= type_var)
             
 
-    def listar(self):
-        print(self._DataCadastro)
+    def listar_veiculos(self, user_login):
+        data_filter =self._DataCadastro[self._DataCadastro['Loja'] == user_login]
+        print(data_filter)
 
     def listar_info(self):
         print(self._DataCadastro.info())

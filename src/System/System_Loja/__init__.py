@@ -1,0 +1,1 @@
+from .Cad_loja import loja
