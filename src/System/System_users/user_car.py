@@ -340,4 +340,22 @@ class Users():
 
     def listar_Informacoes_user(self, User_login):
         index = self._DataUsers[self._DataUsers['Usuario'] == User_login].index[0]
-        print(self._DataUsers)
+        Nome = self._DataUsers[index, 'Nome']
+        data_n = self._DataUsers[index, 'Data Nascimento']
+        idade = self._DataUsers[index, 'Idade']
+        sexo = self._DataUsers[index, 'Sexo']
+
+
+        print(f'')
+
+
+
+        # 'Codigo': 'string',
+        # 'Loja': 'string',
+        # 'Nome': 'string',
+        # 'Data Nascimento': 'string',
+        # 'Idade': 'int64',
+        # 'Sexo': 'string',
+        # 'Usuario': 'string',
+        # 'Senha': 'string',
+        # 'Type': 'string'

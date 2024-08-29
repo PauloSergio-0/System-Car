@@ -234,9 +234,9 @@ class Carro:
             print('Erro no valor')
             return self.Atualizar_qtd_veiculo(Type_mod= Type_mod, type_var= type_var)
             
-
     def listar_veiculos(self, user_login, ):
         data_filter =self._DataCadastro[self._DataCadastro['Loja'] == user_login]
+        
         print(data_filter)
 
     def listar_info(self):

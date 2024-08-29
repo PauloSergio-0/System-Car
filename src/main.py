@@ -34,8 +34,10 @@ def main():
                 carro_sistema = Carro(user_estacia=usuario, Loja_estacia=lojas,userLogin_estacia=Login_usuario)
                 carro_vendas = Venda(carro_sistema,user_name=Login_usuario.user_login)
                 main_log( Login_usuario, carro_sistema, carro_vendas, lojas, usuario)
+
         elif opcao == 4:
             break
+        
         else:
             print('Opção invalida!!')
             return main()
@@ -100,6 +102,7 @@ def main_log(Login_usuario, carro_sistema, carro_vendas, loja_estacia, user_esta
                 print('Opcao invalida')
                 return Carro_config()
             
+#TODO: Move to loja_config
     def User_config():
         
         while True:
