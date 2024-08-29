@@ -196,52 +196,24 @@ class Carro:
         else:
             print(f'Veículo com marca: {marca} e modelo: {modelo} não encontrado.')
             return self.Codigo_Carro()
-        
-    def Atualizar_preco_veiculo(self):
-        Codigo_search = self.Codigo_Carro()
-        
-        if Codigo_search in self._DataCadastro['Codigo'].values: # se o codigo existir na coluna['Codigo'] irá gerar um True oq fará e poderar seguir para a alteração
-            
-            index = self._DataCadastro[self._DataCadastro['Codigo'] == Codigo_search ].index[0]# pega o indice para modificar a na raiz do df
-            
-            self._DataCadastro.at[index,'Preco'] = float(input('Informe o novo preço:'))
-            self._DataCadastro.at[index,'Data Modificacao'] = datetime.now().strftime("%d/%m/%Y, %H:%M:%S")
 
-            if self.user_type == 1:
-                self._DataCadastro.at[index,'Modificado Por'] = self.info_user['Nome_loja'].values
-                
-            elif self.user_types == 2:
-                self._DataCadastro.at[index,'Modificado Por'] = self.info_user['Nome'].values
+    def Atualizar_valor_colunas_vendas(self, venda_df, type_mod,nome_atual, novo_nome):
+        venda_df._DataVenda.loc[venda_df._DataVenda[type_mod] == nome_atual, type_mod] = novo_nome
 
-            
-            print('Valor atualizado')
-        else:
-            print('Não encontrado')
-        
-    def Atualizar_qtd_veiculo(self):
-        Codigo_search = self.Codigo_Carro()
-        
-        if Codigo_search in self._DataCadastro['Codigo'].values:
-            index = self._DataCadastro[self._DataCadastro['Codigo'] == Codigo_search].index[0]
-            self._DataCadastro.at[index, 'Quantidade'] = int(input('Informe quantidade: '))
-            self._DataCadastro.at[index,'Data Modificacao'] = datetime.now().strftime("%d/%m/%Y, %H:%M:%S")
+        venda_df._DataVenda.to_csv("./src/Datasets/Venda_data/Vendas_carros.csv", sep = ";", encoding="UTF-8", index=False)
 
-            if self.user_type == 1:
-                self._DataCadastro.at[index,'Modificado Por'] = self.info_user['Nome_loja'].values
-            elif self.user_types == 2:
-                self._DataCadastro.at[index,'Modificado Por'] = self.info_user['Nome'].values
-
-            print("Quantidade atualizada: ")
-        else:
-            print('Não encontrado')
-            
-    def Atualizar_dados_veiculo(self, Type_mod, type_var):
+    def Atualizar_dados_veiculo(self, Type_mod, type_var, venda_estacia):
         Codigo_search = self.Codigo_Carro()
         try:
             if Codigo_search in self._DataCadastro['Codigo'].values:
                 index = self._DataCadastro[self._DataCadastro['Codigo'] == Codigo_search].index[0]
                 if type_var == 1:
+
+                    nome_antes = self._DataCadastro.at[index, Type_mod]
                     self._DataCadastro.at[index, Type_mod] = input(f'Informe a {Type_mod}: ')
+                    nome_depois = self._DataCadastro.at[index, Type_mod]
+                    if Type_mod == 'Marca' or Type_mod == 'Modelo':
+                        self.Atualizar_valor_colunas_vendas(venda_df=venda_estacia, type_mod=Type_mod, nome_atual=nome_antes, novo_nome=nome_depois)
                 elif type_var ==2:
                     self._DataCadastro.at[index, Type_mod] = int(input(f'Informe a {Type_mod}: '))
                 elif type_var ==3:
@@ -249,11 +221,10 @@ class Carro:
 
                 self._DataCadastro.at[index,'Data Modificacao'] = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 
-                if self.user_type == 1:
-                    self._DataCadastro.at[index,'Modificado Por'] = self.user_login
-                elif self.user_types == 2:
-                    self._DataCadastro.at[index,'Modificado Por'] = self.user_login
+                self._DataCadastro.at[index,'Modificado Por'] = self.user_login
+                
                 print(f"{Type_mod} atualizada")
+
                 self._DataCadastro.to_csv("./src/Datasets/Carro_data/Car_system.csv", sep = ";",encoding="UTF-8",index=False)
             else:
                 print('Não encontrado')
@@ -264,7 +235,7 @@ class Carro:
             return self.Atualizar_qtd_veiculo(Type_mod= Type_mod, type_var= type_var)
             
 
-    def listar_veiculos(self, user_login):
+    def listar_veiculos(self, user_login, ):
         data_filter =self._DataCadastro[self._DataCadastro['Loja'] == user_login]
         print(data_filter)
 

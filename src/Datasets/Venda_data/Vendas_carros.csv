@@ -1,4 +1,4 @@
 Nr_Fatura;Loja;Marca;Modelo;Quantidade_Vendida;Valor_transacao;Ano;data_transancao;Metodo Pagamento;Vendedor
-FTRCRR00001-001;Imports;Ferrari;Enzo;1;123312.0;1999;28/08/2024 14:27:24;EM DINHEIRO;Imports
-FTRCRR00001-002;Imports;Ferrari;Enzo;1;123312.0;1999;28/08/2024 14:40:11;CARTAO - CREDITO;Imports
-FTRCRR00001-003;Imports;Ferrari;Enzo;3;369936.0;1999;28/08/2024 14:41:54;PIX;Paulo0
+FTRCRR00001-001;Imports;plot;Bartolomeu;1;123312.0;1999;28/08/2024 14:27:24;EM DINHEIRO;Imports
+FTRCRR00001-002;Imports;plot;Bartolomeu;1;123312.0;1999;28/08/2024 14:40:11;CARTAO - CREDITO;Imports
+FTRCRR00001-003;Imports;plot;Bartolomeu;3;369936.0;1999;28/08/2024 14:41:54;PIX;Paulo0

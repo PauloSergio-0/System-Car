@@ -15,7 +15,6 @@ class Users():
                 "./src/Datasets/Usuario_data/Usuario_system.csv",
                     sep=";",
                     encoding="UTF-8",
-
                     dtype={
                         'Codigo': 'string',
                         'Loja': 'string',
@@ -27,7 +26,6 @@ class Users():
                         'Senha': 'string',
                         'Type': 'string'
                     }
-                    
                 )
 
         else:
@@ -340,5 +338,6 @@ class Users():
         ]
         self._DataUsers.to_csv("./src/Datasets/Usuario_data/Usuario_system.csv", sep = ";",encoding="UTF-8",index=False)
 
-    def listar(self):
+    def listar_Informacoes_user(self, User_login):
+        index = self._DataUsers[self._DataUsers['Usuario'] == User_login].index[0]
         print(self._DataUsers)

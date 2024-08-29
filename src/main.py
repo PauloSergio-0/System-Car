@@ -6,15 +6,16 @@ from System_Loja.Cad_loja import loja
 
 
 def main():
+
     lojas = loja()
     usuario = Users(loja_estacia=lojas)
     Login_usuario = Login(usuario, lojas)
     while True:
-        print(('-'*5) + 'ESTOQUE GLOBAL' + ('-'*5))
-        print('1. Cadastar loja')
-        print('2. Cadastrar Usuario')
-        print('3. Login')
-        print('4. sair')
+        print(f"{('-'*5) + 'ESTOQUE GLOBAL' + ('-'*5)}")
+        print('1. Cadastar loja' )
+        print('2. Login')
+        print('3. sair')
+
         try:
             opcao = int(input('Informe a opcao: '))
         except ValueError:
@@ -23,14 +24,10 @@ def main():
 
         if opcao == 1:
             lojas.Cadastrar_Loja()
+
         elif opcao == 2:
-            if lojas._Loja_Df.empty:
-                    print('Não existem lojas cadastradas!')
-            else:
-                usuario.Cadastro_User()
-        elif opcao == 3:
             if usuario._DataUsers.empty and lojas._Loja_Df.empty:
-                print('Não existem usuarios cadastrados!')
+                print('Não existem contas cadastradas!')
                 
             else:
                 Login_usuario.logar()
@@ -41,6 +38,7 @@ def main():
             break
         else:
             print('Opção invalida!!')
+            return main()
 
 
 
@@ -79,8 +77,8 @@ def main_log(Login_usuario, carro_sistema, carro_vendas, loja_estacia, user_esta
                 if carro_sistema._DataCadastro.empty:
                     print('Não existem Carro cadastrados!')
                 else:
-                    carro_sistema.Atualizar_dados_veiculo('Marca', 1)
-                    carro_sistema.Atualizar_dados_veiculo('Modelo', 1)
+                    carro_sistema.Atualizar_dados_veiculo('Marca', 1, carro_vendas)
+                    carro_sistema.Atualizar_dados_veiculo('Modelo', 1, carro_vendas)
             elif opcao == 4:
                 if carro_sistema._DataCadastro.empty:
                     print('Não existem Carro cadastrados!')
@@ -103,13 +101,16 @@ def main_log(Login_usuario, carro_sistema, carro_vendas, loja_estacia, user_esta
                 return Carro_config()
             
     def User_config():
+        
         while True:
-            print('-'*5+'Veiculos'+'-'*5)
-            print('1. Alterar nome')
-            print('2. Alterar senha')
-            print('3. Alterar Data de nascimento')
-            print('4. Alterar sexo')
-            print('5. Sair')
+
+            print(f"{('-'*5)+'Usuário'+('-'*5)}")
+            print('1. Cadastrar Usuário')
+            print('2. Alterar nome')
+            print('3. Alterar senha')
+            print('4. Alterar Data de nascimento')
+            print('5. Alterar sexo')
+            print('6. Sair')
             
             try:
                 opcao = int(input('Informe a opcao: '))
@@ -119,19 +120,24 @@ def main_log(Login_usuario, carro_sistema, carro_vendas, loja_estacia, user_esta
             
 
             if opcao == 1:
-                
-                user_estacia.Alterar_user(Login_usuario.user_login, 'Nome')
-
+                if Login_usuario.user_Type == 1:
+                    user_estacia.Cadastro_User()
+                elif Login_usuario.user_Type == 2:
+                    print('Só Usuarios do Tipo Adim Podem Fazer Cadastro')
             elif opcao == 2:
-                user_estacia.Alterar_user(Login_usuario.user_login, 'Senha')
+                user_estacia.Alterar_user(Login_usuario.user_login, 'Nome')
+                
 
             elif opcao == 3:
-                user_estacia.Alterar_user(Login_usuario.user_login, 'Data Nascimento')
+                user_estacia.Alterar_user(Login_usuario.user_login, 'Senha')
 
             elif opcao == 4:
-                user_estacia.Alterar_user(Login_usuario.user_login, 'Sexo')
+                user_estacia.Alterar_user(Login_usuario.user_login, 'Data Nascimento')
 
             elif opcao == 5:
+                user_estacia.Alterar_user(Login_usuario.user_login, 'Sexo')
+
+            elif opcao == 6:
                 print('Saindo...')
                 return main_log(Login_usuario = Login_usuario, carro_sistema = carro_sistema, carro_vendas = carro_vendas, loja_estacia=loja_estacia, user_estacia=user_estacia)
             else:
@@ -140,13 +146,13 @@ def main_log(Login_usuario, carro_sistema, carro_vendas, loja_estacia, user_esta
             
     def Loja_config():
         while True:
-            print('-'*5+'Veiculos'+'-'*5)
+
             print('1. Alterar nome')
             print('2. Alterar senha')
             print('3. Alterar pais')
             print('4. Alterar estado')
             print('5. Cidade')
-            print('5. Sair')
+            print('6. Sair')
             
             try:
                 opcao = int(input('Informe a opcao: '))
@@ -156,7 +162,6 @@ def main_log(Login_usuario, carro_sistema, carro_vendas, loja_estacia, user_esta
             
 
             if opcao == 1:
-                
                 loja_estacia.Alterar_user_admin(Login_usuario.user_login, 'Nome_loja')
 
             elif opcao == 2:

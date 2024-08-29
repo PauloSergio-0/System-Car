@@ -138,6 +138,7 @@ class Venda():
         else:
             print("Veiculo não encontrado!!")
             return self.Realizar_Venda()
+        
 
     def listar_vendas(self, user_login):
 
