@@ -144,8 +144,12 @@ class Users():
         criterios, valido = criterios, todos_criterios_satisfeitos
 
         if valido:
-            print("Senha válida!")
-            return usuario
+            if not usuario in self._DataUsers['Usuario'].values:
+                print("Senha válida!")
+                return usuario
+            else:
+                print('Usuário já existente')
+                return self.verificar_usuario()
         else:
             print("Senha inválida. Critérios não atendidos:")
             for criterio, atendido in criterios.items():
@@ -169,6 +173,7 @@ class Users():
             print('0. Não')
             print('1. Sim')
             opcao = int(input('Informe a opção: '))
+            
             if opcao == 1:
                 print('Nome confirmado!')
             elif opcao == 0:
@@ -195,12 +200,9 @@ class Users():
         if valido:
             confirmacao_nome(name)
             
-            if not name in self._DataUsers['Nome'].values:
-                print("nome valido!")
-                return name
-            else:
-                print("Usuario já existe")
-                return self.verificar_Nome()
+            
+            print("nome valido!")
+            return name
 
         else:
             print("nome invalido. Critérios não atendidos:")
