@@ -1,2 +1,3 @@
 Codigo;Marca;Modelo;Preco;Ano;Quantidade;Data Cadastro;Data Modificacao;Loja;Adcionado Por;Modificado Por
-CRR00001;plot;Bartolomeu;123312.0;1999;12;28/08/2024;29/08/2024 11:03:45;Imports;Admin;Paulo
+CRR00001;Ferrari;M21;123.0;1990;1;30/08/2024;30/08/2024 15:16:30;Imports;Admin;
+CRR00002;Ferrari;klo09;123.0;1990;20;30/08/2024;30/08/2024 14:14:01;Imports;Admin;

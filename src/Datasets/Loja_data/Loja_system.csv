@@ -1,3 +1,3 @@
-Nome_loja;Pais;Estado;Cidade;Senha;Type
-Postirg;Brasil;Sergipe;Aracaju;$argon2id$v=19$m=65536,t=2,p=2$fgdpmcX22XRgNM20uGpawA$zZYe0jLlUOVvlM8XrpB1p8TpwkfiscVOWvrDlElFCNQ;Admin
-Imports;Brasil;Sergipe;São cristóvão;$argon2id$v=19$m=65536,t=2,p=2$1+6HNEUhIOaboIYCcho27Q$JrWMKCLG+nSFkNah3TftWVCR7AgduREaqi+iGl/h+Eg;Admin
+Nome_loja;Pais;Estado;Cidade;Usuario_loja;Senha;Type
+Importados;Brasil;Sergipe;Aracaju;Imports;$argon2id$v=19$m=65536,t=2,p=2$EZR7TlnsDo4/nNmGiObAuQ$j5+Hw31Us4HuB7YZHpS8fBC7rj2Bz9ilyIAMyRGEN4k;Admin
+Guanabara;Brasil;Bahia;Salvador;Guana001;$argon2id$v=19$m=65536,t=2,p=2$roipvHAzL5KPGndalg3phw$Puk1BAGuKjrvXex41OuSvwoISbFUcSxJl5ETWpJ6Ob0;Admin

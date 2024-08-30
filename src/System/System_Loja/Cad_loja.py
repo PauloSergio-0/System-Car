@@ -16,6 +16,7 @@ class loja:
                 'Pais': 'string',
                 'Estado': 'string',
                 'Cidade': 'string',
+                'Usuario_loja': 'string',
                 'Senha': 'string',
                 'Type': 'string'
             })
@@ -23,13 +24,14 @@ class loja:
         else:
             os.makedirs("./src/Datasets/Loja_data", exist_ok=True)
 
-            self._Loja_Df = pd.DataFrame(columns=['Nome_loja', 'Pais', 'Estado', 'Cidade','Senha','Type']) # Moeda ??  add ==> type user
+            self._Loja_Df = pd.DataFrame(columns=['Nome_loja', 'Pais', 'Estado', 'Cidade', 'Usuario_loja', 'Senha', 'Type']) # Moeda ??  add ==> type user
             
             self._Loja_Df = self._Loja_Df.astype({
                 'Nome_loja': 'string',
                 'Pais': 'string',
                 'Estado': 'string',
                 'Cidade': 'string',
+                'Usuario_loja': 'string',
                 'Senha': 'string',
                 'Type': 'string'
             })
@@ -83,8 +85,47 @@ class loja:
                     print(f"- {criterio.replace('_', ' ').capitalize()}")
                     return self.verificar_senha()
 
+
+    def verificar_usuario(self):
+
+        """
+        Verifica a qualidade da senha com base em vários critérios:
+        - Comprimento mínimo de 8 caracteres
+        - Pelo menos uma letra maiúscula
+        - Pelo menos uma letra minúscula
+        - Pelo menos um número
+        - Pelo menos um caractere especial
+        - Não deve conter espaços
+        """
+        
+        usuario = input('Informe a usuario: ')
+
+        criterios = { # dicionário com os valores da verificação de criterios
+            "letra_maiuscula": re.search(r'[A-Z]', usuario) is not None,
+            "letra_minuscula": re.search(r'[a-z]', usuario) is not None,
+            "caractere_especial": re.search(r'[^a-zA-Z0-9]', usuario) is None,
+        }
+        todos_criterios_satisfeitos = all(criterios.values()) # capta os booleanos gerados
+
+        criterios, valido = criterios, todos_criterios_satisfeitos
+
+        if valido:
+            if not usuario in self._Loja_Df['Usuario_loja'].values:
+                print("Usuário válido")
+                return usuario
+            else:
+                print('Usuário já existente')
+                return self.verificar_usuario()
+        else:
+            print("Senha inválida. Critérios não atendidos:")
+            for criterio, atendido in criterios.items():
+                if not atendido:
+                    print(f"- {criterio.replace('_', ' ').capitalize()}")
+                    return self.verificar_usuario()
+
+
     def Alterar_user_admin(self, User_login, type_alteracao):
-        index = self._Loja_Df[self._Loja_Df['Nome_loja'] == User_login ].index[0]
+        index = self._Loja_Df[self._Loja_Df['Usuario_loja'] == User_login ].index[0]
         if type_alteracao == 'Senha':
             self._Loja_Df.at[index,type_alteracao] = self.verificar_senha()
         else:
@@ -99,6 +140,7 @@ class loja:
         Pais = 'Brasil'
         estado = input('Informe o estado: ')
         cidade = input('Informe a cidade: ')
+        usuario = self.verificar_usuario()
         senha = self.verificar_senha()
         Tipo = 'Admin'
 
@@ -107,11 +149,16 @@ class loja:
             Pais,
             estado,
             cidade,
+            usuario,
             senha,
             Tipo
         ]
 
         self._Loja_Df.to_csv("./src/Datasets/Loja_data/Loja_system.csv", sep = ";",encoding="UTF-8",index=False)
+
+
+    def Alterar_loja(self):
+        print(1)
 
     def listar_lojas(self):
         print(self._Loja_Df)

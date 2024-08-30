@@ -3,10 +3,11 @@ from datetime import date,datetime
 import os
 
 class Venda():
-    def __init__(self, Carro_estancia, user_name):#, user_cad_Dat
+    def __init__(self, Carro_estancia, Login_estacia,):#, user_cad_Dat
         self._DataCadastro = Carro_estancia._DataCadastro
         #self._DataUsers = user_cad_Dat._DataUsers[self._DataUsers['Nome'] == user_name].iloc[0]
-        self.user_login = user_name
+        self.user_login = Login_estacia.user_login
+        self.user_type = Login_estacia.user_Type
         self.carro = Carro_estancia
 
         if os.path.exists('./src/Datasets/Venda_data/Vendas_carros.csv'):
@@ -86,7 +87,6 @@ class Venda():
 
     def Realizar_Venda(self):
         codigo_search = self.carro.Codigo_Carro()
-        # codigo_search = input('Informe o código:')
         if codigo_search in self._DataCadastro['Codigo'].values:
             
             
@@ -130,6 +130,7 @@ class Venda():
                 ]
 
                 self._DataVenda.to_csv("./src/Datasets/Venda_data/Vendas_carros.csv", sep = ";", encoding="UTF-8", index=False)
+                self._DataCadastro.to_csv("./src/Datasets/Carro_data/Car_system.csv", sep = ";",encoding="UTF-8",index=False)
                 
                 print('venda realizada com sucesso!')
             else:

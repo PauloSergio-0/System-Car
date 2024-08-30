@@ -47,8 +47,8 @@ class Login():
                 return Verificar_usuario()
             
             if tipo_login == 1:
-                if self.user_login in self._Loja_Df['Nome_loja'].values:
-                    index = self._Loja_Df[self._Loja_Df['Nome_loja'] == self.user_login].index[0]
+                if self.user_login in self._Loja_Df['Usuario_loja'].values:
+                    index = self._Loja_Df[self._Loja_Df['Usuario_loja'] == self.user_login].index[0]
                     return index, self.user_login, tipo_login
                 else:
                     print(f"Usuario Admin não encontrado!!")

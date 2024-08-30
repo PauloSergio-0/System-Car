@@ -32,10 +32,11 @@ def main():
             else:
                 Login_usuario.logar()
                 carro_sistema = Carro(user_estacia=usuario, Loja_estacia=lojas,userLogin_estacia=Login_usuario)
-                carro_vendas = Venda(carro_sistema,user_name=Login_usuario.user_login)
-                main_log( Login_usuario, carro_sistema, carro_vendas, lojas, usuario)
+                carro_vendas = Venda(carro_sistema,Login_estacia = Login_usuario)
+                main_log(Login_usuario, carro_sistema, carro_vendas, lojas, usuario)
 
-        elif opcao == 4:
+        elif opcao == 3:
+            print('Saindo do Sistema')
             break
         
         else:
@@ -102,18 +103,17 @@ def main_log(Login_usuario, carro_sistema, carro_vendas, loja_estacia, user_esta
                 print('Opcao invalida')
                 return Carro_config()
             
-#TODO: Move to loja_config
+
     def User_config():
         
         while True:
 
             print(f"{('-'*5)+'Usuário'+('-'*5)}")
-            print('1. Cadastrar Usuário')
-            print('2. Alterar nome')
-            print('3. Alterar senha')
-            print('4. Alterar Data de nascimento')
-            print('5. Alterar sexo')
-            print('6. Sair')
+            print('1. Alterar nome')
+            print('2. Alterar senha')
+            print('3. Alterar Data de nascimento')
+            print('4. Alterar sexo')
+            print('5. Sair')
             
             try:
                 opcao = int(input('Informe a opcao: '))
@@ -123,24 +123,19 @@ def main_log(Login_usuario, carro_sistema, carro_vendas, loja_estacia, user_esta
             
 
             if opcao == 1:
-                if Login_usuario.user_Type == 1:
-                    user_estacia.Cadastro_User()
-                elif Login_usuario.user_Type == 2:
-                    print('Só Usuarios do Tipo Adim Podem Fazer Cadastro')
-            elif opcao == 2:
                 user_estacia.Alterar_user(Login_usuario.user_login, 'Nome')
                 
 
-            elif opcao == 3:
+            elif opcao == 2:
                 user_estacia.Alterar_user(Login_usuario.user_login, 'Senha')
 
-            elif opcao == 4:
+            elif opcao == 3:
                 user_estacia.Alterar_user(Login_usuario.user_login, 'Data Nascimento')
 
-            elif opcao == 5:
+            elif opcao == 4:
                 user_estacia.Alterar_user(Login_usuario.user_login, 'Sexo')
 
-            elif opcao == 6:
+            elif opcao == 5:
                 print('Saindo...')
                 return main_log(Login_usuario = Login_usuario, carro_sistema = carro_sistema, carro_vendas = carro_vendas, loja_estacia=loja_estacia, user_estacia=user_estacia)
             else:
@@ -150,12 +145,13 @@ def main_log(Login_usuario, carro_sistema, carro_vendas, loja_estacia, user_esta
     def Loja_config():
         while True:
 
-            print('1. Alterar nome')
-            print('2. Alterar senha')
-            print('3. Alterar pais')
-            print('4. Alterar estado')
-            print('5. Cidade')
-            print('6. Sair')
+            print('1. Cadastrar usuário')
+            print('2. Alterar nome')
+            print('3. Alterar senha')
+            print('4. Alterar pais')
+            print('5. Alterar estado')
+            print('6. Cidade')
+            print('7. Sair')
             
             try:
                 opcao = int(input('Informe a opcao: '))
@@ -165,21 +161,26 @@ def main_log(Login_usuario, carro_sistema, carro_vendas, loja_estacia, user_esta
             
 
             if opcao == 1:
+                if Login_usuario.user_Type == 1:
+                    user_estacia.Cadastro_User(Login_usuario.user_login)
+                elif Login_usuario.user_Type == 2:
+                    print('Só Usuarios do Tipo Adim Podem Fazer Cadastro')
+            elif opcao == 2:
                 loja_estacia.Alterar_user_admin(Login_usuario.user_login, 'Nome_loja')
 
-            elif opcao == 2:
+            elif opcao == 3:
                 loja_estacia.Alterar_user_admin(Login_usuario.user_login, 'Senha')
 
-            elif opcao == 3:
+            elif opcao == 4:
                 loja_estacia.Alterar_user_admin(Login_usuario.user_login, 'Pais')
 
-            elif opcao == 4:
+            elif opcao == 5:
                 loja_estacia.Alterar_user_admin(Login_usuario.user_login, 'Estado')
                 
-            elif opcao == 5:
+            elif opcao == 6:
                 loja_estacia.Alterar_user_admin(Login_usuario.user_login, 'Cidade')
 
-            elif opcao == 6:
+            elif opcao == 7:
                 print('Saindo...')
                 return main_log(Login_usuario = Login_usuario, carro_sistema = carro_sistema, carro_vendas = carro_vendas, loja_estacia=loja_estacia, user_estacia=user_estacia)
             else:

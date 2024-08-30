@@ -56,8 +56,8 @@ class Carro:
     def Tipo_usuario(self):
 
         if self.user_type == 1:
-            self.info_user = self._Loja_Df[self._Loja_Df['Nome_loja'] == self.user_login].iloc[0]
-            return self.info_user['Nome_loja'], self.info_user['Type']
+            self.info_user = self._Loja_Df[self._Loja_Df['Usuario_loja'] == self.user_login].iloc[0]
+            return self.info_user['Usuario_loja'], self.info_user['Type']
         
         elif self.user_type == 2:
             self.info_user = self._DataUsers[self._DataUsers['Usuario'] == self.user_login].iloc[0]
@@ -180,7 +180,7 @@ class Carro:
         except ValueError:
             print('Erro! Por favor, insira um número válido.')
             return self.Modelo_carro(Marca_escolha=Marca_escolha)
-        
+
     def Codigo_Carro(self):
         marca = self.Marca_carro()
         modelo = self.Modelo_carro(marca)
@@ -214,9 +214,9 @@ class Carro:
                     nome_depois = self._DataCadastro.at[index, Type_mod]
                     if Type_mod == 'Marca' or Type_mod == 'Modelo':
                         self.Atualizar_valor_colunas_vendas(venda_df=venda_estacia, type_mod=Type_mod, nome_atual=nome_antes, novo_nome=nome_depois)
-                elif type_var ==2:
+                elif type_var == 2:
                     self._DataCadastro.at[index, Type_mod] = int(input(f'Informe a {Type_mod}: '))
-                elif type_var ==3:
+                elif type_var == 3:
                     self._DataCadastro.at[index, Type_mod] = float(input(f'Informe a {Type_mod}: '))
 
                 self._DataCadastro.at[index,'Data Modificacao'] = datetime.now().strftime("%d/%m/%Y %H:%M:%S")

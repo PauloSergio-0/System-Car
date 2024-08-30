@@ -143,7 +143,7 @@ class Users():
 
         if valido:
             if not usuario in self._DataUsers['Usuario'].values:
-                print("Senha válida!")
+                print("Usuário válido!")
                 return usuario
             else:
                 print('Usuário já existente')
@@ -310,7 +310,7 @@ class Users():
                 return self.Escolha_Sexo()
             
         
-    def Cadastro_User(self):
+    def Cadastro_User(self, loja_name):
 
         codigo_user = f'USR{self._DataUsers.shape[0]+1:05d}'
         name = self.verificar_Nome() # add verificador de nome
@@ -323,7 +323,8 @@ class Users():
         sexo = self.Escolha_Sexo()
         usuario = self.verificar_usuario()
         senha = self.verificar_senha() 
-        loja = self.Registrar_loja()
+        # loja = self.Registrar_loja()
+        loja = loja_name
         Tipo = 'Default'
         self._DataUsers.loc[self._DataUsers.shape[0]] =[
             codigo_user,
