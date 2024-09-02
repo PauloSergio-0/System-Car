@@ -9,6 +9,7 @@ class Carro:
         self._Loja_Df = Loja_estacia._Loja_Df
         self.user_login = userLogin_estacia.user_login
         self.user_type = userLogin_estacia.user_Type
+        self.loja_user = userLogin_estacia.loja_user
         self.data_atual = date.today()
         self.Verificar_fonte()
         self.Tipo_usuario()
@@ -105,7 +106,7 @@ class Carro:
         data_de_modificacao = None # data de modificação só irá iniciado por None pois só pode ser modificados após ser cadastrado
 
         if self.user_type == 1:            
-            Loja =  self.info_user['Nome_loja']
+            Loja =  self.info_user['Usuario_loja']
             add_user = self.info_user['Type']
 
         elif self.user_type == 2:
@@ -145,7 +146,8 @@ class Carro:
     def Marca_carro(self):
         print('Informe a marca que será vendida:')
         num = 0
-        lista_carro = self._DataCadastro['Marca'].unique().tolist()
+        cadastro_data = self._DataCadastro.loc[self._DataCadastro['Loja'] == self.loja_user]
+        lista_carro = cadastro_data['Marca'].unique().tolist()
         
         for item in lista_carro:
             num += 1
@@ -163,6 +165,7 @@ class Carro:
             return self.Registrar_loja()
             
     def Modelo_carro(self, Marca_escolha):
+        lista_modelo = self._DataCadastro.loc[self._DataCadastro['Loja'] == self.loja_user]
         lista_modelo = self._DataCadastro[self._DataCadastro['Marca'] == Marca_escolha]
         modelos_unicos = lista_modelo['Modelo'].unique().tolist()
         

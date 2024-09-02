@@ -165,6 +165,7 @@ def main_log(Login_usuario, carro_sistema, carro_vendas, loja_estacia, user_esta
                     user_estacia.Cadastro_User(Login_usuario.user_login)
                 elif Login_usuario.user_Type == 2:
                     print('Só Usuarios do Tipo Adim Podem Fazer Cadastro')
+        
             elif opcao == 2:
                 loja_estacia.Alterar_user_admin(Login_usuario.user_login, 'Nome_loja')
 

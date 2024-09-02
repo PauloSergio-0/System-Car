@@ -8,6 +8,7 @@ class Login():
         self.user_login = None
         self.user_Type = None
         self.id_user = None
+        self.loja_user = None
         self._DataUsers  = users_estacia._DataUsers
         self._Loja_Df = loja_estacia._Loja_Df
         self.ph = PasswordHasher()
@@ -49,6 +50,7 @@ class Login():
             if tipo_login == 1:
                 if self.user_login in self._Loja_Df['Usuario_loja'].values:
                     index = self._Loja_Df[self._Loja_Df['Usuario_loja'] == self.user_login].index[0]
+                    self.loja_user = self._Loja_Df.loc[index ,'Usuario_loja']
                     return index, self.user_login, tipo_login
                 else:
                     print(f"Usuario Admin não encontrado!!")
@@ -57,6 +59,7 @@ class Login():
             if tipo_login == 2:
                 if self.user_login in self._DataUsers['Usuario'].values:
                     index =self._DataUsers[self._DataUsers['Usuario'] == self.user_login].index[0]
+                    self.loja_user = self._DataUsers.loc[index, 'Loja']
                     return index , self.user_login, tipo_login
                 else:
                     print("Usuario Default não encontrado!!")
