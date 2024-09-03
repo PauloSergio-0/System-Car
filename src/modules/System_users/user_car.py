@@ -1,5 +1,5 @@
 import pandas as pd
-from datetime import date,datetime
+from datetime import date
 from argon2 import PasswordHasher
 import os
 import re
@@ -10,9 +10,9 @@ class Users():
         self.data_atual = date.today()
         self._Loja_Df = loja_estacia._Loja_Df
 
-        if os.path.exists("./src/Datasets/Usuario_data/Usuario_system.csv"):
+        if os.path.exists("./src/Data/Usuario_data/Usuario_system.csv"):
             self._DataUsers = pd.read_csv(
-                "./src/Datasets/Usuario_data/Usuario_system.csv",
+                "./src/Data/Usuario_data/Usuario_system.csv",
                     sep=";",
                     encoding="UTF-8",
                     dtype={
@@ -29,7 +29,7 @@ class Users():
                 )
 
         else:
-            os.makedirs("./src/Datasets/Usuario_data", exist_ok=True)
+            os.makedirs("./src/Data/Usuario_data", exist_ok=True)
 
             self._DataUsers = pd.DataFrame(columns=['Codigo', 'Loja', 'Nome', 'Data Nascimento', 'Idade', 'Sexo', 'Usuario', 'Senha','Type'])
 
@@ -48,8 +48,8 @@ class Users():
 
     def Registrar_loja(self):
         print('Informe a loja que será cadastrado:')
-        num =0
-        lista_loja= self._Loja_Df['Nome_loja'].unique().tolist()
+        num = 0
+        lista_loja = self._Loja_Df['Nome_loja'].unique().tolist()
         
         for item in lista_loja:
             num +=1
@@ -86,7 +86,7 @@ class Users():
         
         def Confirmar_senha(senha_vf):
             re_senha = input('Digite a senha novamente:')
-            if senha == re_senha:
+            if senha_vf == re_senha:
                 print('senha cadastrada')
             else:
                 print('Senhas diferentes')
@@ -227,13 +227,10 @@ class Users():
         elif type_alteracao == 'Sexo':
             self._DataUsers.at[index,type_alteracao] = self.Escolha_Sexo()
 
-        elif type_alteracao == 'Loja':
-            self._DataUsers.at[index,type_alteracao] = self.Registrar_loja()
-
         elif type_alteracao == 'Senha':
             self._DataUsers.at[index,type_alteracao] = self.verificar_senha()
 
-        self._DataUsers.to_csv("./src/Datasets/Usuario_data/Usuario_system.csv", sep = ";", encoding="UTF-8", index=False)
+        self._DataUsers.to_csv("./src/Data/Usuario_data/Usuario_system.csv", sep = ";", encoding="UTF-8", index=False)
 
         
     def data_nascimento(self): 
@@ -337,26 +334,23 @@ class Users():
             senha,
             Tipo
         ]
-        self._DataUsers.to_csv("./src/Datasets/Usuario_data/Usuario_system.csv", sep = ";",encoding="UTF-8",index=False)
+
+        self._DataUsers.to_csv("./src/Data/Usuario_data/Usuario_system.csv", sep = ";", encoding="UTF-8", index=False)
 
     def listar_Informacoes_user(self, User_login):
-        index = self._DataUsers[self._DataUsers['Usuario'] == User_login].index[0]
-        Nome = self._DataUsers[index, 'Nome']
-        data_n = self._DataUsers[index, 'Data Nascimento']
-        idade = self._DataUsers[index, 'Idade']
-        sexo = self._DataUsers[index, 'Sexo']
+        filtro_user = self._DataUsers.loc[self._DataUsers['Usuario'] == User_login]
+        Nome = filtro_user['Nome'].values[0]
+        data_n = filtro_user['Data Nascimento'].values[0]
+        idade = filtro_user['Idade'].values[0]
+        sexo = filtro_user['Sexo'].values[0]
+        Loja = filtro_user['Loja'].values[0]
 
+        print(f'{'-'*5} Informações do usuário {'-'*5}\n')
 
-        print(f'')
+        print(f'Nome do usuário: {Nome}')
+        print(f'Sexo do usuário: {sexo}')
+        print(f'Data de nascimento: {data_n}')
+        print(f'Idade do usuário: {idade}')
+        print(f'Loja do usuário: {Loja}')
 
-
-
-        # 'Codigo': 'string',
-        # 'Loja': 'string',
-        # 'Nome': 'string',
-        # 'Data Nascimento': 'string',
-        # 'Idade': 'int64',
-        # 'Sexo': 'string',
-        # 'Usuario': 'string',
-        # 'Senha': 'string',
-        # 'Type': 'string'
+        print(f'{'-'*34}\n')

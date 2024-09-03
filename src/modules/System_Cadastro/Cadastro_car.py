@@ -17,8 +17,8 @@ class Carro:
 
 
     def Verificar_fonte(self):
-        if os.path.exists("./src/Datasets/Carro_data/Car_system.csv"):
-            self._DataCadastro = pd.read_csv("./src/Datasets/Carro_data/Car_system.csv",
+        if os.path.exists("./src/Data/Carro_data/Car_system.csv"):
+            self._DataCadastro = pd.read_csv("./src/Data/Carro_data/Car_system.csv",
                 sep = ";",
                 encoding="UTF-8",
                 dtype={
@@ -36,7 +36,7 @@ class Carro:
             })
 
         else:
-            os.makedirs("./src/Datasets/Carro_data", exist_ok=True)
+            os.makedirs("./src/Data/Carro_data", exist_ok=True)
 
             self._DataCadastro = pd.DataFrame(columns=['Codigo', 'Marca', 'Modelo', 'Preco', 'Ano', 'Quantidade', 'Data Cadastro', 'Data Modificacao', 'Loja', 'Adcionado Por', 'Modificado Por'])# ==> Loja
             
@@ -141,7 +141,7 @@ class Carro:
             print('Veiculo existente')
             return self.Cadastrar_veiculo()
 
-        self._DataCadastro.to_csv("./src/Datasets/Carro_data/Car_system.csv", sep = ";",encoding="UTF-8",index=False)
+        self._DataCadastro.to_csv("./src/Data/Carro_data/Car_system.csv", sep = ";",encoding="UTF-8",index=False)
 
     def Marca_carro(self):
         print('Informe a marca que será vendida:')
@@ -159,10 +159,11 @@ class Carro:
             if 0 <= opcao < len(lista_carro):
                 return lista_carro[opcao]
             else:
-                return self.Registrar_loja()
-        except ValueError:
+                return self.Marca_carro()
+        except (ValueError, AttributeError):
             print('Erro! Por favor, insira um número válido.')
-            return self.Registrar_loja()
+            return self.Marca_carro()
+
             
     def Modelo_carro(self, Marca_escolha):
         lista_modelo = self._DataCadastro.loc[self._DataCadastro['Loja'] == self.loja_user]
@@ -180,7 +181,7 @@ class Carro:
             else:
                 print("Opção inválida. Por favor, escolha novamente.")
                 return self.Modelo_carro(Marca_escolha=Marca_escolha)
-        except ValueError:
+        except (ValueError, AttributeError):
             print('Erro! Por favor, insira um número válido.')
             return self.Modelo_carro(Marca_escolha=Marca_escolha)
 
@@ -203,7 +204,7 @@ class Carro:
     def Atualizar_valor_colunas_vendas(self, venda_df, type_mod,nome_atual, novo_nome):
         venda_df._DataVenda.loc[venda_df._DataVenda[type_mod] == nome_atual, type_mod] = novo_nome
 
-        venda_df._DataVenda.to_csv("./src/Datasets/Venda_data/Vendas_carros.csv", sep = ";", encoding="UTF-8", index=False)
+        venda_df._DataVenda.to_csv("./src/Data/Venda_data/Vendas_carros.csv", sep = ";", encoding="UTF-8", index=False)
 
     def Atualizar_dados_veiculo(self, Type_mod, type_var, venda_estacia):
         Codigo_search = self.Codigo_Carro()
@@ -228,7 +229,7 @@ class Carro:
                 
                 print(f"{Type_mod} atualizada")
 
-                self._DataCadastro.to_csv("./src/Datasets/Carro_data/Car_system.csv", sep = ";",encoding="UTF-8",index=False)
+                self._DataCadastro.to_csv("./src/Data/Carro_data/Car_system.csv", sep = ";",encoding="UTF-8",index=False)
             else:
                 print('Não encontrado')
                 return self.Atualizar_qtd_veiculo(Type_mod= Type_mod , type_var= type_var)
