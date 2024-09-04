@@ -1,3 +1,4 @@
 Codigo;Loja;Nome;Data Nascimento;Idade;Sexo;Usuario;Senha;Type
 USR00001;Imports;Pablo;02/11/2010;14;Masculino;Castra0909;$argon2id$v=19$m=65536,t=2,p=2$mF0D5nz31BgHymSHbxfG1Q$x69tMgM1IpUB+LzBtVfuk6i9SYc5ON4+GAUrAUMFLMQ;Default
 USR00002;Imports;Paulo Sérgio Madureira de Souza;07/02/2005;19;Masculino;Paulo;$argon2id$v=19$m=65536,t=2,p=2$MfOXIiwwxaaL1USkjcrgXA$xMk31Je3vPuDrck61vwu804p3Mxplgq1NHxos8irsio;Default
+USR00003;Imports;Luis;01/02/2000;24;Masculino;Loas;$argon2id$v=19$m=65536,t=2,p=2$QRHYBJ/FzGALk/21y+v9Zg$gHpINKEfyPabKpZpe+KRaFn/wgH0GzuAop6VDqrsIfY;Default
