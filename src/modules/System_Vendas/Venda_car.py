@@ -5,7 +5,6 @@ import os
 class Venda():
     def __init__(self, Carro_estancia, Login_estacia,):#, user_cad_Dat
         self._DataCadastro = Carro_estancia._DataCadastro
-        #self._DataUsers = user_cad_Dat._DataUsers[self._DataUsers['Nome'] == user_name].iloc[0]
         self.user_login = Login_estacia.user_login
         self.user_type = Login_estacia.user_Type
         self.carro = Carro_estancia
@@ -27,7 +26,7 @@ class Venda():
         else:
             os.makedirs("./src/Data/Venda_data", exist_ok=True)
 
-            self._DataVenda = pd.DataFrame(columns=['Nr_Fatura','Loja','Marca', 'Modelo', 'Quantidade_Vendida', 'Valor_transacao', 'Ano', 'data_transancao', 'Metodo Pagamento', 'Vendedor']) # add --> 'Comprador', 'Vendedor' , 'loja'
+            self._DataVenda = pd.DataFrame(columns=['Nr_Fatura','Loja','Marca', 'Modelo', 'Quantidade_Vendida', 'Valor_transacao', 'Ano', 'data_transancao', 'Metodo Pagamento', 'Vendedor']) # add --> 'Comprador',
 
             self._DataVenda = self._DataVenda.astype({ 
                 'Nr_Fatura': 'string',

@@ -24,8 +24,7 @@ class loja:
         else:
             os.makedirs("./src/Data/Loja_data", exist_ok=True)
 
-            self._Loja_Df = pd.DataFrame(columns=['Nome_loja', 'Pais', 'Estado', 'Cidade', 'Usuario_loja', 'Senha', 'Type']) # Moeda ??  add ==> type user
-            
+            self._Loja_Df = pd.DataFrame(columns=['Nome_loja', 'Pais', 'Estado', 'Cidade', 'Usuario_loja', 'Senha', 'Type']) 
             self._Loja_Df = self._Loja_Df.astype({
                 'Nome_loja': 'string',
                 'Pais': 'string',
@@ -162,3 +161,28 @@ class loja:
 
     def listar_lojas(self):
         print(self._Loja_Df)
+
+    def listar_Informacoes_loja(self, User_login, funca_estacia, carro_estacia):
+        filtro_user = self._Loja_Df.loc[self._Loja_Df['Usuario_loja'] == User_login]
+
+        total_funca = funca_estacia[funca_estacia['Loja'] == User_login].shape[0]
+
+        filter_carro = carro_estacia[carro_estacia['Loja'] == User_login]
+        total_carro = filter_carro['Quantidade'].sum()
+
+        Nome = filtro_user['Nome_loja'].values[0]
+        pais = filtro_user['Pais'].values[0]
+        Estado = filtro_user['Estado'].values[0]
+        Cidade = filtro_user['Cidade'].values[0]
+
+
+        print(f'{'-'*5} Informações do usuário {'-'*5}\n')
+
+        print(f'Nome da loja: {Nome}')
+        print(f'País: {pais}')
+        print(f'Estado: {Estado}')
+        print(f'Cidade: {Cidade}')
+        print(f'Total de veiculos: {total_carro}')
+        print(f'Total de funcionário: {total_funca}')
+
+        print(f'{'-'*34}\n')
