@@ -2,7 +2,11 @@ import os
 from datetime import datetime
 import pandas as pd
 
-
+from modules.System_users.user_car import Users
+from modules.System_Vendas.Venda_car import Venda
+from modules.System_Cadastro.Cadastro_car import Carro
+from modules.System_Login.Login_user import Login
+from modules.System_Loja.Cad_loja import loja
 
 
 class Estatistica:
@@ -40,14 +44,20 @@ class Estatistica:
             estatistica.write(f'Números Totais de Veiculos: {sum(Carro_filter['Quantidade'])}\n\n')
 
             estatistica.write('Total de de vaiculos por marca:\n')
-            for marca, qtd in total_veiculos_marca:
+            for marca, qtd in total_veiculos_marca.items():
                 estatistica.write(f'{marca}: {qtd} veiculos\n')
             estatistica.write('\n')
 
             estatistica.write('Total de modelos por marcas:\n')
-            for marca, qtd_model in total_modelos_marca:
+            for marca, qtd_model in total_modelos_marca.items():
                 estatistica.write(f'{marca}: {qtd_model} modelos\n')
             estatistica.write('\n')
             
-            estatistica
-                
+            estatistica.write('Total de modelo por Marca')
+            for marca, modelo, qtd in total_veiculo_modelo.items():
+                estatistica.write(f'Marca: {marca} Modelo: {modelo} Quantidade: {qtd}\n')
+            estatistica.write('\n')
+
+            print(estatistica)
+
+
