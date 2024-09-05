@@ -9,7 +9,6 @@ class main:
     def __init__(self):
         self.lojas = loja()
         self.usuario = Users(self.lojas)
-        self.usuario = Users(loja_estacia=self.lojas)
         self.Login_usuario = Login(self.usuario, self.lojas)
 
 

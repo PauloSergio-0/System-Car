@@ -10,7 +10,7 @@ class Venda():
         self.carro = Carro_estancia
 
         if os.path.exists('./src/Data/Venda_data/Vendas_carros.csv'):
-            self._DataVenda= pd.read_csv('./src/Data/Venda_data/Vendas_carros.csv', 
+            self._DataVenda = pd.read_csv('./src/Data/Venda_data/Vendas_carros.csv', 
                 sep=';', 
                 encoding='UTF-8',
                 dtype={ 

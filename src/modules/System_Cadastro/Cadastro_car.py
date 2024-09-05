@@ -166,8 +166,10 @@ class Carro:
 
             
     def Modelo_carro(self, Marca_escolha):
-        lista_modelo = self._DataCadastro.loc[self._DataCadastro['Loja'] == self.loja_user]
-        lista_modelo = self._DataCadastro[self._DataCadastro['Marca'] == Marca_escolha]
+        lista_modelo = self._DataCadastro[
+            (self._DataCadastro['Loja'] == self.loja_user) & 
+            (self._DataCadastro['Marca'] == Marca_escolha)
+        ]
         modelos_unicos = lista_modelo['Modelo'].unique().tolist()
         
         for num, modelo in enumerate(modelos_unicos, start=1):
