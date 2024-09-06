@@ -3,7 +3,7 @@ from modules.System_Vendas.Venda_car import Venda
 from modules.System_Cadastro.Cadastro_car import Carro
 from modules.System_Login.Login_user import Login
 from modules.System_Loja.Cad_loja import loja
-
+from modules.System_estatistica.estatistica_car import Estatistica
 
 class main:
     def __init__(self):
@@ -111,6 +111,8 @@ class main:
                 return self.User_config()
         
     def Loja_config(self):
+        self.Estatistica = Estatistica(self.usuario, self.carro_sistema, self.carro_vendas, self.Login_usuario)
+
         while True:
 
             print('1. Cadastrar usuário')
@@ -120,7 +122,8 @@ class main:
             print('5. Alterar estado')
             print('6. Cidade')
             print('7. Informações da loja')
-            print('8. Sair')
+            print('8. estátistica da loja da loja')
+            print('9. Sair')
             
             try:
                 opcao = int(input('Informe a opcao: '))
@@ -154,6 +157,8 @@ class main:
                 self.lojas.listar_Informacoes_loja(User_login=self.Login_usuario.user_login, funca_estacia=self.usuario._DataUsers, carro_estacia=self.carro_sistema._DataCadastro)
 
             elif opcao == 8:
+                self.Estatistica.Realizar_estatistica()
+            elif opcao == 9:
                 print('Saindo...')
                 return self.main_log()
 
