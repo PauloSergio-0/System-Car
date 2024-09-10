@@ -29,6 +29,14 @@ class Estatistica:
         vendas_filter = self._DataVenda[self._DataVenda['Loja'] == self.Log_on.user_login]
 
         # Estatísticas
+        
+        usuario = usuarios_filter['Usuario'].unique()
+        num_usuario = len(usuario)
+
+        vendas_usuario = vendas_filter.groupby('Vendedor')['Quantidade_Vendida'].nunique()
+        
+        
+
         marcas = Carro_filter['Marca'].unique()
         modelos = len(marcas)
         total_veiculos_marca = Carro_filter.groupby('Marca')['Quantidade'].sum()
@@ -39,8 +47,9 @@ class Estatistica:
         os.makedirs(self.dir_estatistica, exist_ok=True)
 
         # Escrevendo no arquivo
-        with open(self.arquivo_estatistica, 'w') as estatistica:
-            estatistica.write(f'Números Totais de Veículos: {Carro_filter["Quantidade"].sum()}\n\n')
+        with open(self.arquivo_estatistica, 'w', encoding='utf-8') as estatistica:
+            estatistica.write(f'Números Totais de Veículos: {Carro_filter["Quantidade"].sum()}\n')
+            estatistica.write(f'Números Totais de modelos: {modelos}\n\n')
 
             estatistica.write('Total de veículos por marca:\n')
             for marca, qtd in total_veiculos_marca.items():
@@ -56,9 +65,14 @@ class Estatistica:
             for (marca, modelo), qtd in total_veiculo_modelo.items():
                 estatistica.write(f'Marca: {marca} Modelo: {modelo} Quantidade: {qtd}\n')
             estatistica.write('\n')
+        
+            estatistica.write('Dados usuários\n')
+            estatistica.write(f'Total de vendedores: {num_usuario}')
+            for vendedor, qtd_venda in vendas_usuario.items():
+                estatistica.write(f'Vendedor: {vendedor} Nº vendas: {qtd_venda}\n')
+            estatistica.write('\n')
+                
+    def Mostrar_estatistica(self):
+        self.Realizar_estatistica()
+        print(self.conteudo)
 
-            print(self.conteudo)
-
-
-if __name__ == '__main__':
-    print('bota rita')

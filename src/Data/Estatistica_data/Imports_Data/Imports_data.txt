@@ -1,10 +1,11 @@
-Números Totais de Veículos: 118
+NÃºmeros Totais de VeÃ­culos: 110
+NÃºmeros Totais de modelos: 4
 
-Total de veículos por marca:
-Buggati: 12 veículos
-Ferrari: 31 veículos
-Mclaren: 45 veículos
-lambor: 30 veículos
+Total de veÃ­culos por marca:
+Buggati: 10 veÃ­culos
+Ferrari: 26 veÃ­culos
+Mclaren: 45 veÃ­culos
+lambor: 29 veÃ­culos
 
 Total de modelos por marcas:
 Buggati: 1 modelos
@@ -13,11 +14,13 @@ Mclaren: 2 modelos
 lambor: 1 modelos
 
 Total de modelo por Marca
-Marca: Buggati Modelo: Veyron Quantidade: 12
-Marca: Ferrari Modelo: Fkkpx Quantidade: 12
+Marca: Buggati Modelo: Veyron Quantidade: 10
+Marca: Ferrari Modelo: Fkkpx Quantidade: 9
 Marca: Ferrari Modelo: M21 Quantidade: 1
-Marca: Ferrari Modelo: klo09 Quantidade: 18
+Marca: Ferrari Modelo: klo09 Quantidade: 16
 Marca: Mclaren Modelo: P1 Quantidade: 23
 Marca: Mclaren Modelo: Senna Quantidade: 22
-Marca: lambor Modelo: veneno Quantidade: 30
+Marca: lambor Modelo: veneno Quantidade: 29
 
+Dados usuÃ¡rios
+Total ed vendedores: 4Vendedor: Cao NÂº vendas: 2Vendedor: Imports NÂº vendas: 3Vendedor: Paulo NÂº vendas: 2

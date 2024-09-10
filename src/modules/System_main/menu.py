@@ -157,7 +157,7 @@ class main:
                 self.lojas.listar_Informacoes_loja(User_login=self.Login_usuario.user_login, funca_estacia=self.usuario._DataUsers, carro_estacia=self.carro_sistema._DataCadastro)
 
             elif opcao == 8:
-                self.Estatistica.Realizar_estatistica()
+                self.Estatistica.Mostrar_estatistica()
             elif opcao == 9:
                 print('Saindo...')
                 return self.main_log()
@@ -229,6 +229,7 @@ class main:
             elif opcao == 3:
                 self.Login_usuario.logout()
                 print('Saindo......')
-                break
+                return self.Menu_inicial()
             else:
                 print('Opção invalida!!')
+                return self.main_log()

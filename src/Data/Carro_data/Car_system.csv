@@ -1,11 +1,11 @@
 Codigo;Marca;Modelo;Preco;Ano;Quantidade;Data Cadastro;Data Modificacao;Loja;Adcionado Por;Modificado Por
 CRR00001;Ferrari;M21;123.0;1990;1;30/08/2024;30/08/2024 15:16:30;Imports;Admin;
-CRR00002;Ferrari;klo09;123.0;1990;18;30/08/2024;03/09/2024 09:21:12;Imports;Admin;
+CRR00002;Ferrari;klo09;123.0;1990;16;30/08/2024;10/09/2024 16:31:29;Imports;Admin;
 CRR00003;Lanborguini;veneno;12990.0;2005;12;02/09/2024;;Importados;Admin;
 CRR00004;Caixa;89;123.0;2020;1;02/09/2024;;Portis;Admin;
-CRR00005;lambor;veneno;123.0;2009;30;03/09/2024;03/09/2024 09:23:51;Imports;Admin;
-CRR00006;Ferrari;Fkkpx;32.0;2000;12;03/09/2024;;Imports;Admin;
-CRR00007;Buggati;Veyron;129902.0;2001;12;03/09/2024;;Imports;Admin;
+CRR00005;lambor;veneno;123.0;2009;29;03/09/2024;10/09/2024 16:28:03;Imports;Admin;
+CRR00006;Ferrari;Fkkpx;32.0;2000;9;03/09/2024;10/09/2024 16:31:40;Imports;Admin;
+CRR00007;Buggati;Veyron;129902.0;2001;10;03/09/2024;10/09/2024 16:27:27;Imports;Admin;
 CRR00008;Mclaren;Senna;90123.0;2015;22;03/09/2024;;Imports;Admin;
 CRR00009;Mclaren;P1;12312.0;2004;23;03/09/2024;03/09/2024 09:27:53;Imports;Admin;
 CRR00010;Porshe;911s;123.0;2021;121;03/09/2024;03/09/2024 09:58:16;Pizza;Admin;
