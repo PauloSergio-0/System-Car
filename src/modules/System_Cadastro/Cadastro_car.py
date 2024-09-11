@@ -17,8 +17,8 @@ class Carro:
 
 
     def Verificar_fonte(self):
-        if os.path.exists("./src/Data/Carro_data/Car_system.csv"):
-            self._DataCadastro = pd.read_csv("./src/Data/Carro_data/Car_system.csv",
+        if os.path.exists("./src/Data/System_data/Carro_data/Car_system.csv"):
+            self._DataCadastro = pd.read_csv("./src/Data/System_data/Carro_data/Car_system.csv",
                 sep = ";",
                 encoding="UTF-8",
                 dtype={
@@ -36,7 +36,7 @@ class Carro:
             })
 
         else:
-            os.makedirs("./src/Data/Carro_data", exist_ok=True)
+            os.makedirs("./src/Data/System_data/Carro_data", exist_ok=True)
 
             self._DataCadastro = pd.DataFrame(columns=['Codigo', 'Marca', 'Modelo', 'Preco', 'Ano', 'Quantidade', 'Data Cadastro', 'Data Modificacao', 'Loja', 'Adcionado Por', 'Modificado Por'])# ==> Loja
             
@@ -141,7 +141,7 @@ class Carro:
             print('Veiculo existente')
             return self.Cadastrar_veiculo()
 
-        self._DataCadastro.to_csv("./src/Data/Carro_data/Car_system.csv", sep = ";",encoding="UTF-8",index=False)
+        self._DataCadastro.to_csv("./src/Data/System_data/Carro_data/Car_system.csv", sep = ";",encoding="UTF-8",index=False)
 
     def Marca_carro(self):
         print('Informe a marca que será vendida:')
@@ -206,7 +206,7 @@ class Carro:
     def Atualizar_valor_colunas_vendas(self, venda_df, type_mod,nome_atual, novo_nome):
         venda_df._DataVenda.loc[venda_df._DataVenda[type_mod] == nome_atual, type_mod] = novo_nome
 
-        venda_df._DataVenda.to_csv("./src/Data/Venda_data/Vendas_carros.csv", sep = ";", encoding="UTF-8", index=False)
+        venda_df._DataVenda.to_csv("./src/Data/System_data/Venda_data/Vendas_carros.csv", sep = ";", encoding="UTF-8", index=False)
 
     def Atualizar_dados_veiculo(self, Type_mod, type_var, venda_estacia):
         Codigo_search = self.Codigo_Carro()
@@ -231,7 +231,7 @@ class Carro:
                 
                 print(f"{Type_mod} atualizada")
 
-                self._DataCadastro.to_csv("./src/Data/Carro_data/Car_system.csv", sep = ";",encoding="UTF-8",index=False)
+                self._DataCadastro.to_csv("./src/Data/System_data/Carro_data/Car_system.csv", sep = ";",encoding="UTF-8",index=False)
             else:
                 print('Não encontrado')
                 return self.Atualizar_qtd_veiculo(Type_mod= Type_mod , type_var= type_var)
@@ -244,6 +244,3 @@ class Carro:
         data_filter =self._DataCadastro[self._DataCadastro['Loja'] == user_login]
         
         print(data_filter)
-
-    def listar_info(self):
-        print(self._DataCadastro.info())

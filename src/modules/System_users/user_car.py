@@ -10,9 +10,9 @@ class Users():
         self.data_atual = date.today()
         self._Loja_Df = loja_estacia._Loja_Df
 
-        if os.path.exists("./src/Data/Usuario_data/Usuario_system.csv"):
+        if os.path.exists("./src/Data/System_data/Usuario_data/Usuario_system.csv"):
             self._DataUsers = pd.read_csv(
-                "./src/Data/Usuario_data/Usuario_system.csv",
+                "./src/Data/System_data/Usuario_data/Usuario_system.csv",
                     sep=";",
                     encoding="UTF-8",
                     dtype={
@@ -29,7 +29,7 @@ class Users():
                 )
 
         else:
-            os.makedirs("./src/Data/Usuario_data", exist_ok=True)
+            os.makedirs("./src/Data/System_data/Usuario_data", exist_ok=True)
 
             self._DataUsers = pd.DataFrame(columns=['Codigo', 'Loja', 'Nome', 'Data Nascimento', 'Idade', 'Sexo', 'Usuario', 'Senha','Type'])
 
@@ -230,7 +230,7 @@ class Users():
         elif type_alteracao == 'Senha':
             self._DataUsers.at[index,type_alteracao] = self.verificar_senha()
 
-        self._DataUsers.to_csv("./src/Data/Usuario_data/Usuario_system.csv", sep = ";", encoding="UTF-8", index=False)
+        self._DataUsers.to_csv("./src/Data/System_data/Usuario_data/Usuario_system.csv", sep = ";", encoding="UTF-8", index=False)
 
         
     def data_nascimento(self): 
@@ -335,7 +335,7 @@ class Users():
             Tipo
         ]
 
-        self._DataUsers.to_csv("./src/Data/Usuario_data/Usuario_system.csv", sep = ";", encoding="UTF-8", index=False)
+        self._DataUsers.to_csv("./src/Data/System_data/Usuario_data/Usuario_system.csv", sep = ";", encoding="UTF-8", index=False)
 
     def listar_Informacoes_user(self, User_login):
         filtro_user = self._DataUsers.loc[self._DataUsers['Usuario'] == User_login]

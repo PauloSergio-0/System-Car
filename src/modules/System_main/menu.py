@@ -111,7 +111,7 @@ class main:
                 return self.User_config()
         
     def Loja_config(self):
-        self.Estatistica = Estatistica(self.usuario, self.carro_sistema, self.carro_vendas, self.Login_usuario)
+        self.Estatistica = Estatistica(self.usuario, self.carro_sistema, self.carro_vendas, self.lojas,self.Login_usuario)
 
         while True:
 

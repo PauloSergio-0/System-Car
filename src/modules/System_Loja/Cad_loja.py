@@ -6,9 +6,9 @@ from argon2 import PasswordHasher
 class loja:
     def __init__(self):
 
-        if os.path.exists("./src/Data/Loja_data/Loja_system.csv"):
+        if os.path.exists("./src/Data/System_data/Loja_data/Loja_system.csv"):
             self._Loja_Df = pd.read_csv(
-                "./src/Data/Loja_data/Loja_system.csv",
+                "./src/Data/System_data/Loja_data/Loja_system.csv",
                 sep=";",
                 encoding="UTF-8",
                 dtype={
@@ -22,7 +22,7 @@ class loja:
             })
 
         else:
-            os.makedirs("./src/Data/Loja_data", exist_ok=True)
+            os.makedirs("./src/Data/System_data/Loja_data", exist_ok=True)
 
             self._Loja_Df = pd.DataFrame(columns=['Nome_loja', 'Pais', 'Estado', 'Cidade', 'Usuario_loja', 'Senha', 'Type']) 
             self._Loja_Df = self._Loja_Df.astype({
@@ -132,7 +132,7 @@ class loja:
 
         print(f'{type_alteracao} Alterado(a)')
 
-        self._Loja_Df.to_csv("./src/Data/Loja_data/Loja_system.csv", sep = ";",encoding="UTF-8",index=False)
+        self._Loja_Df.to_csv("./src/Data/System_data/Loja_data/Loja_system.csv", sep = ";",encoding="UTF-8",index=False)
 
     def Cadastrar_Loja(self):
         Nm_loja = input('Informe o Nome da Loja: ')
@@ -153,7 +153,7 @@ class loja:
             Tipo
         ]
 
-        self._Loja_Df.to_csv("./src/Data/Loja_data/Loja_system.csv", sep = ";",encoding="UTF-8",index=False)
+        self._Loja_Df.to_csv("./src/Data/System_data/Loja_data/Loja_system.csv", sep = ";",encoding="UTF-8",index=False)
 
 
     def Alterar_loja(self):
@@ -183,6 +183,6 @@ class loja:
         print(f'Estado: {Estado}')
         print(f'Cidade: {Cidade}')
         print(f'Total de veiculos: {total_carro}')
-        print(f'Total de funcionário: {total_funca}')
+        print(f'Total de funcionários: {total_funca}')
 
         print(f'{'-'*34}\n')

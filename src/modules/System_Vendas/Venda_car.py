@@ -9,8 +9,8 @@ class Venda():
         self.user_type = Login_estacia.user_Type
         self.carro = Carro_estancia
 
-        if os.path.exists('./src/Data/Venda_data/Vendas_carros.csv'):
-            self._DataVenda = pd.read_csv('./src/Data/Venda_data/Vendas_carros.csv', 
+        if os.path.exists('./src/Data/System_data/Venda_data/Vendas_carros.csv'):
+            self._DataVenda = pd.read_csv('./src/Data/System_data/Venda_data/Vendas_carros.csv', 
                 sep=';', 
                 encoding='UTF-8',
                 dtype={ 
@@ -24,7 +24,7 @@ class Venda():
             })
             
         else:
-            os.makedirs("./src/Data/Venda_data", exist_ok=True)
+            os.makedirs("./src/Data/System_data/Venda_data", exist_ok=True)
 
             self._DataVenda = pd.DataFrame(columns=['Nr_Fatura','Loja','Marca', 'Modelo', 'Quantidade_Vendida', 'Valor_transacao', 'Ano', 'data_transancao', 'Metodo Pagamento', 'Vendedor']) # add --> 'Comprador',
 
@@ -128,8 +128,8 @@ class Venda():
                     usuario
                 ]
 
-                self._DataVenda.to_csv("./src/Data/Venda_data/Vendas_carros.csv", sep = ";", encoding="UTF-8", index=False)
-                self._DataCadastro.to_csv("./src/Data/Carro_data/Car_system.csv", sep = ";",encoding="UTF-8",index=False)
+                self._DataVenda.to_csv("./src/Data/System_data/Venda_data/Vendas_carros.csv", sep = ";", encoding="UTF-8", index=False)
+                self._DataCadastro.to_csv("./src/Data/System_data/Carro_data/Car_system.csv", sep = ";",encoding="UTF-8",index=False)
                 
                 print('venda realizada com sucesso!')
             else:

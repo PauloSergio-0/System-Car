@@ -1,8 +1,23 @@
-Números Totais de Veículos: 110
-Números Totais de modelos: 4
+Dados Loja: Imports
+Nome da loja: Importados
+Pais da loja: Brasil
+Estado da loja: Sergipe
+Cidade da loja: Aracaju
+
+Dados usuários
+Total de vendedores: 4
+Loja: Imports Vendedor: Cao Nº vendas: 4
+Loja: Imports Vendedor: Imports Nº vendas: 39
+Loja: Imports Vendedor: Paulo Nº vendas: 4
+
+Dados Veiculos
+Números Totais de Veículos: 109
+Números Totais de Marcas: 4
+
+Números Totais de modelos: 7
 
 Total de veículos por marca:
-Buggati: 10 veículos
+Buggati: 9 veículos
 Ferrari: 26 veículos
 Mclaren: 45 veículos
 lambor: 29 veículos
@@ -14,7 +29,7 @@ Mclaren: 2 modelos
 lambor: 1 modelos
 
 Total de modelo por Marca
-Marca: Buggati Modelo: Veyron Quantidade: 10
+Marca: Buggati Modelo: Veyron Quantidade: 9
 Marca: Ferrari Modelo: Fkkpx Quantidade: 9
 Marca: Ferrari Modelo: M21 Quantidade: 1
 Marca: Ferrari Modelo: klo09 Quantidade: 16
@@ -22,5 +37,3 @@ Marca: Mclaren Modelo: P1 Quantidade: 23
 Marca: Mclaren Modelo: Senna Quantidade: 22
 Marca: lambor Modelo: veneno Quantidade: 29
 
-Dados usuários
-Total ed vendedores: 4Vendedor: Cao Nº vendas: 2Vendedor: Imports Nº vendas: 3Vendedor: Paulo Nº vendas: 2
