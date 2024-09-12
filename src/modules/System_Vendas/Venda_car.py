@@ -40,7 +40,7 @@ class Venda():
             })
 
     
-    def Metodo_pagamento(self):
+    def metodo_pagamento(self):
         print('1. PIX')
         print('2. CARTÃO')
         print('3. EM DINHEIRO')
@@ -65,10 +65,10 @@ class Venda():
                             return 'CARTAO - DEBITO'
                         else:
                             print('Opção invalida')
-                            return self.Metodo_pagamento()
+                            return self.metodo_pagamento()
                 except ValueError:
                     print("Valor invalido")
-                    return self.Metodo_pagamento()
+                    return self.metodo_pagamento()
 
             elif opcao == 3:
                 return 'EM DINHEIRO'
@@ -81,10 +81,10 @@ class Venda():
 
             else:
                 print("Opção invalida!")
-                return self.Metodo_pagamento()
+                return self.metodo_pagamento()
 
 
-    def Realizar_Venda(self):
+    def realizar_Venda(self):
         codigo_search = self.carro.Codigo_Carro()
         if codigo_search in self._DataCadastro['Codigo'].values:
             
@@ -112,7 +112,7 @@ class Venda():
                 Ano_Veiculo = self._DataCadastro.at[index, 'Ano']
                 
                 data_de_venda = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
-                metodo_pg_venda = self.Metodo_pagamento()
+                metodo_pg_venda = self.metodo_pagamento()
                 usuario = self.user_login
 
                 self._DataVenda.loc[self._DataVenda.shape[0]]=[
@@ -134,10 +134,10 @@ class Venda():
                 print('venda realizada com sucesso!')
             else:
                 print('A quantidade é maior que o estoque')
-                return self.Realizar_Venda()
+                return self.realizar_Venda()
         else:
             print("Veiculo não encontrado!!")
-            return self.Realizar_Venda()
+            return self.realizar_Venda()
         
 
     def listar_vendas(self, user_login):

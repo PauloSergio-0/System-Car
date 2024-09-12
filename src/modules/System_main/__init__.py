@@ -1,1 +1,1 @@
-from .menu import main 
+from .menu import Main 

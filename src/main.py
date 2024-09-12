@@ -1,5 +1,5 @@
-from modules.System_main.menu import main
+from modules.System_main.menu import Main
 
 if __name__ == '__main__':
-    iniciar = main()
-    iniciar.Menu_inicial()
+    iniciar = Main()
+    iniciar.menu_inicial()

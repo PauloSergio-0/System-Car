@@ -3,7 +3,7 @@ import os
 import re
 from argon2 import PasswordHasher
 
-class loja:
+class Loja:
     def __init__(self):
 
         if os.path.exists("./src/Data/System_data/Loja_data/Loja_system.csv"):
@@ -123,7 +123,7 @@ class loja:
                     return self.verificar_usuario()
 
 
-    def Alterar_user_admin(self, User_login, type_alteracao):
+    def alterar_user_admin(self, User_login, type_alteracao):
         index = self._Loja_Df[self._Loja_Df['Usuario_loja'] == User_login ].index[0]
         if type_alteracao == 'Senha':
             self._Loja_Df.at[index,type_alteracao] = self.verificar_senha()
@@ -134,7 +134,7 @@ class loja:
 
         self._Loja_Df.to_csv("./src/Data/System_data/Loja_data/Loja_system.csv", sep = ";",encoding="UTF-8",index=False)
 
-    def Cadastrar_Loja(self):
+    def cadastrar_Loja(self):
         Nm_loja = input('Informe o Nome da Loja: ')
         Pais = 'Brasil'
         estado = input('Informe o estado: ')
@@ -155,9 +155,6 @@ class loja:
 
         self._Loja_Df.to_csv("./src/Data/System_data/Loja_data/Loja_system.csv", sep = ";",encoding="UTF-8",index=False)
 
-
-    def Alterar_loja(self):
-        print(1)
 
     def listar_lojas(self):
         print(self._Loja_Df)

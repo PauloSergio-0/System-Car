@@ -1,3 +1,2 @@
 pandas
-setuptools
 argon2-cffi

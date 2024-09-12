@@ -1,0 +1,1 @@
+from .estatistica_car import Estatistica

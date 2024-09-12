@@ -22,7 +22,7 @@ class Estatistica:
             os.makedirs(self.dir_estatistica, exist_ok=True)
             self.conteudo = None
 
-    def Realizar_estatistica(self):
+    def realizar_estatistica(self):
         
         # Filtrando os dados
         usuarios_filter = self._DataUsers[self._DataUsers['Loja'] == self.Log_on.user_login]
@@ -87,8 +87,8 @@ class Estatistica:
                 estatistica.write(f'Marca: {marca} Modelo: {modelo} Quantidade: {qtd}\n')
             estatistica.write('\n')
             
-    def Mostrar_estatistica(self):
-        self.Realizar_estatistica()
+    def mostrar_estatistica(self):
+        self.realizar_estatistica()
         with open(self.arquivo_estatistica, 'r', encoding='utf-8') as conteudo:
             self.conteudo = conteudo.read()
             print(f'\n{self.conteudo}')

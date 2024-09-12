@@ -46,7 +46,7 @@ class Users():
             })
         
 
-    def Registrar_loja(self):
+    def registrar_loja(self):
         print('Informe a loja que será cadastrado:')
         num = 0
         lista_loja = self._Loja_Df['Nome_loja'].unique().tolist()
@@ -61,10 +61,10 @@ class Users():
             if opcao < len(lista_loja):
                 return lista_loja[opcao]
             else:
-                return self.Registrar_loja()
+                return self.registrar_loja()
         except ValueError:
             print('erro!!')
-            return self.Registrar_loja()
+            return self.registrar_loja()
         
     def verificar_senha(self): # ADD hash
 
@@ -211,21 +211,21 @@ class Users():
                 
 
 
-    def Alterar_user(self, User_login, type_alteracao):
+    def alterar_user(self, User_login, type_alteracao):
         index = self._DataUsers[self._DataUsers['Usuario'] == User_login].index[0]
         if type_alteracao == 'Nome':
             self._DataUsers.at[index,type_alteracao] = self.verificar_Nome()
 
         elif type_alteracao == 'Data Nascimento':
             Data_de_nascimento = self.data_nascimento()
-            idade = self.Idade_calc(Data_de_nascimento)
+            idade = self.idade_calc(Data_de_nascimento)
             Data_de_nascimento = Data_de_nascimento.strftime('%d/%m/%Y')
 
             self._DataUsers.at[index,type_alteracao] = Data_de_nascimento
             self._DataUsers.at[index,'Idade']= idade
 
         elif type_alteracao == 'Sexo':
-            self._DataUsers.at[index,type_alteracao] = self.Escolha_Sexo()
+            self._DataUsers.at[index,type_alteracao] = self.escolha_Sexo()
 
         elif type_alteracao == 'Senha':
             self._DataUsers.at[index,type_alteracao] = self.verificar_senha()
@@ -276,7 +276,7 @@ class Users():
 
 
 
-    def Idade_calc(self, data_nascimento):
+    def idade_calc(self, data_nascimento):
     
         idade =  self.data_atual.year - data_nascimento.year
 
@@ -286,7 +286,7 @@ class Users():
         return idade
     
     
-    def Escolha_Sexo(self):
+    def escolha_Sexo(self):
             print('--Escolha o sexo--')
             print("1. Masculino")
             print("2. Feminino")
@@ -301,26 +301,26 @@ class Users():
             
             except ValueError:
                 print('Não é um número das opções')
-                return self.Escolha_Sexo()
+                return self.escolha_Sexo()
             else:
                 print('Item Invalido')
-                return self.Escolha_Sexo()
+                return self.escolha_Sexo()
             
         
-    def Cadastro_User(self, loja_name):
+    def cadastro_User(self, loja_name):
 
         codigo_user = f'USR{self._DataUsers.shape[0]+1:05d}'
         name = self.verificar_Nome() # add verificador de nome
 
         Data_de_nascimento = self.data_nascimento()
-        idade = self.Idade_calc(Data_de_nascimento)
+        idade = self.idade_calc(Data_de_nascimento)
 
         Data_de_nascimento = Data_de_nascimento.strftime('%d/%m/%Y')
 
-        sexo = self.Escolha_Sexo()
+        sexo = self.escolha_Sexo()
         usuario = self.verificar_usuario()
         senha = self.verificar_senha() 
-        # loja = self.Registrar_loja()
+        # loja = self.registrar_loja()
         loja = loja_name
         Tipo = 'Default'
         self._DataUsers.loc[self._DataUsers.shape[0]] =[

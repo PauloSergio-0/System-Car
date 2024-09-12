@@ -1,1 +1,1 @@
-from .Cad_loja import loja
+from .Cad_loja import Loja

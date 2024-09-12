@@ -11,12 +11,12 @@ class Carro:
         self.user_type = userLogin_estacia.user_Type
         self.loja_user = userLogin_estacia.loja_user
         self.data_atual = date.today()
-        self.Verificar_fonte()
+        self.verificar_fonte()
         self.Tipo_usuario()
 
 
 
-    def Verificar_fonte(self):
+    def verificar_fonte(self):
         if os.path.exists("./src/Data/System_data/Carro_data/Car_system.csv"):
             self._DataCadastro = pd.read_csv("./src/Data/System_data/Carro_data/Car_system.csv",
                 sep = ";",
@@ -92,7 +92,7 @@ class Carro:
             return self.verificador_preco_e_qtd(type_=type_)
         
 
-    def Cadastrar_veiculo(self):# no cadastro de veiculo será gerado um codifo de acordo com o tamanho do df(linhas)
+    def cadastrar_veiculo(self):# no cadastro de veiculo será gerado um codifo de acordo com o tamanho do df(linhas)
         Codigo_Veiculo = f'CRR{self._DataCadastro.shape[0] + 1:05d}'
         
         Marca_Veiculo = input('Informe a Marca: ')
@@ -103,7 +103,7 @@ class Carro:
         Ano_Veiculo = self.verificar_ano() 
         Quantidade_veiculo = self.verificador_preco_e_qtd('Qtd') 
         data_de_cadastro = date.today().strftime('%d/%m/%Y')
-        data_de_modificacao = None # data de modificação só irá iniciado por None pois só pode ser modificados após ser cadastrado
+        data_de_modificacao = 'Não Modificado' # data de modificação só irá iniciado por None pois só pode ser modificados após ser cadastrado
 
         if self.user_type == 1:            
             Loja =  self.info_user['Usuario_loja']
@@ -113,7 +113,7 @@ class Carro:
             Loja =  self.info_user['Loja']
             add_user = self.info_user['Nome']
 
-        mod_user = None
+        mod_user = 'Não Aplicável'
 
         def Verificacao_test():
             lista_modelo = self._DataCadastro[(self._DataCadastro['Marca'] == Marca_Veiculo) & (self._DataCadastro['Modelo'] == Modelo_Veiculo) & self._DataCadastro['Loja'] == Loja].reset_index(drop=True)
@@ -123,6 +123,7 @@ class Carro:
                 return True
         # adcionado ao dataframe
         if Verificacao_test():
+
             self._DataCadastro.loc[self._DataCadastro.shape[0]] = [ 
                 Codigo_Veiculo,
                 Marca_Veiculo,
@@ -219,7 +220,7 @@ class Carro:
                     self._DataCadastro.at[index, Type_mod] = input(f'Informe a {Type_mod}: ')
                     nome_depois = self._DataCadastro.at[index, Type_mod]
                     if Type_mod == 'Marca' or Type_mod == 'Modelo':
-                        self.Atualizar_valor_colunas_vendas(venda_df=venda_estacia, type_mod=Type_mod, nome_atual=nome_antes, novo_nome=nome_depois)
+                        self.Atualizar_valor_colunas_vendas(venda_df=venda_estacia, type_mod=Type_mod, nome_atual=nome_antes,  novo_nome = nome_depois)
                 elif type_var == 2:
                     self._DataCadastro.at[index, Type_mod] = int(input(f'Informe a {Type_mod}: '))
                 elif type_var == 3:

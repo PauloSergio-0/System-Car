@@ -2,17 +2,17 @@ from modules.System_users.user_car import Users
 from modules.System_Vendas.Venda_car import Venda
 from modules.System_Cadastro.Cadastro_car import Carro
 from modules.System_Login.Login_user import Login
-from modules.System_Loja.Cad_loja import loja
+from modules.System_Loja.Cad_loja import Loja
 from modules.System_estatistica.estatistica_car import Estatistica
 
-class main:
+class Main:
     def __init__(self):
-        self.lojas = loja()
+        self.lojas = Loja()
         self.usuario = Users(self.lojas)
         self.Login_usuario = Login(self.usuario, self.lojas)
 
 
-    def Carro_config(self):
+    def carro_config(self):
         while True:
             print('-'*5+'Veiculos'+'-'*5)
             print('1. Cadastrar veiculo')
@@ -32,44 +32,45 @@ class main:
                 
             if opcao == 1 :   
                 if self.Login_usuario.user_Type == 1:
-                    self.carro_sistema.Cadastrar_veiculo()
+                    self.carro_sistema.cadastrar_veiculo()
                 elif self.Login_usuario.user_Type == 2:
                     print('Usuários Defaults não podem registrar veiculos')
-                    return self.Carro_config()
+                    # return self.carro_config()
+                    continue
             elif opcao == 2:
                 if self.carro_sistema._DataCadastro.empty:
                     print('Não existem Carro cadastrados!')
                 else:
-                    self.carro_vendas.Realizar_Venda()
+                    self.carro_vendas.realizar_Venda()
             elif opcao == 3:
                 if self.carro_sistema._DataCadastro.empty:
                     print('Não existem Carro cadastrados!')
                 else:
-                    self.carro_sistema.Atualizar_dados_veiculo('Marca', 1, self.carro_vendas)
-                    self.carro_sistema.Atualizar_dados_veiculo('Modelo', 1, self.carro_vendas)
+                    self.carro_sistema.atualizar_dados_veiculo('Marca', 1, self.carro_vendas)
+                    self.carro_sistema.atualizar_dados_veiculo('Modelo', 1, self.carro_vendas)
             elif opcao == 4:
                 if self.carro_sistema._DataCadastro.empty:
                     print('Não existem Carro cadastrados!')
                 else:
-                    self.carro_sistema.Atualizar_dados_veiculo('Quantidade', 2)
+                    self.carro_sistema.atualizar_dados_veiculo('Quantidade', 2)
             elif opcao == 5:
                 if self.carro_sistema._DataCadastro.empty:
                     print('Não existem Carro cadastrados!')
                 else:
-                    self.carro_sistema.Atualizar_dados_veiculo('Preco', 3)
+                    self.carro_sistema.atualizar_dados_veiculo('Preco', 3)
             elif opcao == 6:
                 self.carro_sistema.listar_veiculos(self.Login_usuario.user_login)
             elif opcao == 7:
                 self.carro_vendas.listar_vendas(self.Login_usuario.user_login)
             elif opcao == 8:
                 print("Saindo")
-                return self.main_log()
+                return 
             else:
                 print('Opcao invalida')
-                return self.Carro_config()
+                continue 
         
 
-    def User_config(self):
+    def user_config(self):
         while True:
 
             print(f"{('-'*5)+'Usuário'+('-'*5)}")
@@ -84,33 +85,33 @@ class main:
                 opcao = int(input('Informe a opcao: '))
             except ValueError:
                 print('Valor Incorreto!!')
-                return self.User_config()
-            
+                # return self.user_config()
+                return
 
             if opcao == 1:
-                self.usuario.Alterar_user(self.Login_usuario.user_login, 'Nome')
+                self.usuario.alterar_user(self.Login_usuario.user_login, 'Nome')
                 
 
             elif opcao == 2:
-                self.usuario.Alterar_user(self.Login_usuario.user_login, 'Senha')
+                self.usuario.alterar_user(self.Login_usuario.user_login, 'Senha')
 
             elif opcao == 3:
-                self.usuario.Alterar_user(self.Login_usuario.user_login, 'Data Nascimento')
+                self.usuario.alterar_user(self.Login_usuario.user_login, 'Data Nascimento')
 
             elif opcao == 4:
-                self.usuario.Alterar_user(self.Login_usuario.user_login, 'Sexo')
+                self.usuario.alterar_user(self.Login_usuario.user_login, 'Sexo')
 
             elif opcao == 5:
                 self.usuario.listar_Informacoes_user(self.Login_usuario.user_login)
 
             elif opcao == 6:
                 print('Saindo...')
-                return self.main_log()
+                return 
             else:
                 print('Opção incorreta.')
-                return self.User_config()
+                continue
         
-    def Loja_config(self):
+    def loja_config(self):
         self.Estatistica = Estatistica(self.usuario, self.carro_sistema, self.carro_vendas, self.lojas,self.Login_usuario)
 
         while True:
@@ -129,44 +130,44 @@ class main:
                 opcao = int(input('Informe a opcao: '))
             except ValueError:
                 print('Valor Incorreto!!')
-                return self.Loja_config()
+                continue
             
 
             if opcao == 1:
                 if self.Login_usuario.user_Type == 1:
-                    self.usuario.Cadastro_User(self.Login_usuario.user_login)
+                    self.usuario.cadastro_User(self.Login_usuario.user_login)
                 elif self.Login_usuario.user_Type == 2:
                     print('Só Usuarios do Tipo Adim Podem Fazer Cadastro')
 
             elif opcao == 2:
-                self.lojas.Alterar_user_admin(self.Login_usuario.user_login, 'Nome_loja')
+                self.lojas.alterar_user_admin(self.Login_usuario.user_login, 'Nome_loja')
 
             elif opcao == 3:
-                self.lojas.Alterar_user_admin(self.Login_usuario.user_login, 'Senha')
+                self.lojas.alterar_user_admin(self.Login_usuario.user_login, 'Senha')
 
             elif opcao == 4:
-                self.lojas.Alterar_user_admin(self.Login_usuario.user_login, 'Pais')
+                self.lojas.alterar_user_admin(self.Login_usuario.user_login, 'Pais')
 
             elif opcao == 5:
-                self.lojas.Alterar_user_admin(self.Login_usuario.user_login, 'Estado')
+                self.lojas.alterar_user_admin(self.Login_usuario.user_login, 'Estado')
 
             elif opcao == 6:
-                self.lojas.Alterar_user_admin(self.Login_usuario.user_login, 'Cidade')
+                self.lojas.alterar_user_admin(self.Login_usuario.user_login, 'Cidade')
 
             elif opcao == 7:
                 self.lojas.listar_Informacoes_loja(User_login=self.Login_usuario.user_login, funca_estacia=self.usuario._DataUsers, carro_estacia=self.carro_sistema._DataCadastro)
 
             elif opcao == 8:
-                self.Estatistica.Mostrar_estatistica()
+                self.Estatistica.mostrar_estatistica()
             elif opcao == 9:
                 print('Saindo...')
-                return self.main_log()
+                return 
 
             else:
                 print('Opção incorreta.')
-                return self.Loja_config()
+                continue
 
-    def Menu_inicial(self):
+    def menu_inicial(self):
         while True:
             print(f"{('-'*5) + 'ESTOQUE GLOBAL' + ('-'*5)}")
             print('1. Cadastar loja' )
@@ -177,10 +178,10 @@ class main:
                 opcao = int(input('Informe a opcao: '))
             except ValueError:
                 print('Valor Incorreto!!')
-                return self.Menu_inicial()
+                return self.menu_inicial()
 
             if opcao == 1:
-                self.lojas.Cadastrar_Loja()
+                self.lojas.cadastrar_Loja()
 
             elif opcao == 2:
                 if self.usuario._DataUsers.empty and self.lojas._Loja_Df.empty:
@@ -198,7 +199,7 @@ class main:
             
             else:
                 print('Opção invalida!!')
-                return self.Menu_inicial()
+                return self.menu_inicial()
 
     def main_log(self):
 
@@ -215,21 +216,21 @@ class main:
                 opcao = int(input('Informe a opcao: '))
             except ValueError:
                 print('Valor Incorreto!!')
-                return self.main_log()
+                continue
             
             if opcao == 1:
-                self.Carro_config()
+                self.carro_config()
 
             elif opcao == 2:
                 if self.Login_usuario.user_Type == 1:
-                    self.Loja_config()
+                    self.loja_config()
                 elif self.Login_usuario.user_Type == 2:
-                    self.User_config()
+                    self.user_config()
 
             elif opcao == 3:
                 self.Login_usuario.logout()
                 print('Saindo......')
-                return self.Menu_inicial()
+                break
             else:
                 print('Opção invalida!!')
-                return self.main_log()
+                continue
