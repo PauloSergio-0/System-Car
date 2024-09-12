@@ -1,0 +1,20 @@
+Dados Loja: Tests
+Nome da loja: Test
+Pais da loja: Brasil
+Estado da loja: Sergipe
+Cidade da loja: Aracaju
+
+Dados usuários
+Total de vendedores: 0
+
+Dados Veiculos
+Números Totais de Veículos: 0
+Números Totais de Marcas: 0
+Números Totais de modelos: 0
+
+Total de veículos por marca:
+
+Total de modelos por marcas:
+
+Total de modelo por Marca
+
