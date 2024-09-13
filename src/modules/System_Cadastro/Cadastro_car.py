@@ -11,12 +11,11 @@ class Carro:
         self.user_type = userLogin_estacia.user_Type
         self.loja_user = userLogin_estacia.loja_user
         self.data_atual = date.today()
-        self.verificar_fonte()
         self.Tipo_usuario()
 
 
 
-    def verificar_fonte(self):
+    
         if os.path.exists("./src/Data/System_data/Carro_data/Car_system.csv"):
             self._DataCadastro = pd.read_csv("./src/Data/System_data/Carro_data/Car_system.csv",
                 sep = ";",
@@ -29,10 +28,10 @@ class Carro:
                 'Ano': 'int32',
                 'Quantidade': 'int32',
                 'Data Cadastro': 'string',
-                'Data Modificacao': 'string',# BUG: bug pandas: is string
+                'Data Modificacao': 'string',
                 'Loja': 'string',
                 'Adcionado Por': 'string',
-                'Modificado Por': 'string'# BUG: bug pandas: is string
+                'Modificado Por': 'string'
             })
 
         else:
