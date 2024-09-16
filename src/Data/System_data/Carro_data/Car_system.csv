@@ -1,5 +1,5 @@
 Codigo;Marca;Modelo;Preco;Ano;Quantidade;Data Cadastro;Data Modificacao;Loja;Adcionado Por;Modificado Por
 CRR00001;Ferrari;FPK;123.909;1990;122;16/09/2024;16/09/2024 15:31:25;Imports;Admin;Não Aplicável
-CRR00002;Ferrari;Enzo;90.0;1999;21;16/09/2024;Não Modificado;Imports;Admin;Não Aplicável
-CRR00003;Buggati;Veyron;12312.0;2001;33;16/09/2024;16/09/2024 15:31:37;Imports;Admin;Não Aplicável
+CRR00002;Ferrari;Enzo;90.0;1999;19;16/09/2024;16/09/2024 15:48:07;Imports;Admin;Não Aplicável
+CRR00003;Buggati;Veyrom;12312.0;2001;33;16/09/2024;16/09/2024 15:49:29;Imports;Admin;Imports
 CRR00004;Porshe;911s;123.12;1999;21;16/09/2024;Não Modificado;Imports;Admin;Não Aplicável

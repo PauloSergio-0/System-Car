@@ -173,7 +173,7 @@ class Carro:
         self._DataCadastro.to_csv("./src/Data/System_data/Carro_data/Car_system.csv", sep = ";",encoding="UTF-8",index=False)
 
     def Marca_carro(self): # função para selecionar uma marca a parti da loja do usuário
-        print('Informe a marca que será vendida:')
+        print('Informe a marca:')
         num = 0
         cadastro_data = self._DataCadastro.loc[self._DataCadastro['Loja'] == self.loja_user]
         lista_carro = sorted(cadastro_data['Marca'].unique().tolist())

@@ -1,3 +1,5 @@
 Nr_Fatura;Loja;Marca;Modelo;Quantidade_Vendida;Valor_transacao;Ano;data_transancao;Metodo Pagamento;Vendedor
 FTRCRR00001-001;Imports;Ferrari;FPK;1;123.909;1990;16/09/2024 15:31:25;PAYPAL;Paulo
-FTRCRR00003-002;Imports;Buggati;Veyron;12;147744.0;2001;16/09/2024 15:31:37;PIX;Paulo
+FTRCRR00003-002;Imports;Buggati;Veyrom;12;147744.0;2001;16/09/2024 15:31:37;PIX;Paulo
+FTRCRR00002-003;Imports;Ferrari;Enzo;1;90.0;1999;16/09/2024 15:47:25;CARTAO - CREDITO;Imports
+FTRCRR00002-004;Imports;Ferrari;Enzo;1;90.0;1999;16/09/2024 15:48:07;CARTAO - DEBITO;Imports
