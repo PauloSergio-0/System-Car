@@ -6,17 +6,17 @@ Cidade da loja: Aracaju
 
 Dados usuários
 Total de vendedores: 1
-Loja: Imports Vendedor: Imports Nº vendas: 1
+Loja: Imports Vendedor: Imports Nº vendas: 2
 Loja: Imports Vendedor: Paulo Nº vendas: 13
 
 Dados Veiculos
-Números Totais de Veículos: 196
+Números Totais de Veículos: 195
 Números Totais de Marcas: 3
 Números Totais de modelos: 4
 
 Total de veículos por marca:
 Buggati: 33 veículos
-Ferrari: 142 veículos
+Ferrari: 141 veículos
 Porshe: 21 veículos
 
 Total de modelos por marcas:
@@ -25,8 +25,8 @@ Ferrari: 2 modelos
 Porshe: 1 modelos
 
 Total de modelo por Marca
-Marca: Buggati Modelo: Veyron Quantidade: 33
-Marca: Ferrari Modelo: Enzo Quantidade: 20
+Marca: Buggati Modelo: Veyrom Quantidade: 33
+Marca: Ferrari Modelo: Enzo Quantidade: 19
 Marca: Ferrari Modelo: FPK Quantidade: 122
 Marca: Porshe Modelo: 911s Quantidade: 21
 

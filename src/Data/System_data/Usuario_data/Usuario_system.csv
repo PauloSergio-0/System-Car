@@ -1,2 +1,3 @@
 Codigo;Loja;Nome;Data Nascimento;Idade;Sexo;Usuario;Senha;Type
 USR00001;Imports;Paulo;02/02/2005;19;Masculino;Paulo;$argon2id$v=19$m=65536,t=2,p=2$ZDfrKo//Y+B2qdH3VNKIVQ$yUBjKDR3jLssins1EcGJLXMIPKBgurqLq2rr70hcPyY;Default
+USR00002;Imports;Test;01/01/1990;34;Masculino;Test;$argon2id$v=19$m=65536,t=2,p=2$twN88uF7dlWkrEf4t6H4SA$gtF2PyM2sz76lc5CMM6GSgwoyyL/KE4JpwGfT3D5zrA;Default
