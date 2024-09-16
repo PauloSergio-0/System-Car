@@ -120,9 +120,9 @@ class Carro:
     def cadastrar_veiculo(self):# no cadastro de veiculo será gerado um codigo de acordo com o tamanho do df(linhas)
         Codigo_Veiculo = f'CRR{self._DataCadastro.shape[0] + 1:05d}'
         
-        Marca_Veiculo = input('Informe a Marca: ')
+        Marca_Veiculo = input('Informe a Marca: ').capitalize()
         
-        Modelo_Veiculo = input("Informe o modelo: ")
+        Modelo_Veiculo = input("Informe o modelo: ").capitalize()
         
         Preco_Veiculo = self.verificador_preco_e_qtd('Preco')
         Ano_Veiculo = self.verificar_ano() 
@@ -200,7 +200,7 @@ class Carro:
             (self._DataCadastro['Loja'] == self.loja_user) & 
             (self._DataCadastro['Marca'] == Marca_escolha)
         ]
-        modelos_unicos = sorted(lista_modelo['Modelo'].str.ca.unique().tolist())
+        modelos_unicos = sorted(lista_modelo['Modelo'].unique().tolist())
         
         for num, modelo in enumerate(modelos_unicos, start=1):
             print(f"{num}. {modelo}")

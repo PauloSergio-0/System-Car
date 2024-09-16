@@ -1,49 +1,31 @@
 Dados Loja: Imports
-Nome da loja: Importados
+Nome da loja: Imports
 Pais da loja: Brasil
 Estado da loja: Sergipe
 Cidade da loja: Aracaju
 
 Dados usuários
-Total de vendedores: 4
-Loja: Imports Vendedor: Cao Nº vendas: 4
-Loja: Imports Vendedor: Imports Nº vendas: 41
-Loja: Imports Vendedor: Paulo Nº vendas: 4
+Total de vendedores: 1
+Loja: Imports Vendedor: Paulo Nº vendas: 13
 
 Dados Veiculos
-Números Totais de Veículos: 211
-Números Totais de Marcas: 7
-Números Totais de modelos: 12
+Números Totais de Veículos: 197
+Números Totais de Marcas: 3
+Números Totais de modelos: 4
 
 Total de veículos por marca:
-Buggati: 9 veículos
-Ferrari: 26 veículos
-Ford: 67 veículos
-Mclaren: 43 veículos
-Volkswagen: 21 veículos
-koenigsegg: 16 veículos
-lambor: 29 veículos
+Buggati: 33 veículos
+Ferrari: 143 veículos
+Porshe: 21 veículos
 
 Total de modelos por marcas:
 Buggati: 1 modelos
-Ferrari: 3 modelos
-Ford: 3 modelos
-Mclaren: 2 modelos
-Volkswagen: 1 modelos
-koenigsegg: 1 modelos
-lambor: 1 modelos
+Ferrari: 2 modelos
+Porshe: 1 modelos
 
 Total de modelo por Marca
-Marca: Buggati Modelo: Veyron Quantidade: 9
-Marca: Ferrari Modelo: Fkkpx Quantidade: 9
-Marca: Ferrari Modelo: M21 Quantidade: 1
-Marca: Ferrari Modelo: klo09 Quantidade: 16
-Marca: Ford Modelo: Ford gt Quantidade: 23
-Marca: Ford Modelo: Shelby Quantidade: 21
-Marca: Ford Modelo: mustang Quantidade: 23
-Marca: Mclaren Modelo: P1 Quantidade: 23
-Marca: Mclaren Modelo: Senna Quantidade: 20
-Marca: Volkswagen Modelo: Fusca Quantidade: 21
-Marca: koenigsegg Modelo: Jesko Quantidade: 16
-Marca: lambor Modelo: veneno Quantidade: 29
+Marca: Buggati Modelo: Veyron Quantidade: 33
+Marca: Ferrari Modelo: Enzo Quantidade: 21
+Marca: Ferrari Modelo: FPK Quantidade: 122
+Marca: Porshe Modelo: 911s Quantidade: 21
 
