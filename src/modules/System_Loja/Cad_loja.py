@@ -4,6 +4,30 @@ import re
 from argon2 import PasswordHasher
 
 class Loja:
+    
+    """
+    Classe responsável pela gestão de lojas, incluindo cadastro, alteração de dados, e visualização de informações.
+
+    Esta classe permite que você cadastre novas lojas, altere informações de lojas existentes, verifique 
+    a validade de senhas e usuários, e liste informações detalhadas sobre uma loja específica. Além disso, 
+    gerencia a leitura e escrita de dados em um arquivo CSV.
+
+    Atributos:
+        _Loja_Df (DataFrame): DataFrame contendo informações sobre as lojas, carregado de um arquivo CSV ou criado vazio.
+
+    Métodos:
+        __init__: Inicializa a classe, carregando dados de lojas de um arquivo CSV se disponível, ou criando um DataFrame vazio para novos dados.
+        verificar_senha: Verifica a validade de uma senha com base em critérios de segurança, como comprimento, caracteres maiúsculos e minúsculos, números, e caracteres especiais. Retorna o hash da senha se válido.
+        verificar_usuario: Verifica se um nome de usuário atende a critérios de segurança e se é único. Retorna o nome de usuário se válido.
+        alterar_user_admin: Altera a senha ou outro dado de uma loja existente. Salva as alterações no arquivo CSV.
+        cadastrar_Loja: Cadastra uma nova loja com informações fornecidas pelo usuário e salva no arquivo CSV.
+        listar_lojas: Exibe a lista de todas as lojas.
+        listar_Informacoes_loja: Exibe informações detalhadas sobre uma loja específica, incluindo total de veículos e funcionários.
+
+    Exceções:
+        - A classe lida com a criação e manipulação de arquivos CSV, portanto, pode enfrentar erros relacionados a operações de I/O.
+        - Métodos que solicitam entradas do usuário podem enfrentar erros se entradas inválidas forem fornecidas.
+    """
     def __init__(self):
 
         if os.path.exists("./src/Data/System_data/Loja_data/Loja_system.csv"):

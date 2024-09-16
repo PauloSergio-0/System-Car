@@ -2,6 +2,35 @@ from argon2 import PasswordHasher
 
 
 class Login():
+    """
+    Classe responsável pela autenticação de usuários e gerenciamento de sessões de login.
+
+    Esta classe permite que os usuários façam login como administrador ou usuário padrão, verificando 
+    suas credenciais e gerenciando o estado de autenticação. Também inclui métodos para logout e 
+    gerenciamento de sessões.
+
+    Atributos:
+        Login_successful (bool): Indica se o login foi bem-sucedido.
+        password_login (str): Senha fornecida pelo usuário durante o login.
+        user_login (str): Nome de usuário fornecido durante o login.
+        user_Type (int): Tipo de usuário (1 para Admin, 2 para Default).
+        id_user (int): Identificador do usuário (não utilizado atualmente).
+        loja_user (str): Nome da loja associada ao usuário.
+        _DataUsers (DataFrame): Dados dos usuários.
+        _Loja_Df (DataFrame): Dados das lojas.
+        ph (PasswordHasher): Instância do `PasswordHasher` para verificação de senhas.
+
+    Métodos:
+        __init__: Inicializa a classe com dados de usuários e lojas, configurando atributos necessários.
+        login_type: Solicita ao usuário que escolha um tipo de login (Admin ou Default) e retorna a escolha.
+        logar: Processa o login do usuário verificando o nome de usuário e a senha, e atualiza o estado de login conforme o sucesso ou falha.
+        logout: Desfaz o login do usuário, redefinindo os atributos relacionados ao login e exibindo uma mensagem de logout.
+
+    Exceções:
+        O método `logar` pode gerar erros se as credenciais fornecidas estiverem incorretas ou se houver 
+        problemas ao verificar a senha. A exceção específica não é capturada dentro da classe, mas 
+        erros genéricos são tratados com mensagens de erro apropriadas.
+    """
     def __init__(self, users_estacia, loja_estacia):#
         self.Login_successful = False
         self.password_login = None

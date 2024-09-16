@@ -6,6 +6,34 @@ from modules.System_Loja.Cad_loja import Loja
 from modules.System_estatistica.estatistica_car import Estatistica
 
 class Main:
+    
+    """
+    Classe responsável por gerenciar a interação do usuário com o sistema.
+
+    Esta classe inicializa e gerencia todos os componentes principais do sistema, 
+    incluindo lojas, usuários, login, veículos, vendas e estatísticas. Fornece 
+    um menu de navegação para o usuário interagir com o sistema.
+
+    Atributos:
+        lojas (Loja): Sistema de gerenciamento de lojas.
+        usuario (Users): Sistema de gerenciamento de usuários.
+        Login_usuario (Login): Sistema de login de usuários.
+        carro_sistema (Carro): Sistema de gerenciamento de veículos.
+        carro_vendas (Venda): Sistema de gerenciamento de vendas.
+        Estatistica (Estatistica): Sistema de gerenciamento de estatísticas (usado apenas no modo de administrador).
+
+    Métodos:
+        __init__: Inicializa os componentes do sistema e configura o menu de interação.
+        carro_config: Exibe o menu de opções para gerenciar veículos.
+        user_config: Exibe o menu de opções para gerenciar informações do usuário.
+        loja_config: Exibe o menu de opções para gerenciar a loja e as estatísticas.
+        menu_inicial: Exibe o menu inicial para cadastro de lojas e login de usuários.
+        main_log: Exibe o menu principal após o login, permitindo acessar configurações de veículos ou usuários.
+
+    Exceções:
+        ValueError: Captura entradas inválidas do usuário e oferece a opção de tentar novamente.
+    """
+
     def __init__(self):
         self.lojas = Loja()
         self.usuario = Users(self.lojas)
@@ -52,12 +80,12 @@ class Main:
                 if self.carro_sistema._DataCadastro.empty:
                     print('Não existem Carro cadastrados!')
                 else:
-                    self.carro_sistema.atualizar_dados_veiculo('Quantidade', 2)
+                    self.carro_sistema.atualizar_dados_veiculo('Quantidade', 2, self.carro_vendas)
             elif opcao == 5:
                 if self.carro_sistema._DataCadastro.empty:
                     print('Não existem Carro cadastrados!')
                 else:
-                    self.carro_sistema.atualizar_dados_veiculo('Preco', 3)
+                    self.carro_sistema.atualizar_dados_veiculo('Preco', 3, self.carro_vendas)
             elif opcao == 6:
                 self.carro_sistema.listar_veiculos(self.Login_usuario.user_login)
             elif opcao == 7:

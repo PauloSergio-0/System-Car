@@ -3,6 +3,25 @@ from datetime import date,datetime
 import os
 
 class Venda():
+    """
+    Classe responsável por gerenciar o processo de vendas de veículos.
+
+    A classe utiliza dados previamente cadastrados no sistema e permite 
+    realizar vendas, listar vendas realizadas e definir métodos de pagamento.
+
+    Atributos:
+    ----------
+    _DataCadastro : pandas.DataFrame
+        DataFrame contendo o cadastro de veículos.
+    user_login : str
+        Nome de usuário do login atual.
+    user_type : str
+        Tipo de usuário atual (admin ou comum).
+    carro : object
+        Instância da classe `Carro`, contendo dados dos veículos.
+    _DataVenda : pandas.DataFrame
+        DataFrame contendo os dados de vendas de veículos.
+    """
     def __init__(self, Carro_estancia, Login_estacia,):#, user_cad_Dat
         self._DataCadastro = Carro_estancia._DataCadastro
         self.user_login = Login_estacia.user_login

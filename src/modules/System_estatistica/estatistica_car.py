@@ -4,6 +4,32 @@ import pandas as pd
 
 
 class Estatistica:
+    """
+    Classe responsável pela geração e exibição de estatísticas relacionadas a usuários, veículos e vendas.
+
+    Esta classe coleta dados dos sistemas de usuários, veículos, vendas e lojas para gerar relatórios 
+    estatísticos. Os relatórios são salvos em arquivos no diretório específico do usuário logado e 
+    podem ser exibidos quando necessário.
+
+    Atributos:
+        _DataUsers (DataFrame): Dados dos usuários.
+        _DataCadastro (DataFrame): Dados de cadastro de veículos.
+        _DataVenda (DataFrame): Dados de vendas.
+        _Loja_Df (DataFrame): Dados das lojas.
+        Log_on (Login): Objeto responsável pelo gerenciamento do login e informações do usuário logado.
+        dir_estatistica (str): Caminho do diretório onde os arquivos de estatística serão armazenados.
+        arquivo_estatistica (str): Caminho do arquivo específico para armazenar as estatísticas.
+
+    Métodos:
+        __init__: Inicializa a classe com os dados necessários e configura o diretório e arquivo de estatística.
+        realizar_estatistica: Gera estatísticas baseadas nos dados dos usuários, veículos, vendas e lojas, e escreve essas estatísticas em um arquivo.
+        mostrar_estatistica: Gera e exibe as estatísticas lidas do arquivo.
+
+    Exceções:
+        O método `realizar_estatistica` pode gerar erros se os dados esperados não estiverem presentes 
+        ou se houver problemas ao acessar arquivos. A exceção específica não é capturada dentro da classe.
+        
+    """
     def __init__(self, Users, Carro, Venda, Loja, Log_on):
         self._DataUsers = Users._DataUsers
         self._DataCadastro = Carro._DataCadastro
@@ -70,7 +96,6 @@ class Estatistica:
             estatistica.write(f'Números Totais de Veículos: {Carro_filter["Quantidade"].sum()}\n')
             estatistica.write(f'Números Totais de Marcas: {marcas}\n')
             estatistica.write(f'Números Totais de modelos: {modelos}\n\n')
-
             
             estatistica.write('Total de veículos por marca:\n')
             for marca, qtd in total_veiculos_marca.items():

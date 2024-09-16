@@ -6,6 +6,32 @@ import re
 
 
 class Users():
+    """
+    Classe para gerenciar usuários em um sistema.
+
+    Esta classe lida com a criação e gerenciamento de usuários, incluindo a verificação e validação de informações
+    como nome, data de nascimento, sexo, usuário e senha. As informações dos usuários são armazenadas em um arquivo CSV
+    localizado em "./src/Data/System_data/Usuario_data/Usuario_system.csv". Se o arquivo não existir, ele será criado com
+    as colunas apropriadas.
+
+    Métodos:
+        - __init__(loja_estacia): Inicializa a classe com a loja associada e carrega os dados dos usuários se o arquivo CSV existir.
+        - registrar_loja(): Permite ao usuário escolher uma loja a partir de uma lista de lojas disponíveis.
+        - verificar_senha(): Valida a senha fornecida com base em critérios específicos e retorna o hash da senha se válida.
+        - verificar_usuario(): Valida o nome de usuário com base em critérios específicos e verifica se o nome de usuário já existe.
+        - verificar_Nome(): Valida o nome do usuário com base em critérios específicos e solicita confirmação do nome.
+        - alterar_user(User_login, type_alteracao): Permite alterar informações específicas de um usuário (Nome, Data Nascimento, Sexo, Senha).
+        - data_nascimento(): Solicita e valida a data de nascimento do usuário.
+        - idade_calc(data_nascimento): Calcula a idade com base na data de nascimento fornecida.
+        - escolha_Sexo(): Permite ao usuário escolher o sexo a partir de opções disponíveis.
+        - cadastro_User(loja_name): Cadastra um novo usuário com informações fornecidas e adiciona ao arquivo CSV.
+        - listar_Informacoes_user(User_login): Lista as informações de um usuário específico com base no nome de usuário fornecido.
+
+    Atributos:
+        - data_atual: Data atual no formato 'YYYY-MM-DD'.
+        - _Loja_Df: DataFrame contendo informações das lojas.
+        - _DataUsers: DataFrame contendo informações dos usuários.
+    """
     def __init__(self, loja_estacia):
         self.data_atual = date.today()
         self._Loja_Df = loja_estacia._Loja_Df
