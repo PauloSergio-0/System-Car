@@ -178,7 +178,6 @@ class Carro:
         cadastro_data = self._DataCadastro.loc[self._DataCadastro['Loja'] == self.loja_user]
         lista_carro = sorted(cadastro_data['Marca'].unique().tolist())
         
-        
         for item in lista_carro:
             num += 1
             print(f"{num}. {item}")
