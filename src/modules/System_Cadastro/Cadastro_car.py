@@ -63,7 +63,7 @@ class Carro:
             self.info_user = self._DataUsers[self._DataUsers['Usuario'] == self.user_login].iloc[0]
             return self.info_user['Loja'], self.info_user['Usuario']
         
-    def verificar_ano(self):
+    def verificar_ano(self):# o ano do veiculo deve ser maior que 1800
         try:
             Ano_Veiculo = int(input("Informe o Ano: "))
             if (Ano_Veiculo >= 1800) and (Ano_Veiculo <= self.data_atual.year):
