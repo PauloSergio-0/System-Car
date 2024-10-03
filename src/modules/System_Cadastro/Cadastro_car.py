@@ -144,7 +144,8 @@ class Carro:
             lista_modelo = self._DataCadastro[
                 (self._DataCadastro['Marca'] == Marca_Veiculo) 
                 & (self._DataCadastro['Modelo'] == Modelo_Veiculo) 
-                & self._DataCadastro['Loja'] == Loja].reset_index(drop=True)
+                & (self._DataCadastro['Loja'] == Loja)
+                ].reset_index(drop=True)
             if Ano_Veiculo in lista_modelo['Ano'].values:
                 return False
             else:
