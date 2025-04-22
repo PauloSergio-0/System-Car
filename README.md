@@ -1,4 +1,4 @@
-# Sistema de Estoque Global
+# Sistema administração de Veiculos
 
 Este projeto é um sistema de gerenciamento que permite aos usuários administrar lojas, veículos, usuários e vendas. O sistema inclui funcionalidades de login, permissões de usuário e exibe estatísticas das operações realizadas.
 
